@@ -1,10 +1,10 @@
 (() => {
   'use strict';
 
-  const app = window.NorthstarApp;
-  const engine = window.NorthstarPythonEngine;
-  const config = window.NORTHSTAR_PYTHON_CONFIG;
-  const data = window.NORTHSTAR_PYTHON_DATA;
+  const app = window.MarketingAnalyticsApp;
+  const engine = window.MarketingAnalyticsPythonEngine;
+  const config = window.MCCARTHYS_PYTHON_CONFIG;
+  const data = window.MCCARTHYS_PYTHON_DATA;
 
   if (!app || !engine || !config || !data) {
     console.error('Python challenge dependencies did not load.');
@@ -70,50 +70,72 @@
       'email_open_rate',
       'avg_site_visits'
     ];
-
-    const head = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('');
-    const body = data.map((row) => {
-      const selected = row.campaign_id === state.selectedCampaign ? ' class="python-selected-row"' : '';
-      const cells = columns.map((column) => {
-        const value = formatValue(column, row[column]);
-        const numeric = typeof row[column] === 'number' ? ' class="number"' : '';
-        return `<td${numeric}>${escapeHtml(value)}</td>`;
-      }).join('');
-      return `<tr${selected}>${cells}</tr>`;
-    }).join('');
-
-    $('#python-data-table').innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
-    $('#python-row-count').textContent = `${data.length} rows`;
+  
+    // Display only the campaign selected in the SQL challenge.
+    const visibleRows = data.filter(
+      (row) => row.campaign_id === state.selectedCampaign
+    );
+  
+    const head = columns
+      .map((column) => `<th>${escapeHtml(column)}</th>`)
+      .join('');
+  
+    const body = visibleRows
+      .map((row) => {
+        const cells = columns
+          .map((column) => {
+            const value = formatValue(column, row[column]);
+            const numeric =
+              typeof row[column] === 'number'
+                ? ' class="number"'
+                : '';
+  
+            return `<td${numeric}>${escapeHtml(value)}</td>`;
+          })
+          .join('');
+  
+        return `<tr class="python-selected-row">${cells}</tr>`;
+      })
+      .join('');
+  
+    $('#python-data-table').innerHTML = `
+      <table>
+        <thead>
+          <tr>${head}</tr>
+        </thead>
+        <tbody>
+          ${body}
+        </tbody>
+      </table>
+    `;
+  
+    $('#python-row-count').textContent =
+      `${visibleRows.length} rows`;
   }
 
   function syncFromWorkflow() {
-    state.selectedCampaign = String(app.getWorkflowValue('selectedCampaign') || '');
-    const campaignLabel = state.selectedCampaign || 'not selected yet';
-    $('#python-selected-campaign').textContent = campaignLabel;
-    $('#python-handoff-value').textContent = campaignLabel;
-    renderDataTable();
-  }
-
-  function setOutput(title, message, isError = false) {
-    $('#python-output-title').textContent = title;
-    const output = $('#python-output');
-    output.className = `python-output${isError ? ' error' : ''}`;
-    output.textContent = message || '(No output)';
-  }
-
-  async function initializeEngine() {
-    const status = $('#python-engine-status');
-    const button = $('#run-python-button');
-
-    try {
-      await engine.load();
-      state.engineReady = true;
-      status.textContent = 'Python ready';
-      button.disabled = false;
-    } catch (error) {
-      status.textContent = 'Python failed to load';
-      setOutput('Engine error', error.message, true);
+    state.selectedCampaign = String(
+      app.getWorkflowValue('selectedCampaign') || ''
+    );
+  
+    const campaignLabel =
+      state.selectedCampaign || 'not selected yet';
+  
+    const selectedCampaignHeading =
+      $('#python-selected-campaign');
+  
+    if (selectedCampaignHeading) {
+      selectedCampaignHeading.textContent = campaignLabel;
     }
+  
+    const handoffValue =
+      $('#python-handoff-value');
+  
+    if (handoffValue) {
+      handoffValue.textContent = campaignLabel;
+    }
+  
+    renderDataTable();
   }
 
   async function runCode() {
@@ -164,7 +186,7 @@
     if (attempt === 2) {
       return 'Compare the code with the formula. A contact cost should reduce expected profit, not increase it.';
     }
-    return 'Northstar wants the highest expected profit. Check whether sorted() is placing low or high values first.';
+    return "McCarthy's team wants the highest expected profit. Check whether sorted() is placing low or high values first.";
   }
 
   function markComplete() {
@@ -260,7 +282,7 @@
     initializeEngine();
   }
 
-  window.NorthstarPythonChallenge = {
+  window.MarketingAnalyticsPythonChallenge = {
     reset: resetChallenge,
     resetSilently: () => resetChallenge(false),
     syncFromWorkflow
