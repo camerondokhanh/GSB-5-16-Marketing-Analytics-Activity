@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const WORKFLOW_STORAGE_KEY = 'northstar-workflow-v1';
+  const WORKFLOW_STORAGE_KEY = 'mccarthys-workflow-v1';
   const unlockedSteps = new Set(['welcome', 'cleaning']);
   let currentView = 'welcome';
   let workflow = loadWorkflow();
@@ -94,7 +94,7 @@
     bindNavigation();
   }
 
-  window.NorthstarApp = {
+  window.MarketingAnalyticsApp = {
     $,
     $$,
     unlock,
