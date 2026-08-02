@@ -53,24 +53,24 @@
   async function run(code, context = {}) {
     const pyodide = await load();
 
-    pyodide.globals.set('__northstar_user_code', code);
-    pyodide.globals.set('__northstar_segment_data_json', JSON.stringify(context.segmentData || []));
-    pyodide.globals.set('__northstar_previous_campaign', String(context.previousCampaign || ''));
+    pyodide.globals.set('__activity_user_code', code);
+    pyodide.globals.set('__activity_segment_data_json', JSON.stringify(context.segmentData || []));
+    pyodide.globals.set('__activity_previous_campaign', String(context.previousCampaign || ''));
 
     const proxy = await pyodide.runPythonAsync(`
 import io
 import traceback
 
 _namespace = {
-    "segment_data_json": __northstar_segment_data_json,
-    "previous_campaign": __northstar_previous_campaign,
+    "segment_data_json": __activity_segment_data_json,
+    "previous_campaign": __activity_previous_campaign,
 }
 _stdout = io.StringIO()
 _stderr = io.StringIO()
 
 try:
     with __import__("contextlib").redirect_stdout(_stdout), __import__("contextlib").redirect_stderr(_stderr):
-        exec(__northstar_user_code, _namespace, _namespace)
+        exec(__activity_user_code, _namespace, _namespace)
 except Exception:
     traceback.print_exc(file=_stderr)
 
@@ -83,5 +83,5 @@ except Exception:
     return { stdout, stderr };
   }
 
-  window.NorthstarPythonEngine = { load, run };
+  window.MarketingAnalyticsPythonEngine = { load, run };
 })();
