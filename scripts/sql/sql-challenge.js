@@ -207,10 +207,12 @@
     return 'Join campaigns to campaign_performance using campaign_id, then sort completed campaigns by conversion rate from highest to lowest.';
   }
 
-  function markComplete() {
+  function markComplete(selectedCampaign) {
     state.completed = true;
     saveState();
+    app.setWorkflowValue('selectedCampaign', selectedCampaign);
     app.unlock('python');
+    window.NorthstarPythonChallenge?.syncFromWorkflow?.();
     $('#success-section').hidden = false;
   }
 
@@ -220,7 +222,7 @@
     const feedback = $('#answer-feedback');
 
     if (answer === config.correctCampaign) {
-      markComplete();
+      markComplete(answer);
       feedback.className = 'feedback success is-visible';
       feedback.innerHTML = '<strong>Correct.</strong> C104 has the highest conversion rate among completed campaigns.';
       $('#success-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -254,6 +256,9 @@
 
     try { localStorage.removeItem(config.storageKey); } catch (_) {}
     clearUi();
+    app.clearWorkflowValue('selectedCampaign');
+    app.clearWorkflowValue('selectedSegment');
+    window.NorthstarPythonChallenge?.resetSilently?.();
     app.lock('python');
     app.lock('visualization');
   }
@@ -292,7 +297,11 @@
     $('#sql-editor').value = state.sql;
     $('#success-section').hidden = !state.completed;
 
-    if (state.completed && app.isUnlocked('sql')) app.unlock('python');
+    if (state.completed && app.isUnlocked('sql')) {
+      app.setWorkflowValue('selectedCampaign', config.correctCampaign);
+      app.unlock('python');
+      window.NorthstarPythonChallenge?.syncFromWorkflow?.();
+    }
 
     bindEvents();
     initializeDatabase();
@@ -302,7 +311,11 @@
     reset: resetChallenge,
     resetSilently: () => resetChallenge(false),
     syncUnlock: () => {
-      if (state.completed && app.isUnlocked('sql')) app.unlock('python');
+      if (state.completed && app.isUnlocked('sql')) {
+        app.setWorkflowValue('selectedCampaign', config.correctCampaign);
+        app.unlock('python');
+        window.NorthstarPythonChallenge?.syncFromWorkflow?.();
+      }
     }
   };
 

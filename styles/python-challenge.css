@@ -1,0 +1,89 @@
+.python-handoff {
+  margin: 26px 0 8px;
+  padding: 16px 18px;
+  border: 1px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: baseline;
+  background: rgba(255, 253, 248, .45);
+}
+.python-handoff p { margin: 0; }
+.python-handoff strong { font-family: Menlo, Monaco, Consolas, monospace; }
+
+.python-formula {
+  margin-top: 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  font-size: 1.05rem;
+}
+
+.python-bug-note {
+  margin: 20px 0 0;
+  max-width: 760px;
+}
+
+#python-editor {
+  display: block;
+  width: 100%;
+  min-height: 390px;
+  resize: vertical;
+  border: 0;
+  outline: 0;
+  padding: 18px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: .88rem;
+  line-height: 1.55;
+  tab-size: 4;
+}
+
+.python-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.python-output-panel {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  min-height: 100%;
+}
+
+.python-output-header {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+.python-output-header h3 { margin: 0; }
+
+.python-output {
+  min-height: 390px;
+  margin: 0;
+  padding: 18px;
+  white-space: pre-wrap;
+  overflow: auto;
+  color: var(--ink);
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: .82rem;
+  line-height: 1.6;
+}
+
+.python-output.error { color: var(--error); }
+
+.python-data-panel { margin-top: 24px; }
+.python-selected-row td { background: rgba(49, 93, 61, .075); }
+.python-selected-row td:first-child { box-shadow: inset 3px 0 0 var(--success); }
+
+@media (max-width: 920px) {
+  .python-layout { grid-template-columns: 1fr; }
+  .python-output { min-height: 220px; }
+  .python-handoff { align-items: flex-start; flex-direction: column; gap: 4px; }
+}

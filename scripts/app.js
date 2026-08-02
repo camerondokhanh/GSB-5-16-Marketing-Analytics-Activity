@@ -1,11 +1,47 @@
 (() => {
   'use strict';
 
+  const WORKFLOW_STORAGE_KEY = 'northstar-workflow-v1';
   const unlockedSteps = new Set(['welcome', 'cleaning']);
   let currentView = 'welcome';
+  let workflow = loadWorkflow();
 
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+  function loadWorkflow() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(WORKFLOW_STORAGE_KEY) || '{}');
+      return saved && typeof saved === 'object' ? saved : {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function saveWorkflow() {
+    try {
+      localStorage.setItem(WORKFLOW_STORAGE_KEY, JSON.stringify(workflow));
+    } catch (_) {}
+  }
+
+  function setWorkflowValue(key, value) {
+    workflow[key] = value;
+    saveWorkflow();
+  }
+
+  function getWorkflowValue(key) {
+    return workflow[key];
+  }
+
+  function clearWorkflowValue(key) {
+    delete workflow[key];
+    saveWorkflow();
+  }
+
+  function clearWorkflow() {
+    workflow = {};
+    try { localStorage.removeItem(WORKFLOW_STORAGE_KEY); } catch (_) {}
+  }
 
   function setStepLock(step, locked) {
     const button = $(`.progress-step[data-step="${step}"]`);
@@ -65,6 +101,10 @@
     lock,
     isUnlocked,
     showView,
+    setWorkflowValue,
+    getWorkflowValue,
+    clearWorkflowValue,
+    clearWorkflow,
     getCurrentView: () => currentView
   };
 

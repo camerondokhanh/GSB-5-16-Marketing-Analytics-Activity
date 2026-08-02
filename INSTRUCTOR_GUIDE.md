@@ -46,10 +46,6 @@ SELECT
 FROM cleaned;
 ```
 
-### Intended learning point
-
-AI is especially useful for translating clear cleaning rules into functions such as `DISTINCT`, `TRIM`, `REPLACE`, `CAST`, and `SUM`. Students still need to state the cleaning rules and verify the total.
-
 ## Challenge 2: Select the campaign
 
 ### Business question
@@ -83,13 +79,92 @@ WHERE c.status = 'Complete'
 ORDER BY conversion_rate DESC;
 ```
 
+### Handoff to Python
+
+After the student submits `C104`, the site stores it as `selectedCampaign`. The Python challenge receives it as:
+
+```python
+previous_campaign
+```
+
+## Challenge 3: Choose an audience with Python
+
+### Business question
+
+For the campaign selected in SQL, which audience has the highest expected profit per contacted customer?
+
+```text
+Expected profit = predicted conversion rate × average order value × profit margin − contact cost
+```
+
+### Correct answer
+
+- Segment: `High-Intent Subscribers`
+- Expected profit per contacted customer: `$17.00`
+
+### Starter-code bugs
+
+The starter code contains exactly three intended bugs.
+
+1. **Code-breaking bug:** `selected_campain` is misspelled. It should be `selected_campaign`.
+2. **Business-logic bug:** contact cost is added. It must be subtracted.
+3. **Business-logic bug:** `sorted()` ranks from low to high by default. It needs `reverse=True` so the strongest opportunity is first.
+
+After fixing only the spelling error, the code runs but still recommends the wrong segment. This reinforces that running code is not necessarily correct code.
+
+### Corrected Python
+
+```python
+import json
+
+segment_data = json.loads(segment_data_json)
+selected_campaign = previous_campaign
+
+campaign_rows = [
+    row for row in segment_data
+    if row["campaign_id"] == selected_campaign
+]
+
+for row in campaign_rows:
+    row["expected_profit"] = (
+        row["predicted_conversion_rate"]
+        * row["average_order_value"]
+        * row["profit_margin"]
+        - row["contact_cost"]
+    )
+
+ranked_segments = sorted(
+    campaign_rows,
+    key=lambda row: row["expected_profit"],
+    reverse=True
+)
+
+recommended_segment = ranked_segments[0]["segment"]
+
+print("Recommended segment:", recommended_segment)
+print()
+for row in ranked_segments:
+    print(row["segment"], round(row["expected_profit"], 2))
+```
+
+### Expected corrected output
+
+```text
+Recommended segment: High-Intent Subscribers
+
+High-Intent Subscribers 17.0
+Returning Customers 10.0
+Broad Prospects 7.0
+Discount Seekers 6.5
+```
+
 ## Intended timing
 
 1. Cleaning challenge: about 2 minutes
 2. Campaign SQL challenge: about 3 minutes
-3. Python challenge: to be added
-4. Visualization challenge: to be added
+3. Python challenge: about 3 minutes
+4. Visualization challenge: about 2 minutes once added
 
-## File separation
+## Technical note
 
-Cleaning code lives under `scripts/cleaning/`. Campaign SQL lives under `scripts/sql/`. Both use the shared browser SQL engine in `scripts/shared/sql-engine.js`.
+The Python challenge uses Pyodide to run real Python in the browser. It does not use pandas, which keeps the challenge simpler and avoids loading an additional package during the timed activity.

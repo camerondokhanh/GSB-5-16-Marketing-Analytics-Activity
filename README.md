@@ -1,11 +1,12 @@
 # Marketing Analytics AI Challenge
 
-This static classroom site now contains two working stages:
+This static classroom site contains three working stages:
 
 1. Data cleaning with SQL
 2. Campaign analysis with SQL
+3. Audience prioritization with Python
 
-Python and visualization remain isolated placeholders for the next build.
+The visualization stage remains an isolated placeholder for the next build.
 
 ## Run locally
 
@@ -17,12 +18,14 @@ python3 -m http.server 8000
 
 Then open `http://localhost:8000`.
 
+An internet connection is required the first time the browser loads the SQL and Python engines.
+
 ## Publish updates
 
 This folder can be connected to Netlify through GitHub.
 
-1. Save changes in VS Code.
-2. Commit and push them with GitHub Desktop.
+1. Save changes.
+2. Commit and push them to the `main` branch.
 3. Netlify automatically republishes the same public link.
 
 ## Project structure
@@ -33,10 +36,12 @@ styles/
   base.css
   cleaning-challenge.css
   sql-challenge.css
+  python-challenge.css
 scripts/
   app.js
   shared/
     sql-engine.js
+    python-engine.js
   cleaning/
     cleaning-data.js
     cleaning-challenge.js
@@ -44,6 +49,7 @@ scripts/
     sql-data.js
     sql-challenge.js
   python/
+    python-data.js
     python-challenge.js
   visualization/
     visualization-challenge.js
@@ -56,22 +62,32 @@ netlify.toml
 
 - `index.html` — page structure, navigation, and visible wording
 - `styles/base.css` — shared typography, colors, buttons, and layout
-- `scripts/app.js` — shared routing and challenge unlocking
-- `scripts/shared/sql-engine.js` — shared browser SQL loader and table renderer
+- `scripts/app.js` — navigation, unlocking, and workflow values passed between challenges
+- `scripts/shared/sql-engine.js` — browser SQL loader and table renderer
+- `scripts/shared/python-engine.js` — browser Python loader and code runner
 
 ### Cleaning challenge
 
-- `styles/cleaning-challenge.css` — cleaning-specific layout
-- `scripts/cleaning/cleaning-data.js` — messy revenue data and correct total
-- `scripts/cleaning/cleaning-challenge.js` — cleaning database, query execution, hints, and validation
+- `styles/cleaning-challenge.css`
+- `scripts/cleaning/cleaning-data.js`
+- `scripts/cleaning/cleaning-challenge.js`
 
 ### Campaign SQL challenge
 
-- `styles/sql-challenge.css` — shared SQL workspace, answer form, tabs, and result styling
-- `scripts/sql/sql-data.js` — campaign tables and correct campaign
-- `scripts/sql/sql-challenge.js` — campaign database, query execution, hints, and validation
+- `styles/sql-challenge.css`
+- `scripts/sql/sql-data.js`
+- `scripts/sql/sql-challenge.js`
 
-### Future challenges
+### Python challenge
 
-- `scripts/python/python-challenge.js`
+- `styles/python-challenge.css` — Python editor, output, handoff, and table styling
+- `scripts/python/python-data.js` — segment data, starter code, and correct answer
+- `scripts/python/python-challenge.js` — Python execution, hints, state, and answer validation
+
+### Visualization challenge
+
 - `scripts/visualization/visualization-challenge.js`
+
+## Python challenge dependency
+
+When the SQL answer is correct, the site stores the selected campaign as a workflow value. The Python engine receives that value as `previous_campaign`. The starter code must use it to filter the segment data.

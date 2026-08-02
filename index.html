@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/sql-challenge.css">
   <link rel="stylesheet" href="styles/cleaning-challenge.css">
+  <link rel="stylesheet" href="styles/python-challenge.css">
 </head>
 <body>
   <noscript>This activity requires JavaScript.</noscript>
@@ -32,7 +33,7 @@
       <div>
         <p class="eyebrow">Northstar Marketing Analytics</p>
         <h1>Use AI for the code.<br>Use judgment for the answer.</h1>
-        <p class="lede">Complete four short stages of a marketing analytics workflow. Start by cleaning a messy revenue export.</p>
+        <p class="lede">Complete four short stages of a marketing analytics workflow. Clean the data, analyze campaigns, then review a Python audience recommendation.</p>
         <p>Use AI if helpful, run the analysis, review the result, and submit the business answer.</p>
         <button id="begin-button" class="primary-button">Begin Data Cleaning</button>
       </div>
@@ -40,7 +41,8 @@
         <p class="eyebrow">Challenge format</p>
         <p><strong>Clean:</strong> About 2 minutes</p>
         <p><strong>SQL:</strong> About 3 minutes</p>
-        <p><strong>Then:</strong> Python and visualization</p>
+        <p><strong>Python:</strong> About 3 minutes</p>
+        <p><strong>Then:</strong> Visualization</p>
         <p><strong>Important:</strong> Code can run and still produce the wrong business answer.</p>
       </aside>
     </section>
@@ -198,28 +200,108 @@
         <p class="eyebrow">SQL challenge complete</p>
         <h2>Correct. C104 has the highest conversion rate among completed campaigns.</h2>
         <p>The campaign had 35 conversions from 140 clicks, for a conversion rate of 25%.</p>
-        <button id="continue-button" class="primary-button">See what comes next</button>
+        <button id="continue-button" class="primary-button">Continue to Python</button>
       </section>
     </section>
 
-    <section id="view-python" class="view placeholder-view">
-      <p class="eyebrow">Challenge 3 · Coming next</p>
-      <h1>Use Python to choose an audience.</h1>
-      <p id="python-placeholder-copy">The next stage will continue the Northstar scenario with a short customer-segment decision.</p>
-      <button class="outline-button" data-go="sql">Return to SQL</button>
+    <section id="view-python" class="view challenge-view">
+      <div class="challenge-meta">
+        <p class="eyebrow">Challenge 3 of 4 · Python · About 3 minutes</p>
+        <button id="python-reset-button" class="plain-button reset-button">Reset</button>
+      </div>
+
+      <section class="objective">
+        <p class="eyebrow">Business question</p>
+        <h1>For campaign <span id="python-selected-campaign">C104</span>, which audience has the highest expected profit per contacted customer?</h1>
+        <p class="python-formula"><strong>Expected profit = predicted conversion rate × average order value × profit margin − contact cost</strong></p>
+        <p class="python-bug-note">The starter code has <strong>three bugs</strong>. Only one stops the code from running. Fix the error, then review the business logic before trusting the recommendation.</p>
+      </section>
+
+      <div class="python-handoff" aria-label="Previous SQL result">
+        <p><span class="eyebrow">Result from SQL</span>The Python code must use the campaign selected in the previous challenge.</p>
+        <p>Selected campaign: <strong id="python-handoff-value">C104</strong></p>
+      </div>
+
+      <section class="answer-section" aria-labelledby="python-answer-title">
+        <div>
+          <p class="eyebrow">Final answer</p>
+          <h2 id="python-answer-title">Which audience should Northstar prioritize?</h2>
+        </div>
+        <form id="python-answer-form" class="answer-form" novalidate>
+          <label>
+            Customer segment
+            <input id="python-segment-answer" autocomplete="off" placeholder="Enter the segment name">
+          </label>
+          <button class="primary-button" type="submit">Submit</button>
+        </form>
+        <div id="python-answer-feedback" class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section class="workspace" aria-labelledby="python-workspace-title">
+        <div class="workspace-heading">
+          <div>
+            <p class="eyebrow">Python workspace</p>
+            <h2 id="python-workspace-title">Fix the code, run it, and review the recommendation.</h2>
+          </div>
+          <span id="python-engine-status" class="status-text">Loading Python…</span>
+        </div>
+
+        <div class="python-layout">
+          <div class="editor-shell">
+            <div class="editor-topline">
+              <span>Python</span>
+              <span class="quiet">Run with ⌘/Ctrl + Enter</span>
+            </div>
+            <textarea id="python-editor" spellcheck="false" aria-label="Python editor"></textarea>
+            <div class="editor-actions">
+              <button id="run-python-button" class="primary-button" disabled>Run Python</button>
+              <details>
+                <summary>What to review</summary>
+                <p>Variable names · profit formula · ranking direction</p>
+              </details>
+            </div>
+          </div>
+
+          <section class="python-output-panel" aria-labelledby="python-output-title">
+            <div class="python-output-header">
+              <p class="eyebrow">Result</p>
+              <h3 id="python-output-title">Python output</h3>
+            </div>
+            <pre id="python-output" class="python-output">Run the code to see its output.</pre>
+          </section>
+        </div>
+
+        <section class="data-panel python-data-panel" aria-labelledby="python-data-title">
+          <div class="data-panel-header">
+            <div>
+              <p class="eyebrow">Data</p>
+              <h3 id="python-data-title">segment_performance</h3>
+            </div>
+            <span id="python-row-count" class="quiet"></span>
+          </div>
+          <div id="python-data-table" class="table-scroll"></div>
+        </section>
+      </section>
+
+      <section id="python-success-section" class="success-section" hidden>
+        <p class="eyebrow">Python challenge complete</p>
+        <h2>Correct. High-Intent Subscribers has the highest expected profit.</h2>
+        <p>The correct calculation produces an expected profit of $17.00 per contacted customer.</p>
+        <button id="python-continue-button" class="primary-button">Continue to Visualization</button>
+      </section>
     </section>
 
     <section id="view-visualization" class="view placeholder-view">
       <p class="eyebrow">Challenge 4 · Coming next</p>
       <h1>Communicate the recommendation.</h1>
       <p id="visualization-placeholder-copy">The final stage will ask students to choose or repair a clear marketing visualization.</p>
-      <button class="outline-button" data-go="sql">Return to SQL</button>
+      <button class="outline-button" data-go="python">Return to Python</button>
     </section>
   </main>
 
   <footer>
     <span>Northstar Analytics Lab</span>
-    <span>Cleaning + SQL prototype</span>
+    <span>Cleaning + SQL + Python prototype</span>
   </footer>
 
   <!-- Shared site behavior and SQL engine -->
@@ -234,7 +316,9 @@
   <script src="scripts/sql/sql-data.js"></script>
   <script src="scripts/sql/sql-challenge.js"></script>
 
-  <!-- Future challenges -->
+  <!-- Python challenge -->
+  <script src="scripts/shared/python-engine.js"></script>
+  <script src="scripts/python/python-data.js"></script>
   <script src="scripts/python/python-challenge.js"></script>
   <script src="scripts/visualization/visualization-challenge.js"></script>
 </body>

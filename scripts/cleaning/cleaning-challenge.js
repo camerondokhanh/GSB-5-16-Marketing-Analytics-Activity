@@ -224,6 +224,8 @@
     app.lock('python');
     app.lock('visualization');
     window.NorthstarSqlChallenge?.resetSilently?.();
+    window.NorthstarPythonChallenge?.resetSilently?.();
+    app.clearWorkflow();
   }
 
   function bindEvents() {
