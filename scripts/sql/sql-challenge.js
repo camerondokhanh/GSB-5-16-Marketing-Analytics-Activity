@@ -1,10 +1,10 @@
 (() => {
   'use strict';
 
-  const app = window.NorthstarApp;
-  const engine = window.NorthstarSqlEngine;
-  const config = window.NORTHSTAR_SQL_CONFIG;
-  const data = window.NORTHSTAR_SQL_DATA;
+  const app = window.MarketingAnalyticsApp;
+  const engine = window.MarketingAnalyticsSqlEngine;
+  const config = window.MCCARTHYS_SQL_CONFIG;
+  const data = window.MCCARTHYS_SQL_DATA;
 
   if (!app || !engine || !config || !data) {
     console.error('SQL challenge dependencies did not load.');
@@ -212,7 +212,7 @@
     saveState();
     app.setWorkflowValue('selectedCampaign', selectedCampaign);
     app.unlock('python');
-    window.NorthstarPythonChallenge?.syncFromWorkflow?.();
+    window.MarketingAnalyticsPythonChallenge?.syncFromWorkflow?.();
     $('#success-section').hidden = false;
   }
 
@@ -258,7 +258,7 @@
     clearUi();
     app.clearWorkflowValue('selectedCampaign');
     app.clearWorkflowValue('selectedSegment');
-    window.NorthstarPythonChallenge?.resetSilently?.();
+    window.MarketingAnalyticsPythonChallenge?.resetSilently?.();
     app.lock('python');
     app.lock('visualization');
   }
@@ -300,21 +300,21 @@
     if (state.completed && app.isUnlocked('sql')) {
       app.setWorkflowValue('selectedCampaign', config.correctCampaign);
       app.unlock('python');
-      window.NorthstarPythonChallenge?.syncFromWorkflow?.();
+      window.MarketingAnalyticsPythonChallenge?.syncFromWorkflow?.();
     }
 
     bindEvents();
     initializeDatabase();
   }
 
-  window.NorthstarSqlChallenge = {
+  window.MarketingAnalyticsSqlChallenge = {
     reset: resetChallenge,
     resetSilently: () => resetChallenge(false),
     syncUnlock: () => {
       if (state.completed && app.isUnlocked('sql')) {
         app.setWorkflowValue('selectedCampaign', config.correctCampaign);
         app.unlock('python');
-        window.NorthstarPythonChallenge?.syncFromWorkflow?.();
+        window.MarketingAnalyticsPythonChallenge?.syncFromWorkflow?.();
       }
     }
   };

@@ -1,11 +1,11 @@
-window.NORTHSTAR_SQL_CONFIG = {
-  storageKey: 'northstar-sql-simple-v1',
+window.MCCARTHYS_SQL_CONFIG = {
+  storageKey: 'mccarthys-sql-simple-v1',
   starterSql: '-- Write or paste a query here.\n',
   tableOrder: ['campaigns', 'campaign_performance', 'customers'],
   correctCampaign: 'C104'
 };
 
-window.NORTHSTAR_SQL_DATA = {
+window.MCCARTHYS_SQL_DATA = {
   campaigns: [
     { campaign_id: 'C101', campaign_name: 'Welcome Week', channel: 'Email', status: 'Complete', budget: 3200, region: 'West', launch_date: '2026-06-01' },
     { campaign_id: 'C102', campaign_name: 'Campus Social', channel: 'Social', status: 'Complete', budget: 2800, region: 'National', launch_date: '2026-06-03' },
