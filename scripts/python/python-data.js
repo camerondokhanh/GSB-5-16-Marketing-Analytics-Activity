@@ -1,5 +1,5 @@
-window.NORTHSTAR_PYTHON_CONFIG = {
-  storageKey: 'northstar-python-challenge-v1',
+window.MCCARTHYS_PYTHON_CONFIG = {
+  storageKey: 'mccarthys-python-challenge-v1',
   correctSegment: 'HIGHINTENTSUBSCRIBERS',
   correctDisplayName: 'High-Intent Subscribers',
   correctExpectedProfit: 17,
@@ -39,7 +39,7 @@ for row in ranked_segments:
 `
 };
 
-window.NORTHSTAR_PYTHON_DATA = [
+window.MCCARTHYS_PYTHON_DATA = [
   {
     campaign_id: 'C103',
     segment: 'Search Loyalists',
