@@ -1,7 +1,3 @@
-/* ==========================================
-   DESIGN TOKENS
-========================================== */
-
 :root {
   --paper: #f3f0e8;
   --surface: #faf9f5;
@@ -20,7 +16,6 @@
   --error-bg: #f7ece9;
 
   --content-width: 1180px;
-  --reading-width: 760px;
 
   --serif:
     Georgia,
@@ -37,9 +32,9 @@
 }
 
 
-/* ==========================================
-   RESET
-========================================== */
+/* ================================
+   BASIC RESET
+================================ */
 
 *,
 *::before,
@@ -94,12 +89,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
 p,
 h1,
 h2,
@@ -112,9 +101,9 @@ h3 {
 }
 
 
-/* ==========================================
+/* ================================
    TYPOGRAPHY
-========================================== */
+================================ */
 
 h1,
 h2,
@@ -132,7 +121,7 @@ h3 {
 h1 {
   margin-bottom: 24px;
 
-  font-size: clamp(38px, 4.1vw, 58px);
+  font-size: clamp(38px, 4vw, 56px);
   font-weight: 400;
   line-height: 1.08;
   letter-spacing: -0.025em;
@@ -200,9 +189,9 @@ code {
 }
 
 
-/* ==========================================
-   BUTTONS AND LINKS
-========================================== */
+/* ================================
+   BUTTONS
+================================ */
 
 .primary-button,
 .outline-button {
@@ -289,13 +278,13 @@ summary:focus-visible {
 }
 
 
-/* ==========================================
+/* ================================
    HEADER
-========================================== */
+================================ */
 
 .site-header {
-  min-height: 66px;
-  padding: 18px 38px;
+  min-height: 60px;
+  padding: 16px 28px;
 
   display: flex;
   align-items: center;
@@ -311,7 +300,7 @@ summary:focus-visible {
   color: var(--ink);
 
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.3;
   text-align: left;
 }
@@ -359,9 +348,9 @@ summary:focus-visible {
 }
 
 
-/* ==========================================
+/* ================================
    MAIN VIEWS
-========================================== */
+================================ */
 
 main {
   width: 100%;
@@ -377,81 +366,75 @@ main {
 }
 
 
-/* ==========================================
+/* ================================
    WELCOME PAGE
-========================================== */
+================================ */
 
 .welcome-view.is-visible {
   width: min(100%, var(--content-width));
-  min-height: calc(100vh - 128px);
+  min-height: calc(100vh - 124px);
 
   margin: 0 auto;
-  padding: 82px 40px 92px;
+  padding: 46px 40px 64px;
 
   display: grid;
   grid-template-columns:
-    minmax(0, 1.85fr)
-    minmax(260px, 0.72fr);
+    minmax(0, 1.75fr)
+    minmax(270px, 0.65fr);
 
   align-items: start;
-  gap: clamp(64px, 8vw, 118px);
+  gap: clamp(64px, 7vw, 104px);
 }
 
 .welcome-main {
-  max-width: 800px;
+  max-width: 790px;
 }
 
 .welcome-title {
-  max-width: 820px;
+  max-width: 760px;
   margin: 0;
 
-  font-size: clamp(42px, 4.35vw, 64px);
+  font-size: clamp(36px, 3.25vw, 48px);
   font-weight: 400;
-  line-height: 1.07;
-  letter-spacing: -0.032em;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
 }
 
 .welcome-summary {
-  max-width: 720px;
-  margin: 38px 0 0;
+  max-width: 680px;
+  margin: 24px 0 0;
 
-  font-size: 20px;
+  color: var(--muted);
+  font-size: 17px;
   line-height: 1.5;
 }
 
-.welcome-instructions {
-  max-width: 720px;
-  margin: 34px 0;
+.instructions-title {
+  margin: 34px 0 14px;
 
-  padding: 18px 0;
-
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
-.welcome-instructions p {
-  margin: 0;
-  padding: 8px 0;
 
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.welcome-instructions strong {
-  margin-right: 3px;
+.welcome-button {
+  margin-top: 26px;
 }
 
 .intro-note {
-  padding-top: 18px;
+  margin-top: 2px;
+  padding-top: 16px;
 
   border-top: 1px solid var(--ink);
 }
 
 .intro-note h2 {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
 
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 500;
+  line-height: 1.3;
 }
 
 .task-list {
@@ -459,9 +442,9 @@ main {
 }
 
 .task-item {
-  padding: 15px 0;
+  padding: 13px 0;
 
-  border-bottom: 1px solid var(--rule);
+  border-bottom: none;
 }
 
 .task-item:last-child {
@@ -471,7 +454,7 @@ main {
 .task-item p {
   margin: 0 0 3px;
 
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 1.35;
 }
@@ -479,14 +462,14 @@ main {
 .task-item span {
   color: var(--muted);
 
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
 
-/* ==========================================
-   CHALLENGE PAGE LAYOUT
-========================================== */
+/* ================================
+   CHALLENGE LAYOUT
+================================ */
 
 .challenge-view {
   width: min(100%, var(--content-width));
@@ -528,9 +511,9 @@ main {
 }
 
 
-/* ==========================================
+/* ================================
    ANSWER SECTIONS
-========================================== */
+================================ */
 
 .answer-section {
   margin: 0 0 36px;
@@ -619,9 +602,9 @@ main {
 }
 
 
-/* ==========================================
+/* ================================
    WORKSPACE
-========================================== */
+================================ */
 
 .workspace {
   margin-top: 30px;
@@ -650,9 +633,9 @@ main {
 }
 
 
-/* ==========================================
+/* ================================
    EDITORS
-========================================== */
+================================ */
 
 .editor-shell {
   overflow: hidden;
@@ -692,7 +675,7 @@ main {
   border-radius: 0;
   outline: 0;
 
-  background: var(--surface-strong);
+  background: #ffffff !important;
   color: var(--ink);
 
   font-family: var(--mono);
@@ -735,9 +718,9 @@ details p {
 }
 
 
-/* ==========================================
-   DATA PANELS AND TABLES
-========================================== */
+/* ================================
+   DATA PANELS
+================================ */
 
 .data-panel,
 .python-output-panel {
@@ -860,9 +843,9 @@ tbody tr:last-child td {
 }
 
 
-/* ==========================================
+/* ================================
    CLEANING RULES
-========================================== */
+================================ */
 
 .cleaning-rules {
   margin-top: 28px;
@@ -898,9 +881,9 @@ tbody tr:last-child td {
 }
 
 
-/* ==========================================
+/* ================================
    PYTHON CHALLENGE
-========================================== */
+================================ */
 
 .python-formula {
   max-width: 930px;
@@ -970,9 +953,9 @@ tbody tr:last-child td {
 }
 
 
-/* ==========================================
+/* ================================
    SUCCESS STATES
-========================================== */
+================================ */
 
 .success-section {
   margin-top: 34px;
@@ -997,13 +980,13 @@ tbody tr:last-child td {
 }
 
 
-/* ==========================================
+/* ================================
    VISUALIZATION PAGE
-========================================== */
+================================ */
 
 .placeholder-view {
   width: min(100%, 900px);
-  min-height: calc(100vh - 128px);
+  min-height: calc(100vh - 124px);
 
   margin: 0 auto;
   padding: 82px 40px 100px;
@@ -1037,13 +1020,13 @@ tbody tr:last-child td {
 }
 
 
-/* ==========================================
+/* ================================
    FOOTER
-========================================== */
+================================ */
 
 footer {
   min-height: 64px;
-  padding: 0 38px;
+  padding: 0 28px;
 
   display: flex;
   align-items: center;
@@ -1056,14 +1039,14 @@ footer {
 }
 
 
-/* ==========================================
+/* ================================
    RESPONSIVE DESIGN
-========================================== */
+================================ */
 
 @media (max-width: 980px) {
   .welcome-view.is-visible {
     grid-template-columns: 1fr;
-    gap: 54px;
+    gap: 44px;
   }
 
   .intro-note {
@@ -1112,16 +1095,12 @@ footer {
   }
 
   .welcome-view.is-visible {
-    padding-top: 58px;
-    padding-bottom: 70px;
+    padding-top: 42px;
+    padding-bottom: 60px;
   }
 
   .welcome-title {
-    font-size: clamp(38px, 10vw, 54px);
-  }
-
-  .welcome-summary {
-    font-size: 18px;
+    font-size: clamp(34px, 8vw, 46px);
   }
 
   .challenge-view {
@@ -1168,6 +1147,23 @@ footer {
   footer {
     padding: 0 22px;
   }
+
+  .scenario-label {
+    margin: 0 0 10px;
+  
+    color: var(--muted);
+  
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+}
+
+
+@media (max-width: 620px) {
+  .welcome-instructions {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -1194,7 +1190,7 @@ footer {
   }
 
   .welcome-title {
-    font-size: 38px;
+    font-size: 36px;
   }
 
   .cleaning-rules {
@@ -1221,4 +1217,1243 @@ footer {
   .visualization-actions .outline-button {
     width: 100%;
   }
+}
+
+
+.instruction-bullets {
+  max-width: 680px;
+  margin: 0 0 26px;
+  padding: 18px 0 18px 22px;
+
+  border-top: 1px solid var(--rule);
+  border-bottom: none;
+  color: var(--ink);
+}
+
+.instruction-bullets li {
+  margin: 7px 0;
+  padding-left: 4px;
+
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.instruction-bullets li::marker {
+  color: var(--muted);
+}
+
+/* ================================
+   CHALLENGE PAGE REFINEMENTS
+================================ */
+
+.challenge-view {
+  padding-top: 48px;
+}
+
+.challenge-view .objective {
+  max-width: 960px;
+  margin-bottom: 32px;
+  padding: 0 0 30px;
+
+  border-top: 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.question-prompt {
+  margin: 0 0 10px;
+
+  color: var(--ink);
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.challenge-view .objective h1 {
+  max-width: 900px;
+  margin: 0 0 18px;
+
+  font-size: clamp(32px, 3.25vw, 46px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.objective-instruction {
+  margin: 0;
+
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+
+/* CLEANING INSTRUCTIONS */
+
+#view-cleaning .cleaning-rules {
+  margin-top: 24px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+
+  border-top: 1px solid var(--rule);
+  border-left: 0;
+}
+
+#view-cleaning .cleaning-rule {
+  min-height: 0;
+  margin: 0;
+  padding: 15px 0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(190px, 0.65fr)
+    minmax(0, 1.35fr);
+
+  align-items: start;
+  gap: 24px;
+
+  border-right: 0;
+  border-bottom: 1px solid var(--rule);
+
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+#view-cleaning .cleaning-rule strong {
+  display: block;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#view-cleaning .cleaning-rule span {
+  color: var(--muted);
+}
+
+#view-cleaning .cleaning-rule code {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: inherit;
+
+  font-size: 0.92em;
+}
+
+
+/* WHITE WORK AREAS */
+
+.challenge-view .editor-shell,
+.challenge-view .editor-topline,
+.challenge-view .editor-actions,
+.challenge-view .editor-shell textarea,
+.challenge-view .data-panel,
+.challenge-view .data-panel-header,
+.challenge-view .table-tabs,
+.challenge-view .python-output-panel,
+.challenge-view .python-output-header,
+.challenge-view .python-output {
+  background: #ffffff;
+}
+
+.challenge-view .table-tabs button {
+  background: #ffffff;
+}
+
+.challenge-view .table-tabs button:hover,
+.challenge-view .table-tabs button:focus-visible,
+.challenge-view .table-tabs button.is-active,
+.challenge-view .table-tabs button[aria-selected="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+
+/* RUN AND RESET BUTTONS */
+
+.editor-primary-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.challenge-view .reset-button {
+  min-height: 44px;
+  padding: 11px 20px;
+
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+
+  background: #ffffff;
+  color: var(--ink);
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.challenge-view .reset-button:hover,
+.challenge-view .reset-button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+
+/* RESPONSIVE CHALLENGE REFINEMENTS */
+
+@media (max-width: 780px) {
+  .challenge-view {
+    padding-top: 36px;
+  }
+
+  .challenge-view .objective h1 {
+    font-size: clamp(31px, 7.5vw, 42px);
+  }
+
+  #view-cleaning .cleaning-rule {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+
+
+/* Added on later by me */
+
+
+#clean-total-answer {
+  background: #fff7d6;
+  border: 1px solid #b8a86f;
+}
+
+#clean-total-answer:focus {
+  background: #fffdf2;
+  border-color: var(--ink);
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.question-prompt {
+  margin-bottom: 18px;
+}
+
+.objective-instruction {
+  max-width: 760px;
+  margin: 24px 0 28px;
+  padding-left: 14px;
+
+  border-left: 3px solid var(--ink);
+
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.table-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+
+  background: #ffffff;
+  color: var(--ink);
+
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+#view-cleaning .cleaning-rules {
+  border: none;
+}
+
+#view-cleaning .cleaning-rule {
+  border: none;
+}
+
+
+/* Tighter spacing between directions and cleaning steps */
+
+#view-cleaning .objective-instruction {
+  max-width: 780px;
+  margin: 24px 0 18px;
+  padding: 16px 20px;
+
+  border-left: 4px solid var(--ink);
+  background: #ebe7dc;
+
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+#view-cleaning .cleaning-rules {
+  margin-top: 8px;
+}
+
+#view-cleaning .cleaning-rule {
+  min-height: 0;
+  padding: 9px 0;
+  line-height: 1.4;
+}
+#view-cleaning .cleaning-rules {
+  width: min(100%, 780px);
+  margin: 10px auto 0;
+}
+
+#view-cleaning .cleaning-rule {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: start;
+  justify-items: stretch;
+  column-gap: 48px;
+
+  padding: 9px 0;
+  border: none;
+
+  text-align: left;
+}
+
+#view-cleaning .objective-instruction strong {
+  display: block;
+  margin-bottom: 4px;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#view-cleaning .objective-instruction p {
+  margin: 0;
+}
+
+
+/* Cleaning task callout */
+
+#view-cleaning .cleaning-callout {
+  max-width: 900px;
+  margin: 24px 0 22px;
+  padding: 18px 24px 20px;
+
+  border-left: 4px solid var(--ink);
+  background: #ebe7dc;
+}
+
+#view-cleaning .cleaning-callout-label {
+  margin: 0 0 5px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+#view-cleaning .objective-instruction {
+  max-width: 780px;
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+#view-cleaning .cleaning-rules {
+  width: min(100%, 780px);
+  margin: 18px auto 0;
+
+  display: grid;
+  gap: 10px;
+
+  border: 0;
+}
+
+#view-cleaning .cleaning-rule {
+  min-height: 0;
+  margin: 0;
+  padding: 4px 0;
+
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+
+  border: 0;
+
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+#view-cleaning .cleaning-rule strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#view-cleaning .cleaning-rule span {
+  color: var(--muted);
+}
+
+#view-cleaning .cleaning-rule code {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: inherit;
+
+  font-size: 0.92em;
+}
+
+@media (max-width: 700px) {
+  #view-cleaning .cleaning-rule {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+
+/* Expand cleaning callout and left-align the rules */
+
+#view-cleaning .cleaning-callout {
+  width: 100%;
+  max-width: none;
+  margin: 24px 0 22px;
+  padding: 18px 26px 22px;
+
+  border-left: 4px solid var(--ink);
+  background: #ebe7dc;
+}
+
+#view-cleaning .cleaning-rules {
+  width: 100%;
+  max-width: none;
+  margin: 18px 0 0;
+
+  display: grid;
+  gap: 10px;
+}
+
+#view-cleaning .cleaning-rule {
+  width: 100%;
+  padding: 4px 0;
+
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 32px;
+
+  border: none;
+  text-align: left;
+}
+
+
+/* Make the cleaning section use the full page width */
+
+#view-cleaning .objective {
+  width: 100%;
+  max-width: none;
+}
+
+/* Keep the question from becoming too wide */
+
+#view-cleaning .question-prompt,
+#view-cleaning .objective > h1 {
+  max-width: 900px;
+}
+
+/* Expand the shaded task area */
+
+#view-cleaning .cleaning-callout {
+  width: 100%;
+  max-width: none;
+  margin: 24px 0 22px;
+  padding: 20px 28px 22px;
+
+  box-sizing: border-box;
+
+  border-left: 4px solid var(--ink);
+  background: #ebe7dc;
+}
+
+/* Left-align the full instructions list */
+
+#view-cleaning .cleaning-rules {
+  width: 100%;
+  max-width: none;
+  margin: 18px 0 0;
+
+  display: grid;
+  gap: 10px;
+
+  border: none;
+}
+
+#view-cleaning .cleaning-rule {
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 4px 0;
+
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 32px;
+
+  border: none;
+  text-align: left;
+}
+
+#view-cleaning .cleaning-rule strong,
+#view-cleaning .cleaning-rule span {
+  justify-self: start;
+  text-align: left;
+}
+
+@media (max-width: 700px) {
+  #view-cleaning .cleaning-rule {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+#view-cleaning .objective h1 {
+  font-style: italic;
+}
+
+
+/* =================================
+   UPDATED HOMEPAGE LAYOUT
+================================= */
+
+.welcome-view.is-visible {
+  width: min(100%, var(--content-width));
+  min-height: calc(100vh - 124px);
+
+  margin: 0 auto;
+  padding: 44px 40px 64px;
+
+  display: block;
+}
+
+.welcome-scenario {
+  width: 100%;
+  padding-bottom: 34px;
+
+  border-bottom: 1px solid var(--rule);
+}
+
+.scenario-label {
+  margin: 0 0 14px;
+
+  color: var(--ink);
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.welcome-title {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0;
+
+  font-size: clamp(38px, 4vw, 56px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.welcome-lower {
+  width: 100%;
+  margin-top: 34px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.welcome-instructions-column {
+  padding: 0 56px 0 0;
+}
+
+.instructions-title,
+.intro-note h2 {
+  margin: 0 0 18px;
+
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.instruction-bullets {
+  max-width: none;
+  margin: 0;
+  padding: 0 0 0 22px;
+
+  border: none;
+
+  color: var(--ink);
+}
+
+.instruction-bullets li {
+  margin: 8px 0;
+  padding-left: 4px;
+
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.instruction-bullets li::marker {
+  color: var(--muted);
+}
+
+.intro-note {
+  min-height: 100%;
+  margin: 0;
+  padding: 0 0 0 56px;
+
+  display: flex;
+  flex-direction: column;
+
+  border-top: none;
+  border-left: 1px solid var(--rule);
+}
+
+.task-list {
+  display: grid;
+  gap: 0;
+}
+
+.task-item {
+  padding: 0 0 18px;
+
+  border: none;
+}
+
+.task-item p {
+  margin: 0 0 3px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.task-item span {
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.welcome-button {
+  align-self: flex-end;
+  margin-top: 20px;
+}
+
+
+/* TABLET AND MOBILE */
+
+@media (max-width: 780px) {
+  .welcome-view.is-visible {
+    padding: 36px 22px 56px;
+  }
+
+  .welcome-title {
+    font-size: clamp(36px, 8vw, 48px);
+  }
+
+  .welcome-lower {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .welcome-instructions-column {
+    padding-right: 0;
+  }
+
+  .intro-note {
+    padding: 30px 0 0;
+
+    border-top: 1px solid var(--rule);
+    border-left: none;
+  }
+}
+
+
+/* Clearly show the table that is currently loaded */
+
+.table-tabs button.is-selected,
+.table-tabs button.is-active,
+.table-tabs button[aria-selected="true"] {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  font-weight: 600;
+}
+
+/* Remove the repeated selected-table name above the table buttons */
+
+#clean-data-title,
+#data-title {
+  display: none;
+}
+
+/* Keep Database/Data and the row count neatly aligned */
+
+#view-cleaning .data-panel-header,
+#view-sql .data-panel-header {
+  min-height: 56px;
+  padding: 14px 18px;
+  align-items: center;
+}
+
+#view-cleaning .data-panel-header .eyebrow,
+#view-sql .data-panel-header .eyebrow {
+  margin: 0;
+}
+
+.success-section {
+  border: 1px solid #d9e4dc;
+}
+
+.success-section .primary-button {
+  background: transparent;
+  color: var(--ink);
+
+  border: 1px solid #9fb6a4;
+}
+
+.success-section .primary-button:hover,
+.success-section .primary-button:focus-visible {
+  background: #dfe9e2;
+  color: var(--ink);
+  border-color: #8ca392;
+}
+
+#clean-total-answer {
+  background: #ffffff;
+  border: 4px solid #b96f45;
+  color: var(--ink);
+}
+
+#clean-total-answer::placeholder {
+  color: #9a8d82;
+}
+
+#clean-total-answer:focus {
+  background: #ffffff;
+  border-color: #9f4f24;
+  outline: 2px solid rgba(197, 111, 58, 0.22);
+  outline-offset: 2px;
+}
+
+#clean-answer-form input,
+#clean-answer-form button {
+  height: 52px;
+  box-sizing: border-box;
+}
+
+#clean-answer-form button {
+  padding: 0 24px;
+  align-self: end;
+}
+
+/* =================================
+   SQL + PYTHON MATCH THE CLEAN PAGE
+   These rules are intentionally scoped so the homepage and Clean page do not change.
+================================= */
+
+#view-sql .objective,
+#view-python .objective {
+  width: 100%;
+  max-width: none;
+}
+
+#view-sql .question-prompt,
+#view-python .question-prompt,
+#view-sql .objective > h1,
+#view-python .objective > h1 {
+  max-width: 900px;
+}
+
+#view-sql .objective > h1,
+#view-python .objective > h1 {
+  font-style: italic;
+}
+
+.challenge-task-callout {
+  width: 100%;
+  margin: 24px 0 22px;
+  padding: 20px 28px 22px;
+
+  border-left: 4px solid var(--ink);
+  background: #ebe7dc;
+}
+
+.challenge-task-label {
+  margin: 0 0 5px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.challenge-task-instruction {
+  max-width: 780px;
+  margin: 0;
+
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.challenge-task-rules {
+  width: 100%;
+  margin: 18px 0 0;
+
+  display: grid;
+  gap: 10px;
+}
+
+.challenge-task-rule {
+  width: 100%;
+  padding: 4px 0;
+
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 32px;
+
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.challenge-task-rule strong,
+.challenge-task-rule span {
+  justify-self: start;
+  text-align: left;
+}
+
+.challenge-task-rule span {
+  color: var(--muted);
+}
+
+.challenge-task-rule code {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: inherit;
+
+  font-size: 0.92em;
+}
+
+#campaign-answer,
+#python-segment-answer {
+  background: #ffffff;
+  border: 4px solid #b96f45;
+  color: var(--ink);
+}
+
+#campaign-answer::placeholder,
+#python-segment-answer::placeholder {
+  color: #9a8d82;
+}
+
+#campaign-answer:focus,
+#python-segment-answer:focus {
+  background: #ffffff;
+  border-color: #9f4f24;
+  outline: 2px solid rgba(197, 111, 58, 0.22);
+  outline-offset: 2px;
+}
+
+#answer-form input,
+#answer-form button,
+#python-answer-form input,
+#python-answer-form button {
+  height: 52px;
+  box-sizing: border-box;
+}
+
+#answer-form button,
+#python-answer-form button {
+  padding: 0 24px;
+  align-self: end;
+}
+
+#python-data-title {
+  display: none;
+}
+
+#view-python .data-panel-header {
+  min-height: 56px;
+  padding: 14px 18px;
+  align-items: center;
+}
+
+#view-python .data-panel-header .eyebrow {
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .challenge-task-rule {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+#view-visualization h1 {
+  margin-bottom: 24px;
+  padding-bottom: 26px;
+
+  border-bottom: 1px solid var(--rule);
+}
+
+#view-visualization .visualization-steps {
+  border-top: none;
+}
+
+#view-visualization > p {
+  margin-bottom: 10px;
+}
+
+#view-visualization .visualization-steps {
+  margin-top: 10px;
+}
+
+.colab-action {
+  padding: 2px 5px;
+
+  background: #ebe7dc;
+  font-weight: 700;
+}
+
+#view-visualization .visualization-steps {
+  border-bottom: none;
+}
+
+
+
+
+
+/* Retro shadow style for all main action buttons */
+
+.primary-button,
+.outline-button {
+  background: #ffffff;
+  color: var(--ink);
+
+  border: 2px solid var(--ink);
+  border-radius: 0;
+
+  box-shadow: 4px 4px 0 var(--ink);
+
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+
+.primary-button:hover:not(:disabled),
+.primary-button:focus-visible:not(:disabled),
+.outline-button:hover:not(:disabled),
+.outline-button:focus-visible:not(:disabled) {
+  background: #e7e3da;
+  color: var(--ink);
+
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.primary-button:active:not(:disabled),
+.outline-button:active:not(:disabled) {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.primary-button:disabled,
+.outline-button:disabled {
+  opacity: 0.45;
+  box-shadow: 2px 2px 0 var(--ink);
+  cursor: not-allowed;
+}
+
+/* Keep all main buttons visually consistent */
+button.primary-button,
+button.outline-button,
+a.primary-button,
+a.outline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 0 20px;
+
+  background: #ffffff;
+  color: var(--ink);
+
+  border: 2px solid var(--ink);
+  border-radius: 0;
+
+  box-shadow: 4px 4px 0 var(--ink);
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+
+  box-sizing: border-box;
+  cursor: pointer;
+  text-decoration: none;
+
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+
+button.primary-button:hover:not(:disabled),
+button.outline-button:hover:not(:disabled),
+a.primary-button:hover,
+a.outline-button:hover {
+  background: #e7e3da;
+  color: var(--ink);
+
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+button.primary-button:active:not(:disabled),
+button.outline-button:active:not(:disabled),
+a.primary-button:active,
+a.outline-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* Retro raised style for all main buttons */
+button.primary-button,
+button.outline-button,
+a.primary-button,
+a.outline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 48px;
+  max-width: 100%;
+  padding: 0 24px;
+
+  background-color: #f3f0e8;
+  color: #111111;
+
+  border: 2px solid #111111;
+  border-radius: 0;
+  box-shadow: 6px 6px 0 #111111;
+
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+/* Darker eggshell when hovered */
+button.primary-button:hover:not(:disabled),
+button.outline-button:hover:not(:disabled),
+a.primary-button:hover,
+a.outline-button:hover,
+button.primary-button:focus-visible:not(:disabled),
+button.outline-button:focus-visible:not(:disabled),
+a.primary-button:focus-visible,
+a.outline-button:focus-visible {
+  background-color: #ded9cf;
+
+  box-shadow: 0 0 0 #111111;
+  transform: translate(6px, 6px);
+}
+
+/* Pressed state */
+button.primary-button:active:not(:disabled),
+button.outline-button:active:not(:disabled),
+a.primary-button:active,
+a.outline-button:active {
+  background-color: #d4cec3;
+}
+
+/* Disabled buttons */
+button.primary-button:disabled,
+button.outline-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: 3px 3px 0 #111111;
+}
+
+ /* Editor buttons begin white */
+.editor-actions .primary-button,
+.editor-actions .outline-button {
+  background-color: #ffffff;
+}
+
+/* Darker eggshell on hover */
+.editor-actions .primary-button:hover:not(:disabled),
+.editor-actions .outline-button:hover:not(:disabled),
+.editor-actions .primary-button:focus-visible:not(:disabled),
+.editor-actions .outline-button:focus-visible:not(:disabled) {
+  background-color: #ded9cf;
+}
+
+/* Make editor buttons identical */
+.editor-actions .primary-button,
+.editor-actions .outline-button {
+  background-color: #ffffff;
+
+  border: 2px solid #111111;
+  border-radius: 0;
+
+  box-shadow: 6px 6px 0 #111111;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.editor-actions .primary-button:hover:not(:disabled),
+.editor-actions .outline-button:hover:not(:disabled),
+.editor-actions .primary-button:focus-visible:not(:disabled),
+.editor-actions .outline-button:focus-visible:not(:disabled) {
+  background-color: #ded9cf;
+
+  border: 2px solid #111111;
+  border-radius: 0;
+
+  transform: translate(6px, 6px);
+  box-shadow: none;
+}
+
+#clean-total-answer,
+#campaign-answer,
+#python-segment-answer {
+  background: #ffffff;
+  color: var(--ink);
+
+  border: 1px solid #111111;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#clean-total-answer:focus,
+#campaign-answer:focus,
+#python-segment-answer:focus {
+  background: #ffffff;
+  border-color: #111111;
+
+  outline: 2px solid #ded9cf;
+  outline-offset: 2px;
+}
+
+/* Buttons inside the white editor panel */
+.editor-primary-actions .primary-button,
+.editor-primary-actions .outline-button {
+  background-color: #ffffff;
+  border: 2px solid #111111;
+  border-radius: 0;
+}
+
+/* Keep disabled Run buttons white */
+.editor-primary-actions .primary-button:disabled,
+.editor-primary-actions .outline-button:disabled {
+  background-color: #ffffff;
+  color: #777777;
+  opacity: 1;
+
+  border: 2px solid #111111;
+  box-shadow: 6px 6px 0 #111111;
+
+  transform: none;
+  cursor: not-allowed;
+}
+
+/* Enabled button hover */
+.editor-primary-actions .primary-button:hover:not(:disabled),
+.editor-primary-actions .outline-button:hover:not(:disabled) {
+  background-color: #e7e3da;
+}
+
+/* Force all editor Run and Reset buttons to match the white panel */
+#clean-run-sql-button,
+#run-sql-button,
+#run-python-button,
+#clean-reset-button,
+#reset-button,
+#python-reset-button {
+  background: #ffffff !important;
+  color: #111111 !important;
+
+  border: 2px solid #111111 !important;
+  border-radius: 0 !important;
+
+  opacity: 1 !important;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Darker eggshell only while hovering */
+#clean-run-sql-button:hover:not(:disabled),
+#run-sql-button:hover:not(:disabled),
+#run-python-button:hover:not(:disabled),
+#clean-reset-button:hover,
+#reset-button:hover,
+#python-reset-button:hover {
+  background: #ded9cf !important;
+}
+
+
+/* Match final-answer inputs to the new button style */
+#clean-total-answer,
+#campaign-answer,
+#python-segment-answer {
+  height: 48px !important;
+  min-height: 48px !important;
+  padding: 0 14px;
+
+  background-color: #ffffff !important;
+  color: #111111;
+
+  border: 2px solid #111111 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 16px;
+}
+
+/* Keep the input and Submit button neatly aligned */
+#clean-answer-form,
+#answer-form,
+#python-answer-form {
+  align-items: end;
+  gap: 16px;
+}
+
+#clean-answer-form .primary-button,
+#answer-form .primary-button,
+#python-answer-form .primary-button {
+  height: 48px !important;
+  min-height: 48px !important;
 }
