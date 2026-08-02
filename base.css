@@ -1,0 +1,2352 @@
+:root {
+  --paper: #f3f0e8;
+  --surface: #faf9f5;
+  --surface-strong: #ffffff;
+
+  --ink: #111111;
+  --muted: #64615a;
+
+  --rule: #d4d0c6;
+  --rule-dark: #9c988f;
+
+  --success: #2f613d;
+  --success-bg: #edf4ee;
+
+  --error: #7a2d2d;
+  --error-bg: #f7ece9;
+
+  --content-width: 1180px;
+
+  --serif:
+    Georgia,
+    "Times New Roman",
+    Times,
+    serif;
+
+  --mono:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    monospace;
+}
+
+
+/* ================================
+   BASIC RESET
+================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--paper);
+  color: var(--ink);
+
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.55;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  color: inherit;
+}
+
+button:not(:disabled),
+a {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+p,
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+/* ================================
+   TYPOGRAPHY
+================================ */
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ink);
+}
+
+h1 {
+  margin-bottom: 24px;
+
+  font-size: clamp(38px, 4vw, 56px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  margin-bottom: 14px;
+
+  font-size: clamp(24px, 2.3vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  margin-bottom: 10px;
+
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+code {
+  padding: 2px 5px;
+
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+
+  background: var(--surface);
+
+  font-family: var(--mono);
+  font-size: 0.88em;
+}
+
+.quiet {
+  color: var(--muted);
+}
+
+.lede {
+  max-width: 720px;
+
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+
+  color: var(--ink);
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+
+/* ================================
+   BUTTONS
+================================ */
+
+.primary-button,
+.outline-button {
+  min-height: 44px;
+  padding: 11px 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    opacity 150ms ease;
+}
+
+.primary-button {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.primary-button:hover:not(:disabled),
+.primary-button:focus-visible:not(:disabled) {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-button:disabled {
+  opacity: 0.45;
+}
+
+.outline-button {
+  background: transparent;
+  color: var(--ink);
+}
+
+.outline-button:hover,
+.outline-button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.plain-button {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  font-family: inherit;
+}
+
+.reset-button {
+  color: var(--muted);
+
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.reset-button:hover,
+.reset-button:focus-visible {
+  color: var(--ink);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.site-header {
+  min-height: 60px;
+  padding: 16px 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+
+  border-bottom: 1px solid var(--rule);
+}
+
+.brand {
+  max-width: 540px;
+
+  color: var(--ink);
+
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.progress-step {
+  padding: 2px 0 4px;
+
+  border: 0;
+  border-bottom: 1px solid transparent;
+
+  background: transparent;
+  color: var(--muted);
+
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.progress-step:hover:not(:disabled),
+.progress-step:focus-visible:not(:disabled) {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.progress-step.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.progress-step.is-locked {
+  color: #aaa69d;
+  opacity: 0.75;
+}
+
+
+/* ================================
+   MAIN VIEWS
+================================ */
+
+main {
+  width: 100%;
+  flex: 1;
+}
+
+.view {
+  display: none;
+}
+
+.view.is-visible {
+  display: block;
+}
+
+
+/* ================================
+   WELCOME PAGE
+================================ */
+
+.welcome-view.is-visible {
+  width: min(100%, var(--content-width));
+  min-height: calc(100vh - 124px);
+
+  margin: 0 auto;
+  padding: 46px 40px 64px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.75fr)
+    minmax(270px, 0.65fr);
+
+  align-items: start;
+  gap: clamp(64px, 7vw, 104px);
+}
+
+.welcome-main {
+  max-width: 790px;
+}
+
+.welcome-title {
+  max-width: 760px;
+  margin: 0;
+
+  font-size: clamp(36px, 3.25vw, 48px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.welcome-summary {
+  max-width: 680px;
+  margin: 24px 0 0;
+
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.instructions-title {
+  margin: 34px 0 14px;
+
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+
+.welcome-button {
+  margin-top: 26px;
+}
+
+.intro-note {
+  margin-top: 2px;
+  padding-top: 16px;
+
+  border-top: 1px solid var(--ink);
+}
+
+.intro-note h2 {
+  margin: 0 0 16px;
+
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.task-list {
+  display: grid;
+}
+
+.task-item {
+  padding: 13px 0;
+
+  border-bottom: none;
+}
+
+.task-item:last-child {
+  border-bottom: 0;
+}
+
+.task-item p {
+  margin: 0 0 3px;
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.task-item span {
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+
+/* ================================
+   CHALLENGE LAYOUT
+================================ */
+
+.challenge-view {
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+  padding: 58px 40px 88px;
+}
+
+.challenge-meta {
+  margin-bottom: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.challenge-meta .eyebrow {
+  margin-bottom: 0;
+}
+
+.objective {
+  max-width: 940px;
+  margin-bottom: 34px;
+  padding: 30px 0 34px;
+
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+
+.objective h1 {
+  max-width: 900px;
+  margin: 8px 0 20px;
+
+  font-size: clamp(38px, 4vw, 56px);
+}
+
+.objective > p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ================================
+   ANSWER SECTIONS
+================================ */
+
+.answer-section {
+  margin: 0 0 36px;
+  padding: 26px 0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 0.8fr)
+    minmax(320px, 1.2fr);
+
+  align-items: end;
+  gap: 32px;
+
+  border-bottom: 1px solid var(--rule);
+}
+
+.answer-section h2 {
+  margin-bottom: 0;
+
+  font-size: 26px;
+}
+
+.answer-form {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.answer-form label {
+  display: grid;
+  gap: 7px;
+
+  color: var(--ink);
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.answer-form input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+
+  border: 1px solid var(--rule-dark);
+  border-radius: 2px;
+
+  background: var(--surface-strong);
+  color: var(--ink);
+
+  font-family: var(--serif);
+  font-size: 16px;
+}
+
+.answer-form input::placeholder {
+  color: #918d84;
+}
+
+.feedback {
+  grid-column: 1 / -1;
+
+  min-height: 0;
+
+  font-size: 15px;
+}
+
+.feedback:not(:empty) {
+  margin-top: 4px;
+  padding: 13px 15px;
+
+  border: 1px solid var(--rule);
+}
+
+.feedback.is-error,
+.feedback.error {
+  border-color: #c9a7a0;
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+.feedback.is-success,
+.feedback.success {
+  border-color: #9fb6a4;
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+
+/* ================================
+   WORKSPACE
+================================ */
+
+.workspace {
+  margin-top: 30px;
+}
+
+.workspace-heading {
+  margin-bottom: 18px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.workspace-heading h2 {
+  margin-bottom: 0;
+
+  font-size: 28px;
+}
+
+.status-text {
+  color: var(--muted);
+
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+
+/* ================================
+   EDITORS
+================================ */
+
+.editor-shell {
+  overflow: hidden;
+
+  border: 1px solid var(--rule-dark);
+  border-radius: 2px;
+
+  background: var(--surface-strong);
+}
+
+.editor-topline {
+  min-height: 43px;
+  padding: 10px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  border-bottom: 1px solid var(--rule);
+
+  background: var(--surface);
+
+  font-size: 14px;
+}
+
+.editor-shell textarea {
+  width: 100%;
+  min-height: 235px;
+  margin: 0;
+  padding: 18px;
+
+  display: block;
+  resize: vertical;
+
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+
+  background: #ffffff !important;
+  color: var(--ink);
+
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+.editor-shell textarea:focus {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.editor-actions {
+  min-height: 64px;
+  padding: 10px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border-top: 1px solid var(--rule);
+
+  background: var(--surface);
+}
+
+details {
+  color: var(--muted);
+
+  font-size: 14px;
+}
+
+summary {
+  color: var(--ink);
+  cursor: pointer;
+}
+
+details p {
+  margin: 10px 0 0;
+}
+
+
+/* ================================
+   DATA PANELS
+================================ */
+
+.data-panel,
+.python-output-panel {
+  margin-top: 24px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+
+  background: var(--surface-strong);
+}
+
+.data-panel-header,
+.python-output-header {
+  min-height: 72px;
+  padding: 16px 18px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+
+  border-bottom: 1px solid var(--rule);
+
+  background: var(--surface);
+}
+
+.data-panel-header h3,
+.python-output-header h3 {
+  margin-bottom: 0;
+}
+
+.table-tabs {
+  padding: 12px 16px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+
+  border-bottom: 1px solid var(--rule);
+}
+
+.table-tabs button {
+  padding: 7px 10px;
+
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+
+  background: transparent;
+  color: var(--ink);
+
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.table-tabs button:hover,
+.table-tabs button:focus-visible,
+.table-tabs button.is-active,
+.table-tabs button[aria-selected="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.data-message {
+  padding: 24px 18px;
+
+  color: var(--muted);
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-scroll table,
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  background: var(--surface-strong);
+
+  font-size: 14px;
+}
+
+th,
+td {
+  min-width: 110px;
+  padding: 11px 13px;
+
+  border-bottom: 1px solid var(--rule);
+
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--surface);
+
+  font-family: var(--serif);
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+td {
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+tbody tr:hover {
+  background: #f3f1eb;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+
+/* ================================
+   CLEANING RULES
+================================ */
+
+.cleaning-rules {
+ 
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+
+.cleaning-rule {
+  min-height: 130px;
+  margin: 0;
+  padding: 18px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.cleaning-rule strong {
+  display: block;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+/* ================================
+   PYTHON CHALLENGE
+================================ */
+
+.python-formula {
+  max-width: 930px;
+  margin: 20px 0 12px;
+}
+
+.python-bug-note {
+  max-width: 860px;
+  margin-bottom: 0;
+
+  color: var(--muted);
+}
+
+.python-handoff {
+  margin: 0 0 30px;
+  padding: 20px 22px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.python-handoff p {
+  margin: 0;
+}
+
+.python-handoff .eyebrow {
+  display: block;
+}
+
+.python-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(280px, 0.65fr);
+
+  align-items: stretch;
+  gap: 24px;
+}
+
+.python-layout .python-output-panel {
+  margin-top: 0;
+}
+
+.python-output {
+  min-height: 100%;
+  margin: 0;
+  padding: 18px;
+
+  overflow: auto;
+
+  background: var(--surface-strong);
+  color: var(--ink);
+
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.65;
+
+  white-space: pre-wrap;
+}
+
+.python-data-panel {
+  margin-top: 24px;
+}
+
+
+/* ================================
+   SUCCESS STATES
+================================ */
+
+.success-section {
+  margin-top: 34px;
+  padding: 30px;
+
+  border: 1px solid #9fb6a4;
+  border-radius: 2px;
+
+  background: var(--success-bg);
+}
+
+.success-section h2 {
+  max-width: 820px;
+}
+
+.success-section p {
+  max-width: 760px;
+}
+
+.success-section .primary-button {
+  margin-top: 8px;
+}
+
+
+/* ================================
+   VISUALIZATION PAGE
+================================ */
+
+.placeholder-view {
+  width: min(100%, 900px);
+  min-height: calc(100vh - 124px);
+
+  margin: 0 auto;
+  padding: 82px 40px 100px;
+}
+
+.placeholder-view h1 {
+  max-width: 780px;
+}
+
+.visualization-steps {
+  max-width: 720px;
+  margin: 32px 0;
+  padding: 20px 0;
+
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.visualization-steps p {
+  margin: 0;
+  padding: 7px 0;
+}
+
+.visualization-actions {
+  margin-top: 32px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer {
+  min-height: 64px;
+  padding: 0 32px;
+
+  display: flex;
+  align-items: center;
+
+  border-top: 1px solid var(--rule);
+
+  color: var(--muted);
+
+  font-size: 14px;
+}
+
+
+/* ================================
+   RESPONSIVE DESIGN
+================================ */
+
+@media (max-width: 980px) {
+  .welcome-view.is-visible {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .intro-note {
+    max-width: 620px;
+  }
+
+  .cleaning-rules {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .python-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .python-output {
+    min-height: 220px;
+  }
+}
+
+
+@media (max-width: 780px) {
+  .site-header {
+    padding: 18px 22px;
+
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .brand {
+    max-width: 100%;
+  }
+
+  .progress {
+    width: 100%;
+    justify-content: flex-start;
+
+    white-space: normal;
+  }
+
+  .welcome-view.is-visible,
+  .challenge-view,
+  .placeholder-view {
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .welcome-view.is-visible {
+    padding-top: 42px;
+    padding-bottom: 60px;
+  }
+
+  .welcome-title {
+    font-size: clamp(34px, 8vw, 46px);
+  }
+
+  .challenge-view {
+    padding-top: 44px;
+  }
+
+  .objective h1 {
+    font-size: clamp(34px, 8vw, 48px);
+  }
+
+  .answer-section {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .answer-form {
+    grid-template-columns: 1fr;
+  }
+
+  .answer-form .primary-button {
+    width: 100%;
+  }
+
+  .workspace-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .status-text {
+    white-space: normal;
+  }
+
+  .editor-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .python-handoff {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  footer {
+    padding: 0 22px;
+  }
+
+  .scenario-label {
+    margin: 0 0 10px;
+  
+    color: var(--muted);
+  
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+}
+
+
+@media (max-width: 620px) {
+  .welcome-instructions {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 560px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  .site-header {
+    min-height: auto;
+  }
+
+  .progress {
+    gap: 7px;
+
+    font-size: 13px;
+  }
+
+  .welcome-view.is-visible,
+  .challenge-view,
+  .placeholder-view {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .welcome-title {
+    font-size: 36px;
+  }
+
+  .cleaning-rules {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-meta {
+    align-items: flex-start;
+  }
+
+  .data-panel-header,
+  .python-output-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .visualization-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .visualization-actions .primary-button,
+  .visualization-actions .outline-button {
+    width: 100%;
+  }
+}
+
+
+.instruction-bullets {
+  max-width: 680px;
+  margin: 0 0 26px;
+  padding: 18px 0 18px 22px;
+
+  border-top: 1px solid var(--rule);
+  border-bottom: none;
+  color: var(--ink);
+}
+
+.instruction-bullets li {
+  margin: 7px 0;
+  padding-left: 4px;
+
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.instruction-bullets li::marker {
+  color: var(--muted);
+}
+
+/* ================================
+   FINAL SITE REFINEMENTS
+   Consolidated to avoid conflicting overrides
+================================ */
+
+/* Challenge headings and layout */
+.challenge-view {
+  padding-top: 48px;
+}
+
+.challenge-view .objective {
+  max-width: 960px;
+  margin-bottom: 32px;
+  padding: 0 0 30px;
+
+  border-top: 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.question-prompt {
+  margin: 0 0 18px;
+
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.challenge-view .objective h1 {
+  max-width: 900px;
+  margin: 0 0 18px;
+
+  font-size: clamp(32px, 3.25vw, 46px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+#view-cleaning .objective,
+#view-sql .objective,
+#view-python .objective {
+  width: 100%;
+  max-width: none;
+}
+
+#view-cleaning .question-prompt,
+#view-sql .question-prompt,
+#view-python .question-prompt,
+#view-cleaning .objective > h1,
+#view-sql .objective > h1,
+#view-python .objective > h1 {
+  max-width: 900px;
+}
+
+#view-cleaning .objective > h1,
+#view-sql .objective > h1,
+#view-python .objective > h1 {
+  font-style: italic;
+}
+
+.objective-instruction {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+
+/* Updated homepage layout */
+.welcome-view.is-visible {
+  width: min(100%, var(--content-width));
+  min-height: calc(100vh - 124px);
+
+  margin: 0 auto;
+  padding: 44px 40px 64px;
+
+  display: block;
+}
+
+.welcome-scenario {
+  width: 100%;
+  padding-bottom: 34px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.scenario-label {
+  margin: 0 0 14px;
+
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.welcome-title {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0;
+
+  font-size: clamp(38px, 4vw, 56px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.welcome-lower {
+  width: 100%;
+  margin-top: 34px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.welcome-instructions-column {
+  padding: 0 56px 0 0;
+}
+
+.instructions-title,
+.intro-note h2 {
+  margin: 0 0 18px;
+
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.instruction-bullets {
+  max-width: none;
+  margin: 0;
+  padding: 0 0 0 22px;
+
+  border: 0;
+  color: var(--ink);
+}
+
+.instruction-bullets li {
+  margin: 8px 0;
+  padding-left: 4px;
+
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.instruction-bullets li::marker {
+  color: var(--muted);
+}
+
+.intro-note {
+  min-height: 100%;
+  margin: 0;
+  padding: 0 0 0 56px;
+
+  display: flex;
+  flex-direction: column;
+
+  border-top: 0;
+  border-left: 1px solid var(--rule);
+}
+
+.task-list {
+  display: grid;
+  gap: 0;
+}
+
+.task-item {
+  padding: 0 0 18px;
+  border: 0;
+}
+
+.task-item p {
+  margin: 0 0 3px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.task-item span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.welcome-button {
+  align-self: flex-end;
+  margin-top: 20px;
+}
+
+
+/* Shared shaded task boxes */
+#view-cleaning .cleaning-callout,
+#view-python .challenge-task-callout,
+.sql-brief {
+  width: 100%;
+  max-width: none;
+  margin: 32px 0 22px;
+  padding: 26px 32px;
+
+  box-sizing: border-box;
+  border-left: 4px solid var(--ink);
+  background: #ebe7dc;
+}
+
+.cleaning-callout-label,
+.challenge-task-label,
+.sql-brief-label {
+  margin: 0 0 10px;
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#view-cleaning .cleaning-callout .objective-instruction,
+.challenge-task-instruction,
+.sql-brief-text {
+  max-width: 920px;
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+
+/* Cleaning instructions */
+#view-cleaning .cleaning-rules {
+  width: 100%;
+  max-width: none;
+  margin: 30px 0 0;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+
+  border: 0;
+}
+
+#view-cleaning .cleaning-rule {
+  width: 100%;
+  min-height: 0;
+  margin: 20px;
+  padding: 8px 0;
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 32px;
+
+  border: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+#view-cleaning .cleaning-rule-label,
+#view-cleaning .cleaning-rule > strong {
+  position: relative;
+  justify-self: start;
+  margin: 0;
+  padding-left: 16px;
+
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+}
+
+#view-cleaning .cleaning-rule-label::before,
+#view-cleaning .cleaning-rule > strong::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+}
+
+#view-cleaning .cleaning-rule > span:last-child {
+  justify-self: start;
+  margin: 0;
+
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+}
+
+#view-cleaning .cleaning-rule code,
+.challenge-task-rule code {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: inherit;
+
+  font-size: 0.92em;
+}
+
+.cleaning-submit-note {
+  margin: 26px 0 0;
+  color: var(--ink);
+}
+
+.cleaning-submit-note strong {
+  font-weight: 700;
+}
+
+
+/* Python task rules */
+.challenge-task-rules {
+  width: 100%;
+  margin: 22px 0 0;
+
+  display: grid;
+  gap: 10px;
+}
+
+.challenge-task-rule {
+  width: 100%;
+  padding: 4px 0;
+
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 32px;
+
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.challenge-task-rule strong,
+.challenge-task-rule span {
+  justify-self: start;
+  text-align: left;
+}
+
+.challenge-task-rule span {
+  color: var(--muted);
+}
+
+
+/* SQL brief and formula */
+.sql-formula {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 22px 0;
+  font-size: 18px;
+}
+
+.sql-fraction {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 110px;
+
+  line-height: 1.1;
+  text-align: center;
+}
+
+.sql-fraction-top {
+  padding: 0 10px 5px;
+  border-bottom: 1.5px solid currentColor;
+}
+
+.sql-fraction-bottom {
+  padding: 5px 10px 0;
+}
+
+.sql-submit-note {
+  margin: 0;
+}
+
+.sql-hint-list {
+  margin: 16px 0;
+  padding-left: 22px;
+}
+
+.sql-hint-list li {
+  margin-bottom: 8px;
+}
+
+.sql-hint-terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin: 14px 0 0;
+}
+
+
+/* White work areas */
+.challenge-view .editor-shell,
+.challenge-view .editor-topline,
+.challenge-view .editor-actions,
+.challenge-view .editor-shell textarea,
+.challenge-view .data-panel,
+.challenge-view .data-panel-header,
+.challenge-view .table-tabs,
+.challenge-view .python-output-panel,
+.challenge-view .python-output-header,
+.challenge-view .python-output {
+  background: #ffffff;
+}
+
+.editor-primary-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+/* Raised square buttons */
+button.primary-button,
+button.outline-button,
+a.primary-button,
+a.outline-button {
+  height: 48px;
+  max-width: 100%;
+  padding: 0 24px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--paper);
+  color: var(--ink);
+
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--ink);
+
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+
+  user-select: none;
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+button.primary-button:hover:not(:disabled),
+button.outline-button:hover:not(:disabled),
+a.primary-button:hover,
+a.outline-button:hover,
+button.primary-button:focus-visible:not(:disabled),
+button.outline-button:focus-visible:not(:disabled),
+a.primary-button:focus-visible,
+a.outline-button:focus-visible {
+  background-color: #ded9cf;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+}
+
+button.primary-button:active:not(:disabled),
+button.outline-button:active:not(:disabled),
+a.primary-button:active,
+a.outline-button:active {
+  background-color: #d4cec3;
+}
+
+button.primary-button:disabled,
+button.outline-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Buttons that sit on white editor panels begin white */
+.editor-actions button.primary-button,
+.editor-actions button.outline-button,
+#clean-run-sql-button,
+#run-sql-button,
+#run-python-button,
+#clean-reset-button,
+#reset-button,
+#python-reset-button {
+  background-color: #ffffff;
+  color: var(--ink);
+
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--ink);
+
+  opacity: 1;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.editor-actions button.primary-button:disabled,
+.editor-actions button.outline-button:disabled,
+#clean-run-sql-button:disabled,
+#run-sql-button:disabled,
+#run-python-button:disabled {
+  background-color: #ffffff;
+  color: #77736b;
+  opacity: 1;
+  transform: none;
+}
+
+.editor-actions button.primary-button:hover:not(:disabled),
+.editor-actions button.outline-button:hover:not(:disabled),
+#clean-run-sql-button:hover:not(:disabled),
+#run-sql-button:hover:not(:disabled),
+#run-python-button:hover:not(:disabled),
+#clean-reset-button:hover,
+#reset-button:hover,
+#python-reset-button:hover {
+  background-color: #ded9cf;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+}
+
+
+/* Final answer inputs */
+#clean-total-answer,
+#campaign-answer,
+#python-segment-answer {
+  height: 48px;
+  min-height: 48px;
+  padding: 0 14px;
+
+  background: #ffffff;
+  color: var(--ink);
+
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  box-shadow: none;
+
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 16px;
+}
+
+#clean-total-answer::placeholder,
+#campaign-answer::placeholder,
+#python-segment-answer::placeholder {
+  color: #918d84;
+}
+
+#clean-total-answer:focus,
+#campaign-answer:focus,
+#python-segment-answer:focus {
+  background: #ffffff;
+  border-color: var(--ink);
+  outline: 2px solid #ded9cf;
+  outline-offset: 2px;
+}
+
+#clean-answer-form,
+#answer-form,
+#python-answer-form {
+  align-items: end;
+  gap: 16px;
+}
+
+#clean-answer-form .primary-button,
+#answer-form .primary-button,
+#python-answer-form .primary-button {
+  height: 48px;
+  min-height: 48px;
+}
+
+
+/* Tables and data panels */
+.table-tabs button {
+  background: #ffffff;
+}
+
+.table-tabs button.is-selected,
+.table-tabs button.is-active,
+.table-tabs button[aria-selected="true"],
+.table-tabs button:hover,
+.table-tabs button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.table-tabs button.is-selected,
+.table-tabs button.is-active,
+.table-tabs button[aria-selected="true"] {
+  font-weight: 600;
+}
+
+#clean-data-title,
+#data-title,
+#python-data-title {
+  display: none;
+}
+
+#view-cleaning .data-panel-header,
+#view-sql .data-panel-header,
+#view-python .data-panel-header {
+  min-height: 56px;
+  padding: 14px 18px;
+  align-items: center;
+}
+
+#view-cleaning .data-panel-header .eyebrow,
+#view-sql .data-panel-header .eyebrow,
+#view-python .data-panel-header .eyebrow {
+  margin: 0;
+}
+
+.table-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+
+  background: #ffffff;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.table-scroll th,
+.table-scroll td,
+.table-scroll td.number {
+  text-align: left;
+}
+
+
+/* Success states */
+.success-section {
+  border: 1px solid #d9e4dc;
+}
+
+.success-section .primary-button {
+  background: #ffffff;
+  color: var(--ink);
+
+  border-color: #9fb6a4;
+  box-shadow: 6px 6px 0 #9fb6a4;
+}
+
+.success-section .primary-button:hover,
+.success-section .primary-button:focus-visible {
+  background: #dfe9e2;
+  color: var(--ink);
+  border-color: #8ca392;
+  box-shadow: none;
+}
+
+
+/* Visualization page */
+#view-visualization h1 {
+  margin-bottom: 24px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--rule);
+}
+
+#view-visualization > p {
+  margin-bottom: 10px;
+}
+
+#view-visualization .visualization-steps {
+  margin-top: 10px;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.colab-action {
+  padding: 2px 5px;
+  background: #ebe7dc;
+  font-weight: 700;
+}
+
+
+/* Responsive refinements */
+@media (max-width: 780px) {
+  .challenge-view {
+    padding-top: 36px;
+  }
+
+  .challenge-view .objective h1 {
+    font-size: clamp(31px, 7.5vw, 42px);
+  }
+
+  .welcome-view.is-visible {
+    padding: 36px 22px 56px;
+  }
+
+  .welcome-title {
+    font-size: clamp(36px, 8vw, 48px);
+  }
+
+  .welcome-lower {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .welcome-instructions-column {
+    padding-right: 0;
+  }
+
+  .intro-note {
+    padding: 30px 0 0;
+    border-top: 1px solid var(--rule);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  #view-cleaning .cleaning-rule,
+  .challenge-task-rule {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  #view-cleaning .cleaning-callout,
+  #view-python .challenge-task-callout,
+  .sql-brief {
+    padding: 22px 24px;
+  }
+
+  .sql-formula {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+
+/* =================================
+   CONTEXTUAL BUTTON HOVER COLORS
+================================= */
+
+/* White buttons inside editors and data areas */
+.editor-actions button.primary-button,
+.editor-actions button.outline-button,
+#clean-run-sql-button,
+#run-sql-button,
+#run-python-button,
+#clean-reset-button,
+#reset-button,
+#python-reset-button {
+  background-color: #ffffff;
+}
+
+/* White becomes a slightly darker white */
+.editor-actions button.primary-button:hover:not(:disabled),
+.editor-actions button.outline-button:hover:not(:disabled),
+#clean-run-sql-button:hover:not(:disabled),
+#run-sql-button:hover:not(:disabled),
+#run-python-button:hover:not(:disabled),
+#clean-reset-button:hover,
+#reset-button:hover,
+#python-reset-button:hover {
+  background-color: #ecebea;
+}
+
+
+/* Unselected table-tab buttons */
+.table-tabs button:not(.is-selected):not(.is-active):not([aria-selected="true"]) {
+  background-color: #ffffff;
+  color: var(--ink);
+}
+
+/* White table tabs become a slightly darker white */
+.table-tabs button:not(.is-selected):not(.is-active):not([aria-selected="true"]):hover,
+.table-tabs button:not(.is-selected):not(.is-active):not([aria-selected="true"]):focus-visible {
+  background-color: #ecebea;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+
+/* Green confirmation-area button */
+.success-section .primary-button {
+  background-color: #dfe9e2;
+  color: var(--ink);
+
+  border-color: #9fb6a4;
+  box-shadow: 6px 6px 0 #9fb6a4;
+}
+
+/* Light green becomes darker green */
+.success-section .primary-button:hover,
+.success-section .primary-button:focus-visible {
+  background-color: #c8d8cc;
+  color: var(--ink);
+
+  border-color: #78917f;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+}
+
+/* Force confirmation buttons to use green hover states */
+.success-section button.primary-button {
+  background-color: #dfe9e2 !important;
+  border-color: #9fb6a4 !important;
+  box-shadow: 6px 6px 0 #9fb6a4 !important;
+}
+
+.success-section button.primary-button:hover:not(:disabled),
+.success-section button.primary-button:focus-visible:not(:disabled) {
+  background-color: #c2d4c7 !important;
+  border-color: #78917f !important;
+
+  box-shadow: none !important;
+  transform: translate(6px, 6px);
+}
+
+/* Each cleaning rule stays on one horizontal line */
+#view-cleaning .cleaning-rules {
+  display: block;
+  margin-top: 28px;
+}
+
+#view-cleaning .cleaning-rule {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: baseline;
+  gap: 6px;
+
+  width: 100%;
+  margin-top: 24px;
+  padding: 0px 0;
+
+  border: none;
+}
+
+/* Darker rule name */
+#view-cleaning .cleaning-rule-label {
+  flex: 0 0 auto;
+  padding: 5px 0;
+
+  color: var(--ink);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* Remove the dash and add a colon */
+#view-cleaning .cleaning-rule-label::before {
+  content: none;
+}
+
+#view-cleaning .cleaning-rule-label::after {
+  content: ":";
+}
+
+/* Lighter explanation */
+#view-cleaning .cleaning-rule > span:last-child {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* =================================
+   PYTHON INSTRUCTION BRIEF
+================================= */
+
+.python-brief {
+  margin-top: 32px;
+  padding: 26px 32px;
+
+  background: #ebe7dc;
+  border-left: 4px solid #111111;
+}
+
+.python-brief-label {
+  margin: 0 0 10px;
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.python-brief-text {
+  max-width: 920px;
+  margin: 0 0 12px;
+
+  line-height: 1.5;
+}
+
+/* Formula display */
+.python-equation {
+  margin: 24px 0 14px;
+  padding: 20px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--rule-dark);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(22px, 2.3vw, 30px);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.python-equation-expression {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 13px;
+}
+
+.python-equation-variable,
+.python-equation-expression i {
+  color: var(--ink);
+}
+
+.python-equation-operator {
+  color: var(--ink);
+  font-style: normal;
+}
+
+.python-equation sub {
+  position: relative;
+  bottom: -0.1em;
+
+  font-size: 0.55em;
+}
+
+/* Formula definitions */
+.python-equation-key {
+  margin: 0 0 24px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.python-equation-key span {
+  white-space: nowrap;
+}
+
+.python-verification-note {
+  margin-bottom: 18px;
+}
+
+.python-submit-note {
+  margin: 0;
+
+  color: var(--ink);
+}
+
+.python-submit-note strong {
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .python-brief {
+    padding: 22px 24px;
+  }
+
+  .python-equation {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    white-space: normal;
+  }
+
+  .python-equation-expression {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .python-equation-key {
+    display: grid;
+    gap: 5px;
+  }
+}
+
+.python-formula-line {
+  margin: 18px 0;
+
+  color: var(--muted);
+  font-size: inherit;
+  line-height: 1.5;
+}
+
+/* Hide the small green correct message, but keep red errors */
+.answer-section .feedback.success {
+  display: none !important;
+}
+
+/* Move all success-section Continue buttons to the right */
+.success-section .primary-button {
+  display: block;
+  margin: 20px 0 0 auto;
+}
+
+
+
+/* Header layout */
+.site-header {
+  position: relative;
+
+  display: flex !important;
+  grid-template-columns: none !important;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 50px;
+  padding: 0 32px;
+
+  /* Keep the line beneath the header */
+  border-bottom: 1px solid #d6d1c5;
+}
+
+/* Ball button on the left */
+.header-home-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+  padding: 0 28px;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.header-home-button img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+
+  animation: header-ball-spin 10s linear infinite;
+}
+
+/* Title stays in the exact center of the page */
+.header-center-title {
+ 
+
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+@keyframes header-ball-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Ball and title together on the left */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-title {
+  position: static;
+  transform: none;
+
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Hover effect for the Google Colab link only */
+.colab-button:hover,
+.colab-button:focus-visible {
+  background-color: #e3dfd5 !important;
+  box-shadow: none !important;
+  transform: translate(6px, 6px);
+}
+
+
+.header-home-button {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.header-home-button img {
+  pointer-events: none;
+}
+
+.header-home-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-home-logo img {
+  width: 25px;
+  height: 25px;
+  display: block;
+  animation: header-ball-spin 5s linear infinite;
+}

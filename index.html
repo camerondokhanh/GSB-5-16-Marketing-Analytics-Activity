@@ -13,12 +13,66 @@
     content="A short marketing analytics activity covering data cleaning, SQL, Python, and visualization."
   >
 
-  <title>GSB 516 Group 4: AI Assisted Analytics Engineering</title>
+  <title>Group 4: AI Assisted Analytics Engineering</title>
+  <link rel="icon" type="image/webp" href="assets/4-ball.webp">
 
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/sql-challenge.css">
   <link rel="stylesheet" href="styles/cleaning-challenge.css">
   <link rel="stylesheet" href="styles/python-challenge.css">
+
+  <style>
+    /* Final table alignment override */
+    #clean-data-table table,
+    #data-table table,
+    #python-data-table table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      table-layout: auto !important;
+    }
+  
+    #clean-data-table thead,
+    #data-table thead,
+    #python-data-table thead {
+      display: table-header-group !important;
+    }
+  
+    #clean-data-table tbody,
+    #data-table tbody,
+    #python-data-table tbody {
+      display: table-row-group !important;
+    }
+  
+    #clean-data-table tr,
+    #data-table tr,
+    #python-data-table tr {
+      display: table-row !important;
+    }
+  
+    #clean-data-table th,
+    #clean-data-table td,
+    #data-table th,
+    #data-table td,
+    #python-data-table th,
+    #python-data-table td {
+      display: table-cell !important;
+  
+      padding-right: 13px !important;
+      padding-left: 13px !important;
+  
+      text-align: left !important;
+      vertical-align: top !important;
+    }
+  
+    #clean-data-table td.number,
+    #clean-data-table td.number-cell,
+    #data-table td.number,
+    #data-table td.number-cell,
+    #python-data-table td.number,
+    #python-data-table td.number-cell {
+      text-align: left !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -26,13 +80,17 @@
     This activity requires JavaScript.
   </noscript>
 
-  <header class="site-header">
-    <button
-      class="brand plain-button"
-      data-go="welcome"
-    >
-      Group 4: AI Assisted Analytics Engineering
-    </button>
+ <header class="site-header">
+    
+  <div class="header-brand">
+    <div class="header-home-logo">
+      <img src="assets/4-ball.webp" alt="">
+    </div>
+  
+    <div class="header-title">
+      AI Assisted Analytics Engineering
+    </div>
+  </div>
 
     <nav class="progress" aria-label="Activity progress">
       <button
@@ -175,7 +233,7 @@
         <p class="question-prompt">Help the team answer this question:</p>
 
         <h1>
-          What is McCarthy’s total valid revenue after the export is cleaned?
+          What is McCarthy’s total valid revenue after the data is cleaned?
         </h1>
 
         <div class="cleaning-callout">
@@ -186,34 +244,31 @@
             valid revenue. Enter your final answer at the bottom of the page.
           </p>
         
-          <div
-            class="cleaning-rules"
-            aria-label="Cleaning rules"
-          >
-            <div class="cleaning-rule">
-              <strong>* Remove duplicates</strong>
-              <span>Keep one row for each transaction ID.</span>
-            </div>
-        
-            <div class="cleaning-rule">
-              <strong>* Remove test records</strong>
-              <span>
-                Exclude rows where <code>is_test_record = 1</code>.
-              </span>
-            </div>
-        
-            <div class="cleaning-rule">
-              <strong>* Standardize revenue</strong>
-              <span>Remove dollar signs, commas, and extra spaces.</span>
-            </div>
-        
-            <div class="cleaning-rule">
-              <strong>* Exclude missing revenue</strong>
-              <span>
-                Ignore rows with blank revenue or <code>N/A</code>.
-              </span>
-            </div>
+          <div class="cleaning-rule">
+            <span class="cleaning-rule-label">Remove duplicates</span>
+            <span>Keep one row for each transaction ID.</span>
           </div>
+          
+          <div class="cleaning-rule">
+            <span class="cleaning-rule-label">Remove test records</span>
+            <span>
+              Exclude rows where <code>is_test_record = 1</code>.
+            </span>
+          </div>
+          
+          <div class="cleaning-rule">
+            <span class="cleaning-rule-label">Standardize revenue</span>
+            <span>Remove dollar signs, commas, and extra spaces.</span>
+          </div>
+          
+          <div class="cleaning-rule">
+            <span class="cleaning-rule-label">Exclude missing revenue</span>
+            <span>Ignore rows with blank revenue or <code>N/A</code>.</span>
+          </div>
+          
+          <p class="cleaning-submit-note">
+            <strong>Submit:</strong> Total cleaned revenue.
+          </p>
         </div>
       </section>
 
@@ -225,7 +280,8 @@
       >
         <div class="workspace-heading">
           <div>
-            <p class="eyebrow">Cleaning workspace</p>
+            <p class="eyebrow">SQL workspace
+             </p>
 
             <h2 id="clean-workspace-title">
               View the data table below, then clean it with SQL.
@@ -408,38 +464,33 @@
           conversion rate?
         </h1>
 
-        <div class="challenge-task-callout">
-          <p class="challenge-task-label">Instructions</p>
-
-          <p class="challenge-task-instruction">
-            Use SQL and AI to identify the completed campaign with the highest
-            conversion rate. Enter the campaign ID at the bottom of the page.
+        <div class="sql-brief">
+          <p class="sql-brief-label">Instructions</p>
+        
+          <p class="sql-brief-text">
+            Use SQL and AI to combine the relevant campaign and performance data,
+            calculate the conversion rate for each completed campaign, and identify
+            the top performer.
           </p>
-
+        
           <div
-            class="challenge-task-rules"
-            aria-label="SQL task requirements"
+            class="sql-formula"
+            aria-label="Conversion rate equals conversions divided by clicks"
           >
-            <div class="challenge-task-rule">
-              <strong>* Use completed campaigns only</strong>
-              <span>Exclude campaigns that are not marked <code>Complete</code>.</span>
-            </div>
-
-            <div class="challenge-task-rule">
-              <strong>* Connect the relevant tables</strong>
-              <span>Use <code>campaign_id</code> to combine campaign and performance data.</span>
-            </div>
-
-            <div class="challenge-task-rule">
-              <strong>* Calculate conversion rate</strong>
-              <span>Divide conversions by clicks for each eligible campaign.</span>
-            </div>
-
-            <div class="challenge-task-rule">
-              <strong>* Identify the highest result</strong>
-              <span>Compare the rates and select the strongest campaign.</span>
-            </div>
+            <span>Conversion rate</span>
+        
+            <span>=</span>
+        
+            <span class="sql-fraction">
+              <span class="sql-fraction-top">conversions</span>
+              <span class="sql-fraction-bottom">clicks</span>
+            </span>
           </div>
+        
+          <p class="sql-submit-note">
+            <strong>Submit:</strong>
+            The campaign ID with the highest conversion rate.
+          </p>
         </div>
       </section>
 
@@ -496,14 +547,39 @@
               </button>
             </div>
 
-            <details>
-              <summary>Heres a lil hint if your're stuck. SQL pieces you may need</summary>
-
-              <p>
+            <details class="sql-hint">
+              <summary>Here’s a hint if you’re stuck: SQL pieces you may need</summary>
+            
+              <ul class="sql-hint-list">
+                <li>
+                  Connect the campaign and performance tables using
+                  <code>campaign_id</code>.
+                </li>
+            
+                <li>
+                  Use <code>status</code> to keep completed campaigns only.
+                </li>
+            
+                <li>
+                  Calculate the rate using <code>conversions</code> and
+                  <code>clicks</code>.
+                </li>
+            
+                <li>
+                  Sort the results from highest to lowest.
+                </li>
+            
+                <li>
+                  Return only the strongest campaign.
+                </li>
+              </ul>
+            
+              <p class="sql-hint-terms">
                 <code>SELECT</code>
                 <code>JOIN</code>
                 <code>WHERE</code>
                 <code>ORDER BY</code>
+                <code>LIMIT</code>
               </p>
             </details>
           </div>
@@ -620,55 +696,43 @@
       id="view-python"
       class="view challenge-view"
     >
-      <section class="objective">
-        <p class="question-prompt">Help the team answer this question:</p>
-
-        <h1>
-          For campaign
-          <span id="python-selected-campaign">C104</span>,
-          which audience has the highest expected profit per contacted
-          customer?
-        </h1>
-
-        <div class="challenge-task-callout">
-          <p class="challenge-task-label">Instructions</p>
-
-          <p class="challenge-task-instruction">
-            Use Python and AI to fix the starter code, calculate expected profit
-            correctly, and enter the best audience at the bottom of the page.
-          </p>
-
-          <div
-            class="challenge-task-rules"
-            aria-label="Python task requirements"
-          >
-            <div class="challenge-task-rule">
-              <strong>* Use the SQL result</strong>
-              <span>
-                Keep campaign <code id="python-handoff-value">C104</code> selected.
-              </span>
-            </div>
-
-            <div class="challenge-task-rule">
-              <strong>* Make the code run</strong>
-              <span>Find and fix the variable-name error.</span>
-            </div>
-
-            <div class="challenge-task-rule">
-              <strong>* Check the profit formula</strong>
-              <span>
-                Multiply conversion rate, order value, and margin, then subtract
-                contact cost.
-              </span>
-            </div>
-
-            <div class="challenge-task-rule">
-              <strong>* Check the ranking</strong>
-              <span>The audience with the highest expected profit should appear first.</span>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section class="objective">
+      <p class="question-prompt">
+        Help the team answer this question:
+      </p>
+    
+      <h1>
+        For campaign
+        <span id="python-selected-campaign">C104</span>,
+        which audience has the highest expected profit per contacted customer?
+      </h1>
+    
+      <div class="python-brief">
+        <p class="python-brief-label">Instructions</p>
+      
+        <p class="python-brief-text">
+          Debug the starter Python code so it correctly identifies the best
+          audience for campaign C104.
+        </p>
+      
+        <p class="python-brief-text">
+          Fix all three bugs, run the code, and check the recommendation
+          against the data table.
+        </p>
+      
+        <p class="python-formula-line">
+          <em>
+            Expected profit = predicted conversion rate × average order value ×
+            profit margin − contact cost
+          </em>
+        </p>
+      
+        <p class="python-submit-note">
+          <strong>Submit:</strong>
+          The audience segment with the highest expected profit.
+        </p>
+      </div>
+    </section>
 
       <section
         class="workspace"
@@ -679,7 +743,7 @@
             <p class="eyebrow">Python workspace</p>
 
             <h2 id="python-workspace-title">
-              Fix the code, run it, and review the recommendation.
+              Debug the code and verify the recommendation.
             </h2>
           </div>
 
@@ -724,10 +788,11 @@
               </div>
 
               <details>
-                <summary>Heres a lil hint if your're stuck. What to review</summary>
-
+                <summary>Here’s a hint if you’re stuck: What to review</summary>
+              
                 <p>
-                  Variable names · profit formula · ranking direction
+                  Variable names · campaign filtering · expected-profit formula ·
+                  ranking direction
                 </p>
               </details>
             </div>
@@ -873,18 +938,15 @@
           Complete the visualization task.
         </p>
 
-        <p>
-          <strong>4.</strong>
-          Show your completed output to the instructor.
-        </p>
+    
       </div>
 
       <div class="visualization-actions">
         <a
-          class="primary-button"
+          class="primary-button colab-button"
           href="https://colab.research.google.com/drive/1I4H8cNeyDQrN_8I_YVxkXCyo0Kuuh_vo#scrollTo=b3b07798"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener"
         >
           Open Google Colab File
         </a>
@@ -919,5 +981,15 @@
   <script src="scripts/python/python-challenge.js"></script>
 
   <script src="scripts/visualization/visualization-challenge.js"></script>
+
+
+  <script>
+    document
+      .getElementById('header-home-button')
+      .addEventListener('click', function () {
+        window.MarketingAnalyticsApp.showView('intro');
+      });
+  </script>
+
 </body>
 </html>
