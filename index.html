@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A short marketing analytics SQL challenge.">
+  <title>Marketing Analytics AI Challenge</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <noscript>This activity requires JavaScript.</noscript>
+
+  <header class="site-header">
+    <button class="brand plain-button" data-go="welcome">Marketing Analytics AI Challenge</button>
+    <nav class="progress" aria-label="Activity progress">
+      <button class="progress-step is-active" data-go="welcome" data-step="welcome">Intro</button>
+      <span>/</span>
+      <button class="progress-step" data-go="sql" data-step="sql">SQL</button>
+      <span>/</span>
+      <span class="progress-step is-locked">Python</span>
+      <span>/</span>
+      <span class="progress-step is-locked">Visualization</span>
+    </nav>
+  </header>
+
+  <main>
+    <section id="view-welcome" class="view welcome-view is-visible">
+      <div>
+        <p class="eyebrow">Northstar Marketing Analytics</p>
+        <h1>Use AI for the code.<br>Use judgment for the answer.</h1>
+        <p class="lede">You will complete three short stages of a marketing analytics workflow. This prototype contains the first stage: SQL.</p>
+        <p>Review the data, use AI if helpful, run a query, and submit the business answer.</p>
+        <button id="begin-button" class="primary-button">Begin SQL Challenge</button>
+      </div>
+      <aside class="intro-note">
+        <p class="eyebrow">Challenge format</p>
+        <p><strong>Time:</strong> About 3 minutes</p>
+        <p><strong>Goal:</strong> Find the campaign that best answers leadership’s question.</p>
+        <p><strong>Important:</strong> A query can run and still answer the wrong question.</p>
+      </aside>
+    </section>
+
+    <section id="view-sql" class="view challenge-view">
+      <div class="challenge-meta">
+        <p class="eyebrow">Challenge 1 of 3 · SQL · About 3 minutes</p>
+        <button id="reset-button" class="plain-button reset-button">Reset</button>
+      </div>
+
+      <section class="objective">
+        <p class="eyebrow">Business question</p>
+        <h1>Of Northstar’s completed campaigns, which has the highest conversion rate?</h1>
+        <p><strong>Conversion rate = conversions ÷ clicks</strong></p>
+        <p class="quiet">Use the tables below to identify the campaign. A campaign that is not marked <code>Complete</code> should not be considered.</p>
+      </section>
+
+      <section class="answer-section" aria-labelledby="answer-title">
+        <div>
+          <p class="eyebrow">Final answer</p>
+          <h2 id="answer-title">Which campaign should leadership select?</h2>
+        </div>
+        <form id="answer-form" class="answer-form" novalidate>
+          <label>
+            Campaign ID
+            <input id="campaign-answer" autocomplete="off" placeholder="e.g. C101">
+          </label>
+          <button class="primary-button" type="submit">Submit</button>
+        </form>
+        <div id="answer-feedback" class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section class="workspace" aria-labelledby="workspace-title">
+        <div class="workspace-heading">
+          <div>
+            <p class="eyebrow">SQL workspace</p>
+            <h2 id="workspace-title">Explore the tables, then run your query.</h2>
+          </div>
+          <span id="database-status" class="status-text">Loading database…</span>
+        </div>
+
+        <div class="editor-shell">
+          <div class="editor-topline">
+            <span>SQL</span>
+            <span class="quiet">Run with ⌘/Ctrl + Enter</span>
+          </div>
+          <textarea id="sql-editor" spellcheck="false" aria-label="SQL editor">-- Write or paste a query here.
+</textarea>
+          <div class="editor-actions">
+            <button id="run-sql-button" class="primary-button" disabled>Run SQL</button>
+            <details>
+              <summary>SQL pieces you may need</summary>
+              <p><code>SELECT</code> <code>JOIN</code> <code>WHERE</code> <code>ORDER BY</code></p>
+            </details>
+          </div>
+        </div>
+
+        <section class="data-panel" aria-labelledby="data-title">
+          <div class="data-panel-header">
+            <div>
+              <p class="eyebrow">Database</p>
+              <h3 id="data-title">Choose a table to view</h3>
+            </div>
+            <span id="row-count" class="quiet"></span>
+          </div>
+
+          <div id="table-tabs" class="table-tabs" role="tablist" aria-label="Database tables"></div>
+
+          <div id="data-message" class="data-message">Loading data…</div>
+          <div id="data-table" class="table-scroll" hidden></div>
+        </section>
+      </section>
+
+      <section id="success-section" class="success-section" hidden>
+        <p class="eyebrow">SQL challenge complete</p>
+        <h2>Correct. C104 has the highest conversion rate among completed campaigns.</h2>
+        <p>The campaign had 35 conversions from 140 clicks, for a conversion rate of 25%.</p>
+        <button id="continue-button" class="primary-button">See what comes next</button>
+      </section>
+    </section>
+
+    <section id="view-python" class="view placeholder-view">
+      <p class="eyebrow">Challenge 2 · Coming next</p>
+      <h1>Use Python to choose an audience.</h1>
+      <p>The next stage will continue the Northstar scenario with a short customer-segment decision.</p>
+      <button class="outline-button" data-go="sql">Return to SQL</button>
+    </section>
+  </main>
+
+  <footer>
+    <span>Northstar Analytics Lab</span>
+    <span>Phase 1 prototype</span>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

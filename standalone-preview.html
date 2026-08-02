@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A short marketing analytics SQL challenge.">
+  <title>Marketing Analytics AI Challenge</title>
+  <style>
+:root {
+  --eggshell: #f5f1e8;
+  --paper: #fffdf8;
+  --ink: #11110f;
+  --muted: #5f5c55;
+  --rule: #d6d0c4;
+  --soft: #ebe5da;
+  --error: #7b2727;
+  --success: #315d3d;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--eggshell); color: var(--ink); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--eggshell);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.55;
+}
+
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+code, textarea, .table-scroll, .status-text {
+  font-family: Menlo, Monaco, Consolas, monospace;
+}
+
+.site-header {
+  min-height: 72px;
+  padding: 18px clamp(20px, 4vw, 64px);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(245, 241, 232, .96);
+}
+
+.brand { font-weight: 700; }
+.plain-button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .9rem;
+  white-space: nowrap;
+}
+.progress-step {
+  border: 0;
+  background: transparent;
+  padding: 2px 0;
+  color: var(--muted);
+}
+.progress-step.is-active { color: var(--ink); border-bottom: 1px solid var(--ink); }
+.progress-step.is-locked { opacity: .45; }
+
+main { width: min(1260px, calc(100% - 40px)); margin: 0 auto; }
+.view { display: none; }
+.view.is-visible { display: block; }
+
+.welcome-view {
+  min-height: calc(100vh - 138px);
+  padding: clamp(70px, 11vh, 130px) 0;
+  grid-template-columns: minmax(0, 1.6fr) minmax(260px, .7fr);
+  gap: clamp(60px, 10vw, 140px);
+  align-items: start;
+}
+.welcome-view.is-visible { display: grid; }
+
+h1, h2, h3, p { margin-top: 0; }
+h1 { font-size: clamp(2.5rem, 6vw, 5.7rem); line-height: .98; letter-spacing: -.045em; font-weight: 500; }
+h2 { font-size: clamp(1.45rem, 2.6vw, 2.25rem); line-height: 1.15; font-weight: 500; }
+h3 { font-size: 1.1rem; font-weight: 500; }
+.lede { font-size: 1.35rem; max-width: 680px; }
+.eyebrow { margin-bottom: 10px; text-transform: uppercase; letter-spacing: .13em; font-size: .72rem; font-weight: 700; }
+.quiet { color: var(--muted); }
+.intro-note { border-top: 1px solid var(--ink); padding-top: 18px; }
+
+.primary-button, .outline-button {
+  min-height: 44px;
+  padding: 11px 20px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  transition: .15s ease;
+}
+.primary-button { background: var(--ink); color: var(--eggshell); }
+.primary-button:hover:not(:disabled) { background: transparent; color: var(--ink); }
+.primary-button:disabled { opacity: .4; cursor: not-allowed; }
+.outline-button { background: transparent; color: var(--ink); }
+.outline-button:hover { background: var(--ink); color: var(--eggshell); }
+
+.challenge-view { padding: 38px 0 90px; }
+.challenge-meta { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--rule); margin-bottom: 36px; }
+.reset-button { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+
+.objective {
+  max-width: 940px;
+  padding: 30px 0 38px;
+  border-bottom: 1px solid var(--ink);
+}
+.objective h1 { font-size: clamp(2.25rem, 5vw, 4.7rem); }
+.objective code { font-size: .9em; }
+
+.answer-section {
+  margin: 28px 0 48px;
+  padding: 24px 0 26px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 26px 50px;
+  align-items: end;
+}
+.answer-section h2 { margin-bottom: 0; }
+.answer-form { display: flex; gap: 12px; align-items: end; }
+label { display: grid; gap: 7px; font-size: .88rem; }
+input {
+  width: 210px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.feedback { grid-column: 1 / -1; display: none; padding: 12px 14px; border-left: 3px solid; }
+.feedback.is-visible { display: block; }
+.feedback.error { color: var(--error); border-color: var(--error); background: rgba(123, 39, 39, .04); }
+.feedback.success { color: var(--success); border-color: var(--success); background: rgba(49, 93, 61, .05); }
+
+.workspace { margin-top: 54px; }
+.workspace-heading, .data-panel-header, .editor-topline, .editor-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.workspace-heading { margin-bottom: 18px; }
+.workspace-heading h2, .data-panel-header h3 { margin-bottom: 0; }
+.status-text { font-size: .78rem; color: var(--muted); }
+
+.editor-shell, .data-panel { border: 1px solid var(--rule); background: var(--paper); }
+.editor-topline, .editor-actions, .data-panel-header { padding: 12px 15px; }
+.editor-topline { border-bottom: 1px solid var(--rule); font-size: .82rem; }
+#sql-editor {
+  display: block;
+  width: 100%;
+  min-height: 210px;
+  resize: vertical;
+  border: 0;
+  outline: 0;
+  padding: 18px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: .92rem;
+  line-height: 1.6;
+  tab-size: 4;
+}
+.editor-actions { border-top: 1px solid var(--rule); }
+details { color: var(--muted); font-size: .85rem; }
+details p { margin: 8px 0 0; }
+
+.data-panel { margin-top: 22px; }
+.data-panel-header { border-bottom: 1px solid var(--rule); }
+.table-tabs { display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--rule); }
+.table-tab {
+  border: 0;
+  border-right: 1px solid var(--rule);
+  padding: 12px 17px;
+  background: transparent;
+  color: var(--muted);
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: .82rem;
+}
+.table-tab:hover, .table-tab.is-selected { background: var(--soft); color: var(--ink); }
+.data-message { padding: 26px 18px; color: var(--muted); white-space: pre-wrap; }
+.data-message.error { color: var(--error); }
+.table-scroll { overflow: auto; max-height: 430px; }
+table { width: 100%; border-collapse: collapse; white-space: nowrap; font-size: .78rem; }
+th, td { padding: 10px 13px; border-bottom: 1px solid var(--rule); text-align: left; }
+th { position: sticky; top: 0; z-index: 2; background: var(--eggshell); font-family: Georgia, "Times New Roman", serif; font-size: .8rem; }
+td.number { text-align: right; font-variant-numeric: tabular-nums; }
+tr:hover td { background: rgba(235, 229, 218, .55); }
+
+.success-section {
+  margin-top: 48px;
+  padding: 36px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.placeholder-view { max-width: 820px; min-height: calc(100vh - 138px); padding: 110px 0; }
+.placeholder-view h1 { font-size: clamp(2.8rem, 6vw, 5rem); }
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 22px clamp(20px, 4vw, 64px);
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+@media (max-width: 800px) {
+  .site-header { align-items: flex-start; flex-direction: column; }
+  .progress { overflow-x: auto; max-width: 100%; }
+  .welcome-view.is-visible { display: block; }
+  .intro-note { margin-top: 60px; }
+  .answer-section { grid-template-columns: 1fr; }
+  .answer-form { align-items: stretch; flex-direction: column; }
+  input { width: 100%; }
+  .workspace-heading, .data-panel-header { align-items: flex-start; flex-direction: column; }
+}
+
+</style>
+</head>
+<body>
+  <noscript>This activity requires JavaScript.</noscript>
+
+  <header class="site-header">
+    <button class="brand plain-button" data-go="welcome">Marketing Analytics AI Challenge</button>
+    <nav class="progress" aria-label="Activity progress">
+      <button class="progress-step is-active" data-go="welcome" data-step="welcome">Intro</button>
+      <span>/</span>
+      <button class="progress-step" data-go="sql" data-step="sql">SQL</button>
+      <span>/</span>
+      <span class="progress-step is-locked">Python</span>
+      <span>/</span>
+      <span class="progress-step is-locked">Visualization</span>
+    </nav>
+  </header>
+
+  <main>
+    <section id="view-welcome" class="view welcome-view is-visible">
+      <div>
+        <p class="eyebrow">Northstar Marketing Analytics</p>
+        <h1>Use AI for the code.<br>Use judgment for the answer.</h1>
+        <p class="lede">You will complete three short stages of a marketing analytics workflow. This prototype contains the first stage: SQL.</p>
+        <p>Review the data, use AI if helpful, run a query, and submit the business answer.</p>
+        <button id="begin-button" class="primary-button">Begin SQL Challenge</button>
+      </div>
+      <aside class="intro-note">
+        <p class="eyebrow">Challenge format</p>
+        <p><strong>Time:</strong> About 3 minutes</p>
+        <p><strong>Goal:</strong> Find the campaign that best answers leadership’s question.</p>
+        <p><strong>Important:</strong> A query can run and still answer the wrong question.</p>
+      </aside>
+    </section>
+
+    <section id="view-sql" class="view challenge-view">
+      <div class="challenge-meta">
+        <p class="eyebrow">Challenge 1 of 3 · SQL · About 3 minutes</p>
+        <button id="reset-button" class="plain-button reset-button">Reset</button>
+      </div>
+
+      <section class="objective">
+        <p class="eyebrow">Business question</p>
+        <h1>Of Northstar’s completed campaigns, which has the highest conversion rate?</h1>
+        <p><strong>Conversion rate = conversions ÷ clicks</strong></p>
+        <p class="quiet">Use the tables below to identify the campaign. A campaign that is not marked <code>Complete</code> should not be considered.</p>
+      </section>
+
+      <section class="answer-section" aria-labelledby="answer-title">
+        <div>
+          <p class="eyebrow">Final answer</p>
+          <h2 id="answer-title">Which campaign should leadership select?</h2>
+        </div>
+        <form id="answer-form" class="answer-form" novalidate>
+          <label>
+            Campaign ID
+            <input id="campaign-answer" autocomplete="off" placeholder="e.g. C101">
+          </label>
+          <button class="primary-button" type="submit">Submit</button>
+        </form>
+        <div id="answer-feedback" class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section class="workspace" aria-labelledby="workspace-title">
+        <div class="workspace-heading">
+          <div>
+            <p class="eyebrow">SQL workspace</p>
+            <h2 id="workspace-title">Explore the tables, then run your query.</h2>
+          </div>
+          <span id="database-status" class="status-text">Loading database…</span>
+        </div>
+
+        <div class="editor-shell">
+          <div class="editor-topline">
+            <span>SQL</span>
+            <span class="quiet">Run with ⌘/Ctrl + Enter</span>
+          </div>
+          <textarea id="sql-editor" spellcheck="false" aria-label="SQL editor">-- Write or paste a query here.
+</textarea>
+          <div class="editor-actions">
+            <button id="run-sql-button" class="primary-button" disabled>Run SQL</button>
+            <details>
+              <summary>SQL pieces you may need</summary>
+              <p><code>SELECT</code> <code>JOIN</code> <code>WHERE</code> <code>ORDER BY</code></p>
+            </details>
+          </div>
+        </div>
+
+        <section class="data-panel" aria-labelledby="data-title">
+          <div class="data-panel-header">
+            <div>
+              <p class="eyebrow">Database</p>
+              <h3 id="data-title">Choose a table to view</h3>
+            </div>
+            <span id="row-count" class="quiet"></span>
+          </div>
+
+          <div id="table-tabs" class="table-tabs" role="tablist" aria-label="Database tables"></div>
+
+          <div id="data-message" class="data-message">Loading data…</div>
+          <div id="data-table" class="table-scroll" hidden></div>
+        </section>
+      </section>
+
+      <section id="success-section" class="success-section" hidden>
+        <p class="eyebrow">SQL challenge complete</p>
+        <h2>Correct. C104 has the highest conversion rate among completed campaigns.</h2>
+        <p>The campaign had 35 conversions from 140 clicks, for a conversion rate of 25%.</p>
+        <button id="continue-button" class="primary-button">See what comes next</button>
+      </section>
+    </section>
+
+    <section id="view-python" class="view placeholder-view">
+      <p class="eyebrow">Challenge 2 · Coming next</p>
+      <h1>Use Python to choose an audience.</h1>
+      <p>The next stage will continue the Northstar scenario with a short customer-segment decision.</p>
+      <button class="outline-button" data-go="sql">Return to SQL</button>
+    </section>
+  </main>
+
+  <footer>
+    <span>Northstar Analytics Lab</span>
+    <span>Phase 1 prototype</span>
+  </footer>
+
+  <script>
+window.NORTHSTAR_DATA = {
+  campaigns: [
+    { campaign_id: 'C101', campaign_name: 'Welcome Week', channel: 'Email', status: 'Complete', budget: 3200, region: 'West', launch_date: '2026-06-01' },
+    { campaign_id: 'C102', campaign_name: 'Campus Social', channel: 'Social', status: 'Complete', budget: 2800, region: 'National', launch_date: '2026-06-03' },
+    { campaign_id: 'C103', campaign_name: 'Search Launch', channel: 'Search', status: 'Complete', budget: 4100, region: 'National', launch_date: '2026-06-05' },
+    { campaign_id: 'C104', campaign_name: 'Member Momentum', channel: 'Email', status: 'Complete', budget: 3000, region: 'West', launch_date: '2026-06-07' },
+    { campaign_id: 'C105', campaign_name: 'Summer Display Test', channel: 'Display', status: 'Draft', budget: 1900, region: 'East', launch_date: '2026-06-10' },
+    { campaign_id: 'C106', campaign_name: 'Referral Push', channel: 'Referral', status: 'Complete', budget: 2400, region: 'National', launch_date: '2026-06-12' }
+  ],
+  campaign_performance: [
+    { campaign_id: 'C101', impressions: 3200, clicks: 120, conversions: 18, revenue: 2160, avg_session_seconds: 96, coupon_uses: 7 },
+    { campaign_id: 'C102', impressions: 2600, clicks: 90, conversions: 18, revenue: 2340, avg_session_seconds: 118, coupon_uses: 11 },
+    { campaign_id: 'C103', impressions: 4100, clicks: 160, conversions: 24, revenue: 3360, avg_session_seconds: 104, coupon_uses: 5 },
+    { campaign_id: 'C104', impressions: 3500, clicks: 140, conversions: 35, revenue: 4900, avg_session_seconds: 132, coupon_uses: 16 },
+    { campaign_id: 'C105', impressions: 900, clicks: 40, conversions: 16, revenue: 2240, avg_session_seconds: 151, coupon_uses: 4 },
+    { campaign_id: 'C106', impressions: 2900, clicks: 110, conversions: 22, revenue: 2860, avg_session_seconds: 126, coupon_uses: 13 }
+  ],
+  customers: [
+    { customer_id: 1001, segment: 'Student', region: 'West', age: 20, loyalty_status: 'New', email_opt_in: 1 },
+    { customer_id: 1002, segment: 'Young Professional', region: 'West', age: 27, loyalty_status: 'Returning', email_opt_in: 1 },
+    { customer_id: 1003, segment: 'Family', region: 'South', age: 36, loyalty_status: 'Loyal', email_opt_in: 0 },
+    { customer_id: 1004, segment: 'Student', region: 'East', age: 22, loyalty_status: 'Returning', email_opt_in: 1 },
+    { customer_id: 1005, segment: 'Frequent Traveler', region: 'West', age: 41, loyalty_status: 'Loyal', email_opt_in: 1 },
+    { customer_id: 1006, segment: 'Budget Conscious', region: 'Midwest', age: 45, loyalty_status: 'New', email_opt_in: 0 },
+    { customer_id: 1007, segment: 'Young Professional', region: 'East', age: 29, loyalty_status: 'Loyal', email_opt_in: 1 },
+    { customer_id: 1008, segment: 'Family', region: 'West', age: 39, loyalty_status: 'Returning', email_opt_in: 1 },
+    { customer_id: 1009, segment: 'Student', region: 'South', age: 19, loyalty_status: 'New', email_opt_in: 1 },
+    { customer_id: 1010, segment: 'Frequent Traveler', region: 'East', age: 44, loyalty_status: 'Returning', email_opt_in: 1 },
+    { customer_id: 1011, segment: 'Budget Conscious', region: 'West', age: 51, loyalty_status: 'Loyal', email_opt_in: 0 },
+    { customer_id: 1012, segment: 'Young Professional', region: 'Midwest', age: 31, loyalty_status: 'New', email_opt_in: 1 }
+  ]
+};
+
+</script>
+  <script>
+(() => {
+  'use strict';
+
+  const STORAGE_KEY = 'northstar-sql-simple-v1';
+  const STARTER_SQL = '-- Write or paste a query here.\n';
+  const tableOrder = ['campaigns', 'campaign_performance', 'customers'];
+
+  const state = {
+    db: null,
+    ready: false,
+    currentView: 'welcome',
+    sql: STARTER_SQL,
+    selectedTable: 'campaigns',
+    attempts: 0,
+    completed: false
+  };
+
+  const $ = (selector) => document.querySelector(selector);
+  const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+  function loadState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      state.sql = typeof saved.sql === 'string' ? saved.sql : STARTER_SQL;
+      state.selectedTable = tableOrder.includes(saved.selectedTable) ? saved.selectedTable : 'campaigns';
+      state.attempts = Number.isFinite(saved.attempts) ? saved.attempts : 0;
+      state.completed = Boolean(saved.completed);
+    } catch (_) {}
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        sql: state.sql,
+        selectedTable: state.selectedTable,
+        attempts: state.attempts,
+        completed: state.completed
+      }));
+    } catch (_) {}
+  }
+
+  function showView(name) {
+    if (name === 'python' && !state.completed) return;
+    state.currentView = name;
+    $$('.view').forEach((view) => view.classList.remove('is-visible'));
+    $(`#view-${name}`)?.classList.add('is-visible');
+    $$('.progress-step[data-step]').forEach((step) => {
+      step.classList.toggle('is-active', step.dataset.step === name);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+  }
+
+  function renderTable(columns, rows) {
+    const head = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('');
+    const body = rows.map((row) => {
+      const cells = row.map((value) => {
+        const numeric = typeof value === 'number' ? ' class="number"' : '';
+        const display = typeof value === 'number' && !Number.isInteger(value)
+          ? Number(value.toFixed(4)).toString()
+          : String(value);
+        return `<td${numeric}>${escapeHtml(display)}</td>`;
+      }).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+    return `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+  }
+
+  function createDatabase(SQL) {
+    const db = new SQL.Database();
+    db.run(`
+      CREATE TABLE campaigns (
+        campaign_id TEXT PRIMARY KEY,
+        campaign_name TEXT NOT NULL,
+        channel TEXT NOT NULL,
+        status TEXT NOT NULL,
+        budget REAL NOT NULL,
+        region TEXT NOT NULL,
+        launch_date TEXT NOT NULL
+      );
+
+      CREATE TABLE campaign_performance (
+        campaign_id TEXT PRIMARY KEY,
+        impressions INTEGER NOT NULL,
+        clicks INTEGER NOT NULL,
+        conversions INTEGER NOT NULL,
+        revenue REAL NOT NULL,
+        avg_session_seconds INTEGER NOT NULL,
+        coupon_uses INTEGER NOT NULL
+      );
+
+      CREATE TABLE customers (
+        customer_id INTEGER PRIMARY KEY,
+        segment TEXT NOT NULL,
+        region TEXT NOT NULL,
+        age INTEGER NOT NULL,
+        loyalty_status TEXT NOT NULL,
+        email_opt_in INTEGER NOT NULL
+      );
+    `);
+
+    const columns = {
+      campaigns: ['campaign_id', 'campaign_name', 'channel', 'status', 'budget', 'region', 'launch_date'],
+      campaign_performance: ['campaign_id', 'impressions', 'clicks', 'conversions', 'revenue', 'avg_session_seconds', 'coupon_uses'],
+      customers: ['customer_id', 'segment', 'region', 'age', 'loyalty_status', 'email_opt_in']
+    };
+
+    tableOrder.forEach((table) => {
+      const names = columns[table];
+      const statement = db.prepare(`INSERT INTO ${table} (${names.join(',')}) VALUES (${names.map(() => '?').join(',')})`);
+      try {
+        window.NORTHSTAR_DATA[table].forEach((row) => statement.run(names.map((name) => row[name])));
+      } finally {
+        statement.free();
+      }
+    });
+
+    return db;
+  }
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      const timeout = window.setTimeout(() => {
+        script.remove();
+        reject(new Error(`Timed out while loading ${src}`));
+      }, 12000);
+      script.src = src;
+      script.onload = () => {
+        window.clearTimeout(timeout);
+        resolve();
+      };
+      script.onerror = () => {
+        window.clearTimeout(timeout);
+        reject(new Error(`Could not load ${src}`));
+      };
+      document.head.appendChild(script);
+    });
+  }
+
+  async function loadSqlLibrary() {
+    const sources = [
+      {
+        script: 'https://cdn.jsdelivr.net/npm/sql.js@1.13.0/dist/sql-wasm.js',
+        wasm: 'https://cdn.jsdelivr.net/npm/sql.js@1.13.0/dist/'
+      },
+      {
+        script: 'https://unpkg.com/sql.js@1.13.0/dist/sql-wasm.js',
+        wasm: 'https://unpkg.com/sql.js@1.13.0/dist/'
+      }
+    ];
+
+    let lastError;
+    for (const source of sources) {
+      try {
+        if (typeof window.initSqlJs !== 'function') await loadScript(source.script);
+        return await window.initSqlJs({ locateFile: (file) => source.wasm + file });
+      } catch (error) {
+        lastError = error;
+        delete window.initSqlJs;
+      }
+    }
+    throw lastError || new Error('The SQL engine could not be loaded.');
+  }
+
+  async function initializeDatabase() {
+    try {
+      const SQL = await loadSqlLibrary();
+      state.db = createDatabase(SQL);
+      state.ready = true;
+      $('#database-status').textContent = 'Database ready';
+      $('#run-sql-button').disabled = false;
+      renderTabs();
+      showTable(state.selectedTable);
+    } catch (error) {
+      $('#database-status').textContent = 'Database failed to load';
+      showMessage(`The SQL engine could not load.\n${error.message}`, true);
+    }
+  }
+
+  function execOne(sql) {
+    const results = state.db.exec(sql);
+    return results.length ? results[results.length - 1] : null;
+  }
+
+  function renderTabs() {
+    $('#table-tabs').innerHTML = tableOrder.map((table) => {
+      const count = window.NORTHSTAR_DATA[table].length;
+      return `<button class="table-tab${state.selectedTable === table ? ' is-selected' : ''}" data-table="${table}" role="tab">${table} · ${count} rows</button>`;
+    }).join('');
+
+    $$('#table-tabs [data-table]').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.selectedTable = button.dataset.table;
+        saveState();
+        renderTabs();
+        showTable(state.selectedTable);
+      });
+    });
+  }
+
+  function showMessage(message, isError = false) {
+    const messageBox = $('#data-message');
+    $('#data-table').hidden = true;
+    messageBox.hidden = false;
+    messageBox.className = `data-message${isError ? ' error' : ''}`;
+    messageBox.textContent = message;
+  }
+
+  function showResult(title, result) {
+    $('#data-title').textContent = title;
+    $('#data-message').hidden = true;
+    const table = $('#data-table');
+    table.innerHTML = renderTable(result.columns, result.values);
+    table.hidden = false;
+    $('#row-count').textContent = `${result.values.length} row${result.values.length === 1 ? '' : 's'}`;
+  }
+
+  function showTable(table) {
+    if (!state.ready) return;
+    try {
+      const result = execOne(`SELECT * FROM ${table};`);
+      showResult(table, result);
+    } catch (error) {
+      showMessage(error.message, true);
+    }
+  }
+
+  function isReadOnlyQuery(query) {
+    const cleaned = query
+      .replace(/\/\*[\s\S]*?\*\//g, ' ')
+      .replace(/--.*$/gm, ' ')
+      .trim();
+    if (!cleaned) return false;
+    const statements = cleaned.split(';').map((part) => part.trim()).filter(Boolean);
+    return statements.length === 1 && /^(SELECT|WITH|PRAGMA|EXPLAIN)\b/i.test(statements[0]);
+  }
+
+  function runQuery() {
+    if (!state.ready) return;
+    const query = $('#sql-editor').value.trim();
+    state.sql = $('#sql-editor').value;
+    saveState();
+
+    if (!query || query.split('\n').every((line) => !line.trim() || line.trim().startsWith('--'))) {
+      showMessage('Write a query before running SQL.');
+      $('#row-count').textContent = '';
+      return;
+    }
+
+    if (!isReadOnlyQuery(query)) {
+      showMessage('Run one read-only SELECT query at a time.', true);
+      $('#row-count').textContent = '';
+      return;
+    }
+
+    try {
+      const result = execOne(query);
+      if (!result) {
+        showMessage('The query ran, but it did not return a table.');
+        $('#row-count').textContent = '0 rows';
+        return;
+      }
+      state.selectedTable = '';
+      renderTabs();
+      showResult('Query results', result);
+    } catch (error) {
+      showMessage(`SQL error\n${error.message}`, true);
+      $('#row-count').textContent = 'Query failed';
+    }
+  }
+
+  function normalizeCampaign(value) {
+    return value.toUpperCase().replace(/\s+/g, '').trim();
+  }
+
+  function hintForAttempt(attempt) {
+    if (attempt === 1) return 'Calculate conversion rate as conversions divided by clicks.';
+    if (attempt === 2) return 'Only campaigns whose status is Complete should be considered.';
+    return 'Join campaigns to campaign_performance using campaign_id, then sort the completed campaigns by conversion rate from highest to lowest.';
+  }
+
+  function submitAnswer(event) {
+    event.preventDefault();
+    const answer = normalizeCampaign($('#campaign-answer').value);
+    const feedback = $('#answer-feedback');
+
+    if (answer === 'C104') {
+      state.completed = true;
+      saveState();
+      feedback.className = 'feedback success is-visible';
+      feedback.innerHTML = '<strong>Correct.</strong> C104 has the highest conversion rate among completed campaigns.';
+      $('#success-section').hidden = false;
+      $('#success-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    state.attempts += 1;
+    saveState();
+    feedback.className = 'feedback error is-visible';
+    feedback.innerHTML = `<strong>Not yet.</strong> ${hintForAttempt(state.attempts)}`;
+  }
+
+  function resetChallenge() {
+    if (!window.confirm('Reset your query, attempts, and answer?')) return;
+    try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
+    state.sql = STARTER_SQL;
+    state.selectedTable = 'campaigns';
+    state.attempts = 0;
+    state.completed = false;
+    $('#sql-editor').value = STARTER_SQL;
+    $('#campaign-answer').value = '';
+    $('#answer-feedback').className = 'feedback';
+    $('#answer-feedback').innerHTML = '';
+    $('#success-section').hidden = true;
+    renderTabs();
+    showTable('campaigns');
+  }
+
+  function bindEvents() {
+    $('#begin-button').addEventListener('click', () => showView('sql'));
+    $('#run-sql-button').addEventListener('click', runQuery);
+    $('#answer-form').addEventListener('submit', submitAnswer);
+    $('#reset-button').addEventListener('click', resetChallenge);
+    $('#continue-button').addEventListener('click', () => showView('python'));
+
+    $$('[data-go]').forEach((element) => {
+      element.addEventListener('click', () => showView(element.dataset.go));
+    });
+
+    $('#sql-editor').addEventListener('input', (event) => {
+      state.sql = event.target.value;
+      saveState();
+    });
+
+    $('#sql-editor').addEventListener('keydown', (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
+        event.preventDefault();
+        runQuery();
+      }
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        const target = event.target;
+        const start = target.selectionStart;
+        const end = target.selectionEnd;
+        target.value = `${target.value.slice(0, start)}    ${target.value.slice(end)}`;
+        target.selectionStart = target.selectionEnd = start + 4;
+        target.dispatchEvent(new Event('input'));
+      }
+    });
+  }
+
+  function init() {
+    loadState();
+    $('#sql-editor').value = state.sql;
+    $('#success-section').hidden = !state.completed;
+    bindEvents();
+    initializeDatabase();
+  }
+
+  init();
+})();
+
+</script>
+</body>
+</html>
