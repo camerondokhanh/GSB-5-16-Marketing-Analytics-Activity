@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A short marketing analytics SQL challenge.">
+  <meta name="description" content="A short marketing analytics challenge covering data cleaning, SQL, Python, and visualization.">
   <title>Marketing Analytics AI Challenge</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/sql-challenge.css">
+  <link rel="stylesheet" href="styles/cleaning-challenge.css">
 </head>
 <body>
   <noscript>This activity requires JavaScript.</noscript>
@@ -15,11 +17,13 @@
     <nav class="progress" aria-label="Activity progress">
       <button class="progress-step is-active" data-go="welcome" data-step="welcome">Intro</button>
       <span>/</span>
-      <button class="progress-step" data-go="sql" data-step="sql">SQL</button>
+      <button class="progress-step" data-go="cleaning" data-step="cleaning">Clean</button>
       <span>/</span>
-      <span class="progress-step is-locked">Python</span>
+      <button class="progress-step is-locked" data-go="sql" data-step="sql" disabled>SQL</button>
       <span>/</span>
-      <span class="progress-step is-locked">Visualization</span>
+      <button class="progress-step is-locked" data-go="python" data-step="python" disabled>Python</button>
+      <span>/</span>
+      <button class="progress-step is-locked" data-go="visualization" data-step="visualization" disabled>Visualization</button>
     </nav>
   </header>
 
@@ -28,21 +32,103 @@
       <div>
         <p class="eyebrow">Northstar Marketing Analytics</p>
         <h1>Use AI for the code.<br>Use judgment for the answer.</h1>
-        <p class="lede">You will complete three short stages of a marketing analytics workflow. This prototype contains the first stage: SQL.</p>
-        <p>Review the data, use AI if helpful, run a query, and submit the business answer.</p>
-        <button id="begin-button" class="primary-button">Begin SQL Challenge</button>
+        <p class="lede">Complete four short stages of a marketing analytics workflow. Start by cleaning a messy revenue export.</p>
+        <p>Use AI if helpful, run the analysis, review the result, and submit the business answer.</p>
+        <button id="begin-button" class="primary-button">Begin Data Cleaning</button>
       </div>
       <aside class="intro-note">
         <p class="eyebrow">Challenge format</p>
-        <p><strong>Time:</strong> About 3 minutes</p>
-        <p><strong>Goal:</strong> Find the campaign that best answers leadership’s question.</p>
-        <p><strong>Important:</strong> A query can run and still answer the wrong question.</p>
+        <p><strong>Clean:</strong> About 2 minutes</p>
+        <p><strong>SQL:</strong> About 3 minutes</p>
+        <p><strong>Then:</strong> Python and visualization</p>
+        <p><strong>Important:</strong> Code can run and still produce the wrong business answer.</p>
       </aside>
+    </section>
+
+    <section id="view-cleaning" class="view challenge-view">
+      <div class="challenge-meta">
+        <p class="eyebrow">Challenge 1 of 4 · Data cleaning with SQL · About 2 minutes</p>
+        <button id="clean-reset-button" class="plain-button reset-button">Reset</button>
+      </div>
+
+      <section class="objective">
+        <p class="eyebrow">Business question</p>
+        <h1>What is Northstar’s total valid revenue after the export is cleaned?</h1>
+        <p class="quiet">The revenue file contains duplicate, test, missing, and inconsistently formatted records.</p>
+        <div class="cleaning-rules" aria-label="Cleaning rules">
+          <p class="cleaning-rule"><strong>1. Deduplicate</strong>Keep one row per transaction ID.</p>
+          <p class="cleaning-rule"><strong>2. Remove tests</strong>Exclude rows where <code>is_test_record = 1</code>.</p>
+          <p class="cleaning-rule"><strong>3. Fix revenue</strong>Remove dollar signs, commas, and extra spaces.</p>
+          <p class="cleaning-rule"><strong>4. Ignore missing</strong>Do not include blank or <code>N/A</code> revenue.</p>
+        </div>
+      </section>
+
+      <section class="answer-section" aria-labelledby="clean-answer-title">
+        <div>
+          <p class="eyebrow">Final answer</p>
+          <h2 id="clean-answer-title">Total cleaned revenue</h2>
+        </div>
+        <form id="clean-answer-form" class="answer-form" novalidate>
+          <label>
+            Revenue total
+            <input id="clean-total-answer" inputmode="decimal" autocomplete="off" placeholder="e.g. $5,000">
+          </label>
+          <button class="primary-button" type="submit">Submit</button>
+        </form>
+        <div id="clean-answer-feedback" class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section class="workspace" aria-labelledby="clean-workspace-title">
+        <div class="workspace-heading">
+          <div>
+            <p class="eyebrow">Cleaning workspace</p>
+            <h2 id="clean-workspace-title">View the raw export, then clean it with SQL.</h2>
+          </div>
+          <span id="clean-database-status" class="status-text">Loading database…</span>
+        </div>
+
+        <div class="editor-shell">
+          <div class="editor-topline">
+            <span>SQL</span>
+            <span class="quiet">Run with ⌘/Ctrl + Enter</span>
+          </div>
+          <textarea id="clean-sql-editor" spellcheck="false" aria-label="Data cleaning SQL editor">-- Clean the revenue data and calculate the total valid revenue.
+</textarea>
+          <div class="editor-actions">
+            <button id="clean-run-sql-button" class="primary-button" disabled>Run SQL</button>
+            <details>
+              <summary>SQL pieces you may need</summary>
+              <p><code>DISTINCT</code> <code>WHERE</code> <code>TRIM</code> <code>REPLACE</code> <code>CAST</code> <code>SUM</code></p>
+            </details>
+          </div>
+        </div>
+
+        <section class="data-panel" aria-labelledby="clean-data-title">
+          <div class="data-panel-header">
+            <div>
+              <p class="eyebrow">Data</p>
+              <h3 id="clean-data-title">Choose the table to view</h3>
+            </div>
+            <span id="clean-row-count" class="quiet"></span>
+          </div>
+
+          <div id="clean-table-tabs" class="table-tabs" role="tablist" aria-label="Cleaning table"></div>
+          <div id="clean-data-message" class="data-message">Loading data…</div>
+          <div id="clean-data-table" class="table-scroll" hidden></div>
+        </section>
+      </section>
+
+      <section id="clean-success-section" class="success-section" hidden>
+        <p class="eyebrow">Cleaning challenge complete</p>
+        <h2>Correct. The cleaned valid revenue is $6,925.</h2>
+        <p>You removed duplicate, test, missing, and inconsistent records before making a business calculation.</p>
+        <button id="clean-continue-button" class="primary-button">Continue to Campaign SQL</button>
+      </section>
     </section>
 
     <section id="view-sql" class="view challenge-view">
       <div class="challenge-meta">
-        <p class="eyebrow">Challenge 1 of 3 · SQL · About 3 minutes</p>
+        <p class="eyebrow">Challenge 2 of 4 · SQL · About 3 minutes</p>
         <button id="reset-button" class="plain-button reset-button">Reset</button>
       </div>
 
@@ -103,7 +189,6 @@
           </div>
 
           <div id="table-tabs" class="table-tabs" role="tablist" aria-label="Database tables"></div>
-
           <div id="data-message" class="data-message">Loading data…</div>
           <div id="data-table" class="table-scroll" hidden></div>
         </section>
@@ -118,19 +203,39 @@
     </section>
 
     <section id="view-python" class="view placeholder-view">
-      <p class="eyebrow">Challenge 2 · Coming next</p>
+      <p class="eyebrow">Challenge 3 · Coming next</p>
       <h1>Use Python to choose an audience.</h1>
-      <p>The next stage will continue the Northstar scenario with a short customer-segment decision.</p>
+      <p id="python-placeholder-copy">The next stage will continue the Northstar scenario with a short customer-segment decision.</p>
+      <button class="outline-button" data-go="sql">Return to SQL</button>
+    </section>
+
+    <section id="view-visualization" class="view placeholder-view">
+      <p class="eyebrow">Challenge 4 · Coming next</p>
+      <h1>Communicate the recommendation.</h1>
+      <p id="visualization-placeholder-copy">The final stage will ask students to choose or repair a clear marketing visualization.</p>
       <button class="outline-button" data-go="sql">Return to SQL</button>
     </section>
   </main>
 
   <footer>
     <span>Northstar Analytics Lab</span>
-    <span>Phase 1 prototype</span>
+    <span>Cleaning + SQL prototype</span>
   </footer>
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <!-- Shared site behavior and SQL engine -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/shared/sql-engine.js"></script>
+
+  <!-- Data cleaning challenge -->
+  <script src="scripts/cleaning/cleaning-data.js"></script>
+  <script src="scripts/cleaning/cleaning-challenge.js"></script>
+
+  <!-- Campaign SQL challenge -->
+  <script src="scripts/sql/sql-data.js"></script>
+  <script src="scripts/sql/sql-challenge.js"></script>
+
+  <!-- Future challenges -->
+  <script src="scripts/python/python-challenge.js"></script>
+  <script src="scripts/visualization/visualization-challenge.js"></script>
 </body>
 </html>
