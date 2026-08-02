@@ -2,91 +2,306 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A short marketing analytics challenge covering data cleaning, SQL, Python, and visualization.">
-  <title>Marketing Analytics AI Challenge</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="A short marketing analytics activity covering data cleaning, SQL, Python, and visualization."
+  >
+
+  <title>GSB 516 Group 4: AI Assisted Analytics Engineering</title>
+
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/sql-challenge.css">
   <link rel="stylesheet" href="styles/cleaning-challenge.css">
   <link rel="stylesheet" href="styles/python-challenge.css">
 </head>
+
 <body>
-  <noscript>This activity requires JavaScript.</noscript>
+  <noscript>
+    This activity requires JavaScript.
+  </noscript>
 
   <header class="site-header">
-    <button class="brand plain-button" data-go="welcome">Marketing Analytics AI Challenge</button>
+    <button
+      class="brand plain-button"
+      data-go="welcome"
+    >
+      GSB 516 Group 4: AI Assisted Analytics Engineering
+    </button>
+
     <nav class="progress" aria-label="Activity progress">
-      <button class="progress-step is-active" data-go="welcome" data-step="welcome">Intro</button>
+      <button
+        class="progress-step is-active"
+        data-go="welcome"
+        data-step="welcome"
+      >
+        Intro
+      </button>
+
       <span>/</span>
-      <button class="progress-step" data-go="cleaning" data-step="cleaning">Clean</button>
+
+      <button
+        class="progress-step"
+        data-go="cleaning"
+        data-step="cleaning"
+      >
+        Clean
+      </button>
+
       <span>/</span>
-      <button class="progress-step is-locked" data-go="sql" data-step="sql" disabled>SQL</button>
+
+      <button
+        class="progress-step is-locked"
+        data-go="sql"
+        data-step="sql"
+        disabled
+      >
+        SQL
+      </button>
+
       <span>/</span>
-      <button class="progress-step is-locked" data-go="python" data-step="python" disabled>Python</button>
+
+      <button
+        class="progress-step is-locked"
+        data-go="python"
+        data-step="python"
+        disabled
+      >
+        Python
+      </button>
+
       <span>/</span>
-      <button class="progress-step is-locked" data-go="visualization" data-step="visualization" disabled>Visualization</button>
+
+      <button
+        class="progress-step is-locked"
+        data-go="visualization"
+        data-step="visualization"
+        disabled
+      >
+        Visualization
+      </button>
     </nav>
   </header>
 
   <main>
-    <section id="view-welcome" class="view welcome-view is-visible">
-      <div>
-        <p class="eyebrow">Northstar Marketing Analytics</p>
-        <h1>Use AI for the code.<br>Use judgment for the answer.</h1>
-        <p class="lede">Complete four short stages of a marketing analytics workflow. Clean the data, analyze campaigns, then review a Python audience recommendation.</p>
-        <p>Use AI if helpful, run the analysis, review the result, and submit the business answer.</p>
-        <button id="begin-button" class="primary-button">Begin Data Cleaning</button>
+    <!-- ==========================================
+         WELCOME PAGE
+    =========================================== -->
+
+    <section
+      id="view-welcome"
+      class="view welcome-view is-visible"
+    >
+      <div class="welcome-main">
+        <h1 class="welcome-title">
+          McCarthy’s is a premium direct-to-consumer apparel and
+          lifestyle brand preparing its next growth campaign.
+          Help its marketing team turn raw data into clear,
+          defensible business decisions.
+        </h1>
+
+        <p class="welcome-summary">
+          Complete four short stages of a marketing analytics workflow:
+          clean the data, analyze campaign performance, debug a Python
+          audience recommendation, and communicate the final result.
+        </p>
+
+        <div
+          class="welcome-instructions"
+          aria-label="Activity instructions"
+        >
+          <p>
+            <strong>Use AI freely.</strong>
+            We encourage you to use any AI tool that helps you complete
+            the tasks.
+          </p>
+
+          <p>
+            <strong>Work within the time limit.</strong>
+            When time expires, we will review the answer so everyone
+            can begin the next task.
+          </p>
+
+          <p>
+            <strong>Submit the correct answer.</strong>
+            The next challenge will not unlock until the correct answer
+            is entered.
+          </p>
+
+          <p>
+            <strong>Ask for help.</strong>
+            Talk with a peer or ask one of us if you get stuck.
+          </p>
+        </div>
+
+        <button
+          id="begin-button"
+          class="primary-button"
+        >
+          Begin Data Cleaning
+        </button>
       </div>
-      <aside class="intro-note">
-        <p class="eyebrow">Challenge format</p>
-        <p><strong>Clean:</strong> About 2 minutes</p>
-        <p><strong>SQL:</strong> About 3 minutes</p>
-        <p><strong>Python:</strong> About 3 minutes</p>
-        <p><strong>Then:</strong> Visualization</p>
-        <p><strong>Important:</strong> Code can run and still produce the wrong business answer.</p>
+
+      <aside
+        class="intro-note"
+        aria-label="Task timing"
+      >
+        <h2>Tasks</h2>
+
+        <div class="task-list">
+          <div class="task-item">
+            <p>Clean data with SQL</p>
+            <span>About 1½ minutes</span>
+          </div>
+
+          <div class="task-item">
+            <p>More SQL queries</p>
+            <span>About 2 minutes</span>
+          </div>
+
+          <div class="task-item">
+            <p>Debug with Python</p>
+            <span>About 1½ minutes</span>
+          </div>
+
+          <div class="task-item">
+            <p>Visualization in Google Colab</p>
+            <span>About 2–3 minutes</span>
+          </div>
+        </div>
       </aside>
     </section>
 
-    <section id="view-cleaning" class="view challenge-view">
+    <!-- ==========================================
+         CHALLENGE 1: DATA CLEANING
+    =========================================== -->
+
+    <section
+      id="view-cleaning"
+      class="view challenge-view"
+    >
       <div class="challenge-meta">
-        <p class="eyebrow">Challenge 1 of 4 · Data cleaning with SQL · About 2 minutes</p>
-        <button id="clean-reset-button" class="plain-button reset-button">Reset</button>
+        <p class="eyebrow">
+          Challenge 1 of 4 · Data cleaning with SQL · About 1½ minutes
+        </p>
+
+        <button
+          id="clean-reset-button"
+          class="plain-button reset-button"
+        >
+          Reset
+        </button>
       </div>
 
       <section class="objective">
         <p class="eyebrow">Business question</p>
-        <h1>What is Northstar’s total valid revenue after the export is cleaned?</h1>
-        <p class="quiet">The revenue file contains duplicate, test, missing, and inconsistently formatted records.</p>
-        <div class="cleaning-rules" aria-label="Cleaning rules">
-          <p class="cleaning-rule"><strong>1. Deduplicate</strong>Keep one row per transaction ID.</p>
-          <p class="cleaning-rule"><strong>2. Remove tests</strong>Exclude rows where <code>is_test_record = 1</code>.</p>
-          <p class="cleaning-rule"><strong>3. Fix revenue</strong>Remove dollar signs, commas, and extra spaces.</p>
-          <p class="cleaning-rule"><strong>4. Ignore missing</strong>Do not include blank or <code>N/A</code> revenue.</p>
+
+        <h1>
+          What is McCarthy’s total valid revenue after the export
+          is cleaned?
+        </h1>
+
+        <p class="quiet">
+          The revenue file contains duplicate, test, missing, and
+          inconsistently formatted records.
+        </p>
+
+        <div
+          class="cleaning-rules"
+          aria-label="Cleaning rules"
+        >
+          <p class="cleaning-rule">
+            <strong>1. Deduplicate</strong>
+            Keep one row per transaction ID.
+          </p>
+
+          <p class="cleaning-rule">
+            <strong>2. Remove tests</strong>
+            Exclude rows where
+            <code>is_test_record = 1</code>.
+          </p>
+
+          <p class="cleaning-rule">
+            <strong>3. Fix revenue</strong>
+            Remove dollar signs, commas, and extra spaces.
+          </p>
+
+          <p class="cleaning-rule">
+            <strong>4. Ignore missing</strong>
+            Do not include blank or
+            <code>N/A</code>
+            revenue.
+          </p>
         </div>
       </section>
 
-      <section class="answer-section" aria-labelledby="clean-answer-title">
+      <section
+        class="answer-section"
+        aria-labelledby="clean-answer-title"
+      >
         <div>
           <p class="eyebrow">Final answer</p>
-          <h2 id="clean-answer-title">Total cleaned revenue</h2>
+
+          <h2 id="clean-answer-title">
+            Total cleaned revenue
+          </h2>
         </div>
-        <form id="clean-answer-form" class="answer-form" novalidate>
+
+        <form
+          id="clean-answer-form"
+          class="answer-form"
+          novalidate
+        >
           <label>
             Revenue total
-            <input id="clean-total-answer" inputmode="decimal" autocomplete="off" placeholder="e.g. $5,000">
+
+            <input
+              id="clean-total-answer"
+              inputmode="decimal"
+              autocomplete="off"
+              placeholder="e.g. $5,000"
+            >
           </label>
-          <button class="primary-button" type="submit">Submit</button>
+
+          <button
+            class="primary-button"
+            type="submit"
+          >
+            Submit
+          </button>
         </form>
-        <div id="clean-answer-feedback" class="feedback" aria-live="polite"></div>
+
+        <div
+          id="clean-answer-feedback"
+          class="feedback"
+          aria-live="polite"
+        ></div>
       </section>
 
-      <section class="workspace" aria-labelledby="clean-workspace-title">
+      <section
+        class="workspace"
+        aria-labelledby="clean-workspace-title"
+      >
         <div class="workspace-heading">
           <div>
             <p class="eyebrow">Cleaning workspace</p>
-            <h2 id="clean-workspace-title">View the raw export, then clean it with SQL.</h2>
+
+            <h2 id="clean-workspace-title">
+              View the raw export, then clean it with SQL.
+            </h2>
           </div>
-          <span id="clean-database-status" class="status-text">Loading database…</span>
+
+          <span
+            id="clean-database-status"
+            class="status-text"
+          >
+            Loading database…
+          </span>
         </div>
 
         <div class="editor-shell">
@@ -94,75 +309,208 @@
             <span>SQL</span>
             <span class="quiet">Run with ⌘/Ctrl + Enter</span>
           </div>
-          <textarea id="clean-sql-editor" spellcheck="false" aria-label="Data cleaning SQL editor">-- Clean the revenue data and calculate the total valid revenue.
+
+          <textarea
+            id="clean-sql-editor"
+            spellcheck="false"
+            aria-label="Data cleaning SQL editor"
+          >-- Clean the revenue data and calculate the total valid revenue.
 </textarea>
+
           <div class="editor-actions">
-            <button id="clean-run-sql-button" class="primary-button" disabled>Run SQL</button>
+            <button
+              id="clean-run-sql-button"
+              class="primary-button"
+              disabled
+            >
+              Run SQL
+            </button>
+
             <details>
               <summary>SQL pieces you may need</summary>
-              <p><code>DISTINCT</code> <code>WHERE</code> <code>TRIM</code> <code>REPLACE</code> <code>CAST</code> <code>SUM</code></p>
+
+              <p>
+                <code>DISTINCT</code>
+                <code>WHERE</code>
+                <code>TRIM</code>
+                <code>REPLACE</code>
+                <code>CAST</code>
+                <code>SUM</code>
+              </p>
             </details>
           </div>
         </div>
 
-        <section class="data-panel" aria-labelledby="clean-data-title">
+        <section
+          class="data-panel"
+          aria-labelledby="clean-data-title"
+        >
           <div class="data-panel-header">
             <div>
               <p class="eyebrow">Data</p>
-              <h3 id="clean-data-title">Choose the table to view</h3>
+
+              <h3 id="clean-data-title">
+                Choose the table to view
+              </h3>
             </div>
-            <span id="clean-row-count" class="quiet"></span>
+
+            <span
+              id="clean-row-count"
+              class="quiet"
+            ></span>
           </div>
 
-          <div id="clean-table-tabs" class="table-tabs" role="tablist" aria-label="Cleaning table"></div>
-          <div id="clean-data-message" class="data-message">Loading data…</div>
-          <div id="clean-data-table" class="table-scroll" hidden></div>
+          <div
+            id="clean-table-tabs"
+            class="table-tabs"
+            role="tablist"
+            aria-label="Cleaning table"
+          ></div>
+
+          <div
+            id="clean-data-message"
+            class="data-message"
+          >
+            Loading data…
+          </div>
+
+          <div
+            id="clean-data-table"
+            class="table-scroll"
+            hidden
+          ></div>
         </section>
       </section>
 
-      <section id="clean-success-section" class="success-section" hidden>
+      <section
+        id="clean-success-section"
+        class="success-section"
+        hidden
+      >
         <p class="eyebrow">Cleaning challenge complete</p>
-        <h2>Correct. The cleaned valid revenue is $6,925.</h2>
-        <p>You removed duplicate, test, missing, and inconsistent records before making a business calculation.</p>
-        <button id="clean-continue-button" class="primary-button">Continue to Campaign SQL</button>
+
+        <h2>
+          Correct. The cleaned valid revenue is $6,925.
+        </h2>
+
+        <p>
+          You removed duplicate, test, missing, and inconsistent
+          records before making a business calculation.
+        </p>
+
+        <button
+          id="clean-continue-button"
+          class="primary-button"
+        >
+          Continue to Campaign SQL
+        </button>
       </section>
     </section>
 
-    <section id="view-sql" class="view challenge-view">
+    <!-- ==========================================
+         CHALLENGE 2: SQL
+    =========================================== -->
+
+    <section
+      id="view-sql"
+      class="view challenge-view"
+    >
       <div class="challenge-meta">
-        <p class="eyebrow">Challenge 2 of 4 · SQL · About 3 minutes</p>
-        <button id="reset-button" class="plain-button reset-button">Reset</button>
+        <p class="eyebrow">
+          Challenge 2 of 4 · SQL · About 2 minutes
+        </p>
+
+        <button
+          id="reset-button"
+          class="plain-button reset-button"
+        >
+          Reset
+        </button>
       </div>
 
       <section class="objective">
         <p class="eyebrow">Business question</p>
-        <h1>Of Northstar’s completed campaigns, which has the highest conversion rate?</h1>
-        <p><strong>Conversion rate = conversions ÷ clicks</strong></p>
-        <p class="quiet">Use the tables below to identify the campaign. A campaign that is not marked <code>Complete</code> should not be considered.</p>
+
+        <h1>
+          Of McCarthy’s completed campaigns, which has the highest
+          conversion rate?
+        </h1>
+
+        <p>
+          <strong>
+            Conversion rate = conversions ÷ clicks
+          </strong>
+        </p>
+
+        <p class="quiet">
+          Use the tables below to identify the campaign. A campaign
+          that is not marked
+          <code>Complete</code>
+          should not be considered.
+        </p>
       </section>
 
-      <section class="answer-section" aria-labelledby="answer-title">
+      <section
+        class="answer-section"
+        aria-labelledby="answer-title"
+      >
         <div>
           <p class="eyebrow">Final answer</p>
-          <h2 id="answer-title">Which campaign should leadership select?</h2>
+
+          <h2 id="answer-title">
+            Which campaign should the marketing team select?
+          </h2>
         </div>
-        <form id="answer-form" class="answer-form" novalidate>
+
+        <form
+          id="answer-form"
+          class="answer-form"
+          novalidate
+        >
           <label>
             Campaign ID
-            <input id="campaign-answer" autocomplete="off" placeholder="e.g. C101">
+
+            <input
+              id="campaign-answer"
+              autocomplete="off"
+              placeholder="e.g. C101"
+            >
           </label>
-          <button class="primary-button" type="submit">Submit</button>
+
+          <button
+            class="primary-button"
+            type="submit"
+          >
+            Submit
+          </button>
         </form>
-        <div id="answer-feedback" class="feedback" aria-live="polite"></div>
+
+        <div
+          id="answer-feedback"
+          class="feedback"
+          aria-live="polite"
+        ></div>
       </section>
 
-      <section class="workspace" aria-labelledby="workspace-title">
+      <section
+        class="workspace"
+        aria-labelledby="workspace-title"
+      >
         <div class="workspace-heading">
           <div>
             <p class="eyebrow">SQL workspace</p>
-            <h2 id="workspace-title">Explore the tables, then run your query.</h2>
+
+            <h2 id="workspace-title">
+              Explore the tables, then run your query.
+            </h2>
           </div>
-          <span id="database-status" class="status-text">Loading database…</span>
+
+          <span
+            id="database-status"
+            class="status-text"
+          >
+            Loading database…
+          </span>
         </div>
 
         <div class="editor-shell">
@@ -170,80 +518,226 @@
             <span>SQL</span>
             <span class="quiet">Run with ⌘/Ctrl + Enter</span>
           </div>
-          <textarea id="sql-editor" spellcheck="false" aria-label="SQL editor">-- Write or paste a query here.
+
+          <textarea
+            id="sql-editor"
+            spellcheck="false"
+            aria-label="SQL editor"
+          >-- Write or paste a query here.
 </textarea>
+
           <div class="editor-actions">
-            <button id="run-sql-button" class="primary-button" disabled>Run SQL</button>
+            <button
+              id="run-sql-button"
+              class="primary-button"
+              disabled
+            >
+              Run SQL
+            </button>
+
             <details>
               <summary>SQL pieces you may need</summary>
-              <p><code>SELECT</code> <code>JOIN</code> <code>WHERE</code> <code>ORDER BY</code></p>
+
+              <p>
+                <code>SELECT</code>
+                <code>JOIN</code>
+                <code>WHERE</code>
+                <code>ORDER BY</code>
+              </p>
             </details>
           </div>
         </div>
 
-        <section class="data-panel" aria-labelledby="data-title">
+        <section
+          class="data-panel"
+          aria-labelledby="data-title"
+        >
           <div class="data-panel-header">
             <div>
               <p class="eyebrow">Database</p>
-              <h3 id="data-title">Choose a table to view</h3>
+
+              <h3 id="data-title">
+                Choose a table to view
+              </h3>
             </div>
-            <span id="row-count" class="quiet"></span>
+
+            <span
+              id="row-count"
+              class="quiet"
+            ></span>
           </div>
 
-          <div id="table-tabs" class="table-tabs" role="tablist" aria-label="Database tables"></div>
-          <div id="data-message" class="data-message">Loading data…</div>
-          <div id="data-table" class="table-scroll" hidden></div>
+          <div
+            id="table-tabs"
+            class="table-tabs"
+            role="tablist"
+            aria-label="Database tables"
+          ></div>
+
+          <div
+            id="data-message"
+            class="data-message"
+          >
+            Loading data…
+          </div>
+
+          <div
+            id="data-table"
+            class="table-scroll"
+            hidden
+          ></div>
         </section>
       </section>
 
-      <section id="success-section" class="success-section" hidden>
+      <section
+        id="success-section"
+        class="success-section"
+        hidden
+      >
         <p class="eyebrow">SQL challenge complete</p>
-        <h2>Correct. C104 has the highest conversion rate among completed campaigns.</h2>
-        <p>The campaign had 35 conversions from 140 clicks, for a conversion rate of 25%.</p>
-        <button id="continue-button" class="primary-button">Continue to Python</button>
+
+        <h2>
+          Correct. C104 has the highest conversion rate among
+          completed campaigns.
+        </h2>
+
+        <p>
+          The campaign had 35 conversions from 140 clicks, for a
+          conversion rate of 25%.
+        </p>
+
+        <button
+          id="continue-button"
+          class="primary-button"
+        >
+          Continue to Python
+        </button>
       </section>
     </section>
 
-    <section id="view-python" class="view challenge-view">
+    <!-- ==========================================
+         CHALLENGE 3: PYTHON
+    =========================================== -->
+
+    <section
+      id="view-python"
+      class="view challenge-view"
+    >
       <div class="challenge-meta">
-        <p class="eyebrow">Challenge 3 of 4 · Python · About 3 minutes</p>
-        <button id="python-reset-button" class="plain-button reset-button">Reset</button>
+        <p class="eyebrow">
+          Challenge 3 of 4 · Python · About 1½ minutes
+        </p>
+
+        <button
+          id="python-reset-button"
+          class="plain-button reset-button"
+        >
+          Reset
+        </button>
       </div>
 
       <section class="objective">
         <p class="eyebrow">Business question</p>
-        <h1>For campaign <span id="python-selected-campaign">C104</span>, which audience has the highest expected profit per contacted customer?</h1>
-        <p class="python-formula"><strong>Expected profit = predicted conversion rate × average order value × profit margin − contact cost</strong></p>
-        <p class="python-bug-note">The starter code has <strong>three bugs</strong>. Only one stops the code from running. Fix the error, then review the business logic before trusting the recommendation.</p>
+
+        <h1>
+          For campaign
+          <span id="python-selected-campaign">C104</span>,
+          which audience has the highest expected profit per contacted
+          customer?
+        </h1>
+
+        <p class="python-formula">
+          <strong>
+            Expected profit = predicted conversion rate × average
+            order value × profit margin − contact cost
+          </strong>
+        </p>
+
+        <p class="python-bug-note">
+          The starter code has
+          <strong>three bugs</strong>.
+          Only one stops the code from running. Fix the error, then
+          review the business logic before trusting the recommendation.
+        </p>
       </section>
 
-      <div class="python-handoff" aria-label="Previous SQL result">
-        <p><span class="eyebrow">Result from SQL</span>The Python code must use the campaign selected in the previous challenge.</p>
-        <p>Selected campaign: <strong id="python-handoff-value">C104</strong></p>
+      <div
+        class="python-handoff"
+        aria-label="Previous SQL result"
+      >
+        <p>
+          <span class="eyebrow">Result from SQL</span>
+          The Python code must use the campaign selected in the
+          previous challenge.
+        </p>
+
+        <p>
+          Selected campaign:
+          <strong id="python-handoff-value">C104</strong>
+        </p>
       </div>
 
-      <section class="answer-section" aria-labelledby="python-answer-title">
+      <section
+        class="answer-section"
+        aria-labelledby="python-answer-title"
+      >
         <div>
           <p class="eyebrow">Final answer</p>
-          <h2 id="python-answer-title">Which audience should Northstar prioritize?</h2>
+
+          <h2 id="python-answer-title">
+            Which audience should McCarthy’s prioritize?
+          </h2>
         </div>
-        <form id="python-answer-form" class="answer-form" novalidate>
+
+        <form
+          id="python-answer-form"
+          class="answer-form"
+          novalidate
+        >
           <label>
             Customer segment
-            <input id="python-segment-answer" autocomplete="off" placeholder="Enter the segment name">
+
+            <input
+              id="python-segment-answer"
+              autocomplete="off"
+              placeholder="Enter the segment name"
+            >
           </label>
-          <button class="primary-button" type="submit">Submit</button>
+
+          <button
+            class="primary-button"
+            type="submit"
+          >
+            Submit
+          </button>
         </form>
-        <div id="python-answer-feedback" class="feedback" aria-live="polite"></div>
+
+        <div
+          id="python-answer-feedback"
+          class="feedback"
+          aria-live="polite"
+        ></div>
       </section>
 
-      <section class="workspace" aria-labelledby="python-workspace-title">
+      <section
+        class="workspace"
+        aria-labelledby="python-workspace-title"
+      >
         <div class="workspace-heading">
           <div>
             <p class="eyebrow">Python workspace</p>
-            <h2 id="python-workspace-title">Fix the code, run it, and review the recommendation.</h2>
+
+            <h2 id="python-workspace-title">
+              Fix the code, run it, and review the recommendation.
+            </h2>
           </div>
-          <span id="python-engine-status" class="status-text">Loading Python…</span>
+
+          <span
+            id="python-engine-status"
+            class="status-text"
+          >
+            Loading Python…
+          </span>
         </div>
 
         <div class="python-layout">
@@ -252,80 +746,165 @@
               <span>Python</span>
               <span class="quiet">Run with ⌘/Ctrl + Enter</span>
             </div>
-            <textarea id="python-editor" spellcheck="false" aria-label="Python editor"></textarea>
+
+            <textarea
+              id="python-editor"
+              spellcheck="false"
+              aria-label="Python editor"
+            ></textarea>
+
             <div class="editor-actions">
-              <button id="run-python-button" class="primary-button" disabled>Run Python</button>
+              <button
+                id="run-python-button"
+                class="primary-button"
+                disabled
+              >
+                Run Python
+              </button>
+
               <details>
                 <summary>What to review</summary>
-                <p>Variable names · profit formula · ranking direction</p>
+
+                <p>
+                  Variable names · profit formula · ranking direction
+                </p>
               </details>
             </div>
           </div>
 
-          <section class="python-output-panel" aria-labelledby="python-output-title">
+          <section
+            class="python-output-panel"
+            aria-labelledby="python-output-title"
+          >
             <div class="python-output-header">
               <p class="eyebrow">Result</p>
-              <h3 id="python-output-title">Python output</h3>
+
+              <h3 id="python-output-title">
+                Python output
+              </h3>
             </div>
-            <pre id="python-output" class="python-output">Run the code to see its output.</pre>
+
+            <pre
+              id="python-output"
+              class="python-output"
+            >Run the code to see its output.</pre>
           </section>
         </div>
 
-        <section class="data-panel python-data-panel" aria-labelledby="python-data-title">
+        <section
+          class="data-panel python-data-panel"
+          aria-labelledby="python-data-title"
+        >
           <div class="data-panel-header">
             <div>
               <p class="eyebrow">Data</p>
-              <h3 id="python-data-title">segment_performance</h3>
+
+              <h3 id="python-data-title">
+                segment_performance
+              </h3>
             </div>
-            <span id="python-row-count" class="quiet"></span>
+
+            <span
+              id="python-row-count"
+              class="quiet"
+            ></span>
           </div>
-          <div id="python-data-table" class="table-scroll"></div>
+
+          <div
+            id="python-data-table"
+            class="table-scroll"
+          ></div>
         </section>
       </section>
 
-      <section id="python-success-section" class="success-section" hidden>
+      <section
+        id="python-success-section"
+        class="success-section"
+        hidden
+      >
         <p class="eyebrow">Python challenge complete</p>
-        <h2>Correct. High-Intent Subscribers has the highest expected profit.</h2>
-        <p>The correct calculation produces an expected profit of $17.00 per contacted customer.</p>
-        <button id="python-continue-button" class="primary-button">Continue to Visualization</button>
+
+        <h2>
+          Correct. High-Intent Subscribers has the highest expected
+          profit.
+        </h2>
+
+        <p>
+          The correct calculation produces an expected profit of
+          $17.00 per contacted customer.
+        </p>
+
+        <button
+          id="python-continue-button"
+          class="primary-button"
+        >
+          Continue to Visualization
+        </button>
       </section>
     </section>
 
-    <section id="view-visualization" class="view placeholder-view">
+    <!-- ==========================================
+         CHALLENGE 4: VISUALIZATION
+    =========================================== -->
+
+    <section
+      id="view-visualization"
+      class="view placeholder-view"
+    >
       <p class="eyebrow">
-        Challenge 4 of 4 · Data visualization · About 2 minutes
+        Challenge 4 of 4 · Data visualization · About 2–3 minutes
       </p>
-    
-      <h1>Communicate the recommendation.</h1>
-    
+
+      <h1>
+        Communicate the recommendation.
+      </h1>
+
       <p class="lede">
         Complete the final visualization challenge in Google Colab.
       </p>
-    
+
       <p>
-        Open the notebook, save your own copy, and follow the instructions
-        to repair the visualization.
+        Open the notebook, save your own copy, and follow the
+        instructions to repair the visualization.
       </p>
-    
+
       <div class="visualization-steps">
-        <p><strong>1.</strong> Open the Colab notebook.</p>
-        <p><strong>2.</strong> Select <em>File → Save a copy in Drive</em>.</p>
-        <p><strong>3.</strong> Complete the visualization task.</p>
-        <p><strong>4.</strong> Show your completed output to the instructor.</p>
+        <p>
+          <strong>1.</strong>
+          Open the Colab notebook.
+        </p>
+
+        <p>
+          <strong>2.</strong>
+          Select
+          <em>File → Save a copy in Drive</em>.
+        </p>
+
+        <p>
+          <strong>3.</strong>
+          Complete the visualization task.
+        </p>
+
+        <p>
+          <strong>4.</strong>
+          Show your completed output to the instructor.
+        </p>
       </div>
-    
+
       <div class="visualization-actions">
         <a
           class="primary-button"
           href="https://colab.research.google.com/drive/1I4H8cNeyDQrN_8I_YVxkXCyo0Kuuh_vo#scrollTo=b3b07798"
           target="_blank"
           rel="noopener noreferrer"
-          style="text-decoration: none;"
         >
           Open Visualization Challenge
         </a>
-    
-        <button class="outline-button" data-go="python">
+
+        <button
+          class="outline-button"
+          data-go="python"
+        >
           Return to Python
         </button>
       </div>
@@ -333,8 +912,9 @@
   </main>
 
   <footer>
-    <span>Northstar Analytics Lab</span>
-    <span>Cleaning + SQL + Python prototype</span>
+    <span>
+      GSB 516 Group 4: AI Assisted Analytics Engineering
+    </span>
   </footer>
 
   <!-- Shared site behavior and SQL engine -->
@@ -353,6 +933,8 @@
   <script src="scripts/shared/python-engine.js"></script>
   <script src="scripts/python/python-data.js"></script>
   <script src="scripts/python/python-challenge.js"></script>
+
+  <!-- Visualization challenge -->
   <script src="scripts/visualization/visualization-challenge.js"></script>
 </body>
 </html>
