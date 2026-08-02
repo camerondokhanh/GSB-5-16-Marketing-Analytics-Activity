@@ -848,7 +848,7 @@ tbody tr:last-child td {
 ================================ */
 
 .cleaning-rules {
-  margin-top: 28px;
+ 
 
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1026,7 +1026,7 @@ tbody tr:last-child td {
 
 footer {
   min-height: 64px;
-  padding: 0 28px;
+  padding: 0 32px;
 
   display: flex;
   align-items: center;
@@ -1243,9 +1243,11 @@ footer {
 }
 
 /* ================================
-   CHALLENGE PAGE REFINEMENTS
+   FINAL SITE REFINEMENTS
+   Consolidated to avoid conflicting overrides
 ================================ */
 
+/* Challenge headings and layout */
 .challenge-view {
   padding-top: 48px;
 }
@@ -1260,10 +1262,9 @@ footer {
 }
 
 .question-prompt {
-  margin: 0 0 10px;
+  margin: 0 0 18px;
 
   color: var(--ink);
-
   font-size: 16px;
   font-weight: 400;
   line-height: 1.4;
@@ -1279,454 +1280,36 @@ footer {
   letter-spacing: -0.02em;
 }
 
-.objective-instruction {
-  margin: 0;
-
-  font-size: 17px;
-  line-height: 1.5;
-}
-
-
-/* CLEANING INSTRUCTIONS */
-
-#view-cleaning .cleaning-rules {
-  margin-top: 24px;
-
-  display: grid;
-  grid-template-columns: 1fr;
-
-  border-top: 1px solid var(--rule);
-  border-left: 0;
-}
-
-#view-cleaning .cleaning-rule {
-  min-height: 0;
-  margin: 0;
-  padding: 15px 0;
-
-  display: grid;
-  grid-template-columns:
-    minmax(190px, 0.65fr)
-    minmax(0, 1.35fr);
-
-  align-items: start;
-  gap: 24px;
-
-  border-right: 0;
-  border-bottom: 1px solid var(--rule);
-
-  font-size: 15px;
-  line-height: 1.45;
-}
-
-#view-cleaning .cleaning-rule strong {
-  display: block;
-
-  font-size: 15px;
-  font-weight: 600;
-}
-
-#view-cleaning .cleaning-rule span {
-  color: var(--muted);
-}
-
-#view-cleaning .cleaning-rule code {
-  padding: 0;
-
-  border: 0;
-  background: transparent;
-  color: inherit;
-
-  font-size: 0.92em;
-}
-
-
-/* WHITE WORK AREAS */
-
-.challenge-view .editor-shell,
-.challenge-view .editor-topline,
-.challenge-view .editor-actions,
-.challenge-view .editor-shell textarea,
-.challenge-view .data-panel,
-.challenge-view .data-panel-header,
-.challenge-view .table-tabs,
-.challenge-view .python-output-panel,
-.challenge-view .python-output-header,
-.challenge-view .python-output {
-  background: #ffffff;
-}
-
-.challenge-view .table-tabs button {
-  background: #ffffff;
-}
-
-.challenge-view .table-tabs button:hover,
-.challenge-view .table-tabs button:focus-visible,
-.challenge-view .table-tabs button.is-active,
-.challenge-view .table-tabs button[aria-selected="true"] {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-
-/* RUN AND RESET BUTTONS */
-
-.editor-primary-actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.challenge-view .reset-button {
-  min-height: 44px;
-  padding: 11px 20px;
-
-  border: 1px solid var(--ink);
-  border-radius: 2px;
-
-  background: #ffffff;
-  color: var(--ink);
-
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.2;
-  text-decoration: none;
-}
-
-.challenge-view .reset-button:hover,
-.challenge-view .reset-button:focus-visible {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-
-/* RESPONSIVE CHALLENGE REFINEMENTS */
-
-@media (max-width: 780px) {
-  .challenge-view {
-    padding-top: 36px;
-  }
-
-  .challenge-view .objective h1 {
-    font-size: clamp(31px, 7.5vw, 42px);
-  }
-
-  #view-cleaning .cleaning-rule {
-    grid-template-columns: 1fr;
-    gap: 4px;
-  }
-}
-
-
-
-/* Added on later by me */
-
-
-#clean-total-answer {
-  background: #fff7d6;
-  border: 1px solid #b8a86f;
-}
-
-#clean-total-answer:focus {
-  background: #fffdf2;
-  border-color: var(--ink);
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
-}
-
-.question-prompt {
-  margin-bottom: 18px;
-}
-
-.objective-instruction {
-  max-width: 760px;
-  margin: 24px 0 28px;
-  padding-left: 14px;
-
-  border-left: 3px solid var(--ink);
-
-  color: var(--ink);
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.table-scroll thead th {
-  position: sticky;
-  top: 0;
-  z-index: 3;
-
-  background: #ffffff;
-  color: var(--ink);
-
-  border-bottom: 1px solid var(--rule-dark);
-}
-
-#view-cleaning .cleaning-rules {
-  border: none;
-}
-
-#view-cleaning .cleaning-rule {
-  border: none;
-}
-
-
-/* Tighter spacing between directions and cleaning steps */
-
-#view-cleaning .objective-instruction {
-  max-width: 780px;
-  margin: 24px 0 18px;
-  padding: 16px 20px;
-
-  border-left: 4px solid var(--ink);
-  background: #ebe7dc;
-
-  color: var(--ink);
-  font-size: 17px;
-  line-height: 1.5;
-}
-
-#view-cleaning .cleaning-rules {
-  margin-top: 8px;
-}
-
-#view-cleaning .cleaning-rule {
-  min-height: 0;
-  padding: 9px 0;
-  line-height: 1.4;
-}
-#view-cleaning .cleaning-rules {
-  width: min(100%, 780px);
-  margin: 10px auto 0;
-}
-
-#view-cleaning .cleaning-rule {
-  display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
-  align-items: start;
-  justify-items: stretch;
-  column-gap: 48px;
-
-  padding: 9px 0;
-  border: none;
-
-  text-align: left;
-}
-
-#view-cleaning .objective-instruction strong {
-  display: block;
-  margin-bottom: 4px;
-
-  font-size: 14px;
-  font-weight: 600;
-}
-
-#view-cleaning .objective-instruction p {
-  margin: 0;
-}
-
-
-/* Cleaning task callout */
-
-#view-cleaning .cleaning-callout {
-  max-width: 900px;
-  margin: 24px 0 22px;
-  padding: 18px 24px 20px;
-
-  border-left: 4px solid var(--ink);
-  background: #ebe7dc;
-}
-
-#view-cleaning .cleaning-callout-label {
-  margin: 0 0 5px;
-
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-#view-cleaning .objective-instruction {
-  max-width: 780px;
-  margin: 0;
-  padding: 0;
-
-  border: 0;
-  background: transparent;
-
-  color: var(--ink);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-#view-cleaning .cleaning-rules {
-  width: min(100%, 780px);
-  margin: 18px auto 0;
-
-  display: grid;
-  gap: 10px;
-
-  border: 0;
-}
-
-#view-cleaning .cleaning-rule {
-  min-height: 0;
-  margin: 0;
-  padding: 4px 0;
-
-  display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
-  align-items: start;
-  gap: 32px;
-
-  border: 0;
-
-  font-size: 15px;
-  line-height: 1.4;
-  text-align: left;
-}
-
-#view-cleaning .cleaning-rule strong {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-#view-cleaning .cleaning-rule span {
-  color: var(--muted);
-}
-
-#view-cleaning .cleaning-rule code {
-  padding: 0;
-
-  border: 0;
-  background: transparent;
-  color: inherit;
-
-  font-size: 0.92em;
-}
-
-@media (max-width: 700px) {
-  #view-cleaning .cleaning-rule {
-    grid-template-columns: 1fr;
-    gap: 2px;
-  }
-}
-
-
-/* Expand cleaning callout and left-align the rules */
-
-#view-cleaning .cleaning-callout {
-  width: 100%;
-  max-width: none;
-  margin: 24px 0 22px;
-  padding: 18px 26px 22px;
-
-  border-left: 4px solid var(--ink);
-  background: #ebe7dc;
-}
-
-#view-cleaning .cleaning-rules {
-  width: 100%;
-  max-width: none;
-  margin: 18px 0 0;
-
-  display: grid;
-  gap: 10px;
-}
-
-#view-cleaning .cleaning-rule {
-  width: 100%;
-  padding: 4px 0;
-
-  display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
-  align-items: start;
-  column-gap: 32px;
-
-  border: none;
-  text-align: left;
-}
-
-
-/* Make the cleaning section use the full page width */
-
-#view-cleaning .objective {
+#view-cleaning .objective,
+#view-sql .objective,
+#view-python .objective {
   width: 100%;
   max-width: none;
 }
-
-/* Keep the question from becoming too wide */
 
 #view-cleaning .question-prompt,
-#view-cleaning .objective > h1 {
+#view-sql .question-prompt,
+#view-python .question-prompt,
+#view-cleaning .objective > h1,
+#view-sql .objective > h1,
+#view-python .objective > h1 {
   max-width: 900px;
 }
 
-/* Expand the shaded task area */
-
-#view-cleaning .cleaning-callout {
-  width: 100%;
-  max-width: none;
-  margin: 24px 0 22px;
-  padding: 20px 28px 22px;
-
-  box-sizing: border-box;
-
-  border-left: 4px solid var(--ink);
-  background: #ebe7dc;
-}
-
-/* Left-align the full instructions list */
-
-#view-cleaning .cleaning-rules {
-  width: 100%;
-  max-width: none;
-  margin: 18px 0 0;
-
-  display: grid;
-  gap: 10px;
-
-  border: none;
-}
-
-#view-cleaning .cleaning-rule {
-  width: 100%;
-  min-height: 0;
-  margin: 0;
-  padding: 4px 0;
-
-  display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
-  align-items: start;
-  column-gap: 32px;
-
-  border: none;
-  text-align: left;
-}
-
-#view-cleaning .cleaning-rule strong,
-#view-cleaning .cleaning-rule span {
-  justify-self: start;
-  text-align: left;
-}
-
-@media (max-width: 700px) {
-  #view-cleaning .cleaning-rule {
-    grid-template-columns: 1fr;
-    gap: 2px;
-  }
-}
-
-#view-cleaning .objective h1 {
+#view-cleaning .objective > h1,
+#view-sql .objective > h1,
+#view-python .objective > h1 {
   font-style: italic;
 }
 
+.objective-instruction {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
 
-/* =================================
-   UPDATED HOMEPAGE LAYOUT
-================================= */
 
+/* Updated homepage layout */
 .welcome-view.is-visible {
   width: min(100%, var(--content-width));
   min-height: calc(100vh - 124px);
@@ -1740,7 +1323,6 @@ footer {
 .welcome-scenario {
   width: 100%;
   padding-bottom: 34px;
-
   border-bottom: 1px solid var(--rule);
 }
 
@@ -1748,7 +1330,6 @@ footer {
   margin: 0 0 14px;
 
   color: var(--ink);
-
   font-size: 16px;
   font-weight: 400;
   line-height: 1.3;
@@ -1792,8 +1373,7 @@ footer {
   margin: 0;
   padding: 0 0 0 22px;
 
-  border: none;
-
+  border: 0;
   color: var(--ink);
 }
 
@@ -1817,7 +1397,7 @@ footer {
   display: flex;
   flex-direction: column;
 
-  border-top: none;
+  border-top: 0;
   border-left: 1px solid var(--rule);
 }
 
@@ -1828,8 +1408,7 @@ footer {
 
 .task-item {
   padding: 0 0 18px;
-
-  border: none;
+  border: 0;
 }
 
 .task-item p {
@@ -1842,7 +1421,6 @@ footer {
 
 .task-item span {
   color: var(--muted);
-
   font-size: 14px;
   line-height: 1.4;
 }
@@ -1853,166 +1431,131 @@ footer {
 }
 
 
-/* TABLET AND MOBILE */
-
-@media (max-width: 780px) {
-  .welcome-view.is-visible {
-    padding: 36px 22px 56px;
-  }
-
-  .welcome-title {
-    font-size: clamp(36px, 8vw, 48px);
-  }
-
-  .welcome-lower {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
-
-  .welcome-instructions-column {
-    padding-right: 0;
-  }
-
-  .intro-note {
-    padding: 30px 0 0;
-
-    border-top: 1px solid var(--rule);
-    border-left: none;
-  }
-}
-
-
-/* Clearly show the table that is currently loaded */
-
-.table-tabs button.is-selected,
-.table-tabs button.is-active,
-.table-tabs button[aria-selected="true"] {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-  font-weight: 600;
-}
-
-/* Remove the repeated selected-table name above the table buttons */
-
-#clean-data-title,
-#data-title {
-  display: none;
-}
-
-/* Keep Database/Data and the row count neatly aligned */
-
-#view-cleaning .data-panel-header,
-#view-sql .data-panel-header {
-  min-height: 56px;
-  padding: 14px 18px;
-  align-items: center;
-}
-
-#view-cleaning .data-panel-header .eyebrow,
-#view-sql .data-panel-header .eyebrow {
-  margin: 0;
-}
-
-.success-section {
-  border: 1px solid #d9e4dc;
-}
-
-.success-section .primary-button {
-  background: transparent;
-  color: var(--ink);
-
-  border: 1px solid #9fb6a4;
-}
-
-.success-section .primary-button:hover,
-.success-section .primary-button:focus-visible {
-  background: #dfe9e2;
-  color: var(--ink);
-  border-color: #8ca392;
-}
-
-#clean-total-answer {
-  background: #ffffff;
-  border: 4px solid #b96f45;
-  color: var(--ink);
-}
-
-#clean-total-answer::placeholder {
-  color: #9a8d82;
-}
-
-#clean-total-answer:focus {
-  background: #ffffff;
-  border-color: #9f4f24;
-  outline: 2px solid rgba(197, 111, 58, 0.22);
-  outline-offset: 2px;
-}
-
-#clean-answer-form input,
-#clean-answer-form button {
-  height: 52px;
-  box-sizing: border-box;
-}
-
-#clean-answer-form button {
-  padding: 0 24px;
-  align-self: end;
-}
-
-/* =================================
-   SQL + PYTHON MATCH THE CLEAN PAGE
-   These rules are intentionally scoped so the homepage and Clean page do not change.
-================================= */
-
-#view-sql .objective,
-#view-python .objective {
+/* Shared shaded task boxes */
+#view-cleaning .cleaning-callout,
+#view-python .challenge-task-callout,
+.sql-brief {
   width: 100%;
   max-width: none;
-}
+  margin: 32px 0 22px;
+  padding: 26px 32px;
 
-#view-sql .question-prompt,
-#view-python .question-prompt,
-#view-sql .objective > h1,
-#view-python .objective > h1 {
-  max-width: 900px;
-}
-
-#view-sql .objective > h1,
-#view-python .objective > h1 {
-  font-style: italic;
-}
-
-.challenge-task-callout {
-  width: 100%;
-  margin: 24px 0 22px;
-  padding: 20px 28px 22px;
-
+  box-sizing: border-box;
   border-left: 4px solid var(--ink);
   background: #ebe7dc;
 }
 
-.challenge-task-label {
-  margin: 0 0 5px;
+.cleaning-callout-label,
+.challenge-task-label,
+.sql-brief-label {
+  margin: 0 0 10px;
 
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-.challenge-task-instruction {
-  max-width: 780px;
+#view-cleaning .cleaning-callout .objective-instruction,
+.challenge-task-instruction,
+.sql-brief-text {
+  max-width: 920px;
   margin: 0;
+  padding: 0;
 
+  border: 0;
+  background: transparent;
   color: var(--ink);
+
   font-size: 17px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
+
+/* Cleaning instructions */
+#view-cleaning .cleaning-rules {
+  width: 100%;
+  max-width: none;
+  margin: 30px 0 0;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+
+  border: 0;
+}
+
+#view-cleaning .cleaning-rule {
+  width: 100%;
+  min-height: 0;
+  margin: 20px;
+  padding: 8px 0;
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 32px;
+
+  border: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+#view-cleaning .cleaning-rule-label,
+#view-cleaning .cleaning-rule > strong {
+  position: relative;
+  justify-self: start;
+  margin: 0;
+  padding-left: 16px;
+
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+}
+
+#view-cleaning .cleaning-rule-label::before,
+#view-cleaning .cleaning-rule > strong::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+}
+
+#view-cleaning .cleaning-rule > span:last-child {
+  justify-self: start;
+  margin: 0;
+
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+}
+
+#view-cleaning .cleaning-rule code,
+.challenge-task-rule code {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: inherit;
+
+  font-size: 0.92em;
+}
+
+.cleaning-submit-note {
+  margin: 26px 0 0;
+  color: var(--ink);
+}
+
+.cleaning-submit-note strong {
+  font-weight: 700;
+}
+
+
+/* Python task rules */
 .challenge-task-rules {
   width: 100%;
-  margin: 18px 0 0;
+  margin: 22px 0 0;
 
   display: grid;
   gap: 10px;
@@ -2042,220 +1585,98 @@ footer {
   color: var(--muted);
 }
 
-.challenge-task-rule code {
-  padding: 0;
 
-  border: 0;
-  background: transparent;
-  color: inherit;
-
-  font-size: 0.92em;
-}
-
-#campaign-answer,
-#python-segment-answer {
-  background: #ffffff;
-  border: 4px solid #b96f45;
-  color: var(--ink);
-}
-
-#campaign-answer::placeholder,
-#python-segment-answer::placeholder {
-  color: #9a8d82;
-}
-
-#campaign-answer:focus,
-#python-segment-answer:focus {
-  background: #ffffff;
-  border-color: #9f4f24;
-  outline: 2px solid rgba(197, 111, 58, 0.22);
-  outline-offset: 2px;
-}
-
-#answer-form input,
-#answer-form button,
-#python-answer-form input,
-#python-answer-form button {
-  height: 52px;
-  box-sizing: border-box;
-}
-
-#answer-form button,
-#python-answer-form button {
-  padding: 0 24px;
-  align-self: end;
-}
-
-#python-data-title {
-  display: none;
-}
-
-#view-python .data-panel-header {
-  min-height: 56px;
-  padding: 14px 18px;
+/* SQL brief and formula */
+.sql-formula {
+  display: flex;
   align-items: center;
+  gap: 12px;
+
+  margin: 22px 0;
+  font-size: 18px;
 }
 
-#view-python .data-panel-header .eyebrow {
+.sql-fraction {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 110px;
+
+  line-height: 1.1;
+  text-align: center;
+}
+
+.sql-fraction-top {
+  padding: 0 10px 5px;
+  border-bottom: 1.5px solid currentColor;
+}
+
+.sql-fraction-bottom {
+  padding: 5px 10px 0;
+}
+
+.sql-submit-note {
   margin: 0;
 }
 
-@media (max-width: 700px) {
-  .challenge-task-rule {
-    grid-template-columns: 1fr;
-    gap: 2px;
-  }
+.sql-hint-list {
+  margin: 16px 0;
+  padding-left: 22px;
 }
 
-#view-visualization h1 {
-  margin-bottom: 24px;
-  padding-bottom: 26px;
-
-  border-bottom: 1px solid var(--rule);
+.sql-hint-list li {
+  margin-bottom: 8px;
 }
 
-#view-visualization .visualization-steps {
-  border-top: none;
-}
+.sql-hint-terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 
-#view-visualization > p {
-  margin-bottom: 10px;
-}
-
-#view-visualization .visualization-steps {
-  margin-top: 10px;
-}
-
-.colab-action {
-  padding: 2px 5px;
-
-  background: #ebe7dc;
-  font-weight: 700;
-}
-
-#view-visualization .visualization-steps {
-  border-bottom: none;
+  margin: 14px 0 0;
 }
 
 
-
-
-
-/* Retro shadow style for all main action buttons */
-
-.primary-button,
-.outline-button {
+/* White work areas */
+.challenge-view .editor-shell,
+.challenge-view .editor-topline,
+.challenge-view .editor-actions,
+.challenge-view .editor-shell textarea,
+.challenge-view .data-panel,
+.challenge-view .data-panel-header,
+.challenge-view .table-tabs,
+.challenge-view .python-output-panel,
+.challenge-view .python-output-header,
+.challenge-view .python-output {
   background: #ffffff;
-  color: var(--ink);
-
-  border: 2px solid var(--ink);
-  border-radius: 0;
-
-  box-shadow: 4px 4px 0 var(--ink);
-
-  transition:
-    transform 120ms ease,
-    box-shadow 120ms ease,
-    background-color 120ms ease;
 }
 
-.primary-button:hover:not(:disabled),
-.primary-button:focus-visible:not(:disabled),
-.outline-button:hover:not(:disabled),
-.outline-button:focus-visible:not(:disabled) {
-  background: #e7e3da;
-  color: var(--ink);
-
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--ink);
+.editor-primary-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.primary-button:active:not(:disabled),
-.outline-button:active:not(:disabled) {
-  transform: translate(4px, 4px);
-  box-shadow: none;
-}
 
-.primary-button:disabled,
-.outline-button:disabled {
-  opacity: 0.45;
-  box-shadow: 2px 2px 0 var(--ink);
-  cursor: not-allowed;
-}
-
-/* Keep all main buttons visually consistent */
+/* Raised square buttons */
 button.primary-button,
 button.outline-button,
 a.primary-button,
 a.outline-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 48px;
-  padding: 0 20px;
-
-  background: #ffffff;
-  color: var(--ink);
-
-  border: 2px solid var(--ink);
-  border-radius: 0;
-
-  box-shadow: 4px 4px 0 var(--ink);
-
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1;
-
-  box-sizing: border-box;
-  cursor: pointer;
-  text-decoration: none;
-
-  transition:
-    transform 120ms ease,
-    box-shadow 120ms ease,
-    background-color 120ms ease;
-}
-
-button.primary-button:hover:not(:disabled),
-button.outline-button:hover:not(:disabled),
-a.primary-button:hover,
-a.outline-button:hover {
-  background: #e7e3da;
-  color: var(--ink);
-
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--ink);
-}
-
-button.primary-button:active:not(:disabled),
-button.outline-button:active:not(:disabled),
-a.primary-button:active,
-a.outline-button:active {
-  transform: translate(4px, 4px);
-  box-shadow: none;
-}
-
-/* Retro raised style for all main buttons */
-button.primary-button,
-button.outline-button,
-a.primary-button,
-a.outline-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
   height: 48px;
   max-width: 100%;
   padding: 0 24px;
 
-  background-color: #f3f0e8;
-  color: #111111;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  border: 2px solid #111111;
+  background-color: var(--paper);
+  color: var(--ink);
+
+  border: 2px solid var(--ink);
   border-radius: 0;
-  box-shadow: 6px 6px 0 #111111;
+  box-shadow: 6px 6px 0 var(--ink);
 
   box-sizing: border-box;
   font-family: inherit;
@@ -2265,16 +1686,13 @@ a.outline-button {
   text-align: center;
   text-decoration: none;
 
-  cursor: pointer;
   user-select: none;
-
   transition:
     background-color 160ms ease,
     box-shadow 160ms ease,
     transform 160ms ease;
 }
 
-/* Darker eggshell when hovered */
 button.primary-button:hover:not(:disabled),
 button.outline-button:hover:not(:disabled),
 a.primary-button:hover,
@@ -2284,12 +1702,10 @@ button.outline-button:focus-visible:not(:disabled),
 a.primary-button:focus-visible,
 a.outline-button:focus-visible {
   background-color: #ded9cf;
-
-  box-shadow: 0 0 0 #111111;
+  box-shadow: none;
   transform: translate(6px, 6px);
 }
 
-/* Pressed state */
 button.primary-button:active:not(:disabled),
 button.outline-button:active:not(:disabled),
 a.primary-button:active,
@@ -2297,153 +1713,93 @@ a.outline-button:active {
   background-color: #d4cec3;
 }
 
-/* Disabled buttons */
 button.primary-button:disabled,
 button.outline-button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  box-shadow: 3px 3px 0 #111111;
-}
-
- /* Editor buttons begin white */
-.editor-actions .primary-button,
-.editor-actions .outline-button {
-  background-color: #ffffff;
-}
-
-/* Darker eggshell on hover */
-.editor-actions .primary-button:hover:not(:disabled),
-.editor-actions .outline-button:hover:not(:disabled),
-.editor-actions .primary-button:focus-visible:not(:disabled),
-.editor-actions .outline-button:focus-visible:not(:disabled) {
-  background-color: #ded9cf;
-}
-
-/* Make editor buttons identical */
-.editor-actions .primary-button,
-.editor-actions .outline-button {
-  background-color: #ffffff;
-
-  border: 2px solid #111111;
-  border-radius: 0;
-
-  box-shadow: 6px 6px 0 #111111;
-  box-sizing: border-box;
-  appearance: none;
-}
-
-.editor-actions .primary-button:hover:not(:disabled),
-.editor-actions .outline-button:hover:not(:disabled),
-.editor-actions .primary-button:focus-visible:not(:disabled),
-.editor-actions .outline-button:focus-visible:not(:disabled) {
-  background-color: #ded9cf;
-
-  border: 2px solid #111111;
-  border-radius: 0;
-
-  transform: translate(6px, 6px);
-  box-shadow: none;
-}
-
-#clean-total-answer,
-#campaign-answer,
-#python-segment-answer {
-  background: #ffffff;
-  color: var(--ink);
-
-  border: 1px solid #111111;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-#clean-total-answer:focus,
-#campaign-answer:focus,
-#python-segment-answer:focus {
-  background: #ffffff;
-  border-color: #111111;
-
-  outline: 2px solid #ded9cf;
-  outline-offset: 2px;
-}
-
-/* Buttons inside the white editor panel */
-.editor-primary-actions .primary-button,
-.editor-primary-actions .outline-button {
-  background-color: #ffffff;
-  border: 2px solid #111111;
-  border-radius: 0;
-}
-
-/* Keep disabled Run buttons white */
-.editor-primary-actions .primary-button:disabled,
-.editor-primary-actions .outline-button:disabled {
-  background-color: #ffffff;
-  color: #777777;
-  opacity: 1;
-
-  border: 2px solid #111111;
-  box-shadow: 6px 6px 0 #111111;
-
-  transform: none;
+  opacity: 0.55;
   cursor: not-allowed;
 }
 
-/* Enabled button hover */
-.editor-primary-actions .primary-button:hover:not(:disabled),
-.editor-primary-actions .outline-button:hover:not(:disabled) {
-  background-color: #e7e3da;
-}
-
-/* Force all editor Run and Reset buttons to match the white panel */
+/* Buttons that sit on white editor panels begin white */
+.editor-actions button.primary-button,
+.editor-actions button.outline-button,
 #clean-run-sql-button,
 #run-sql-button,
 #run-python-button,
 #clean-reset-button,
 #reset-button,
 #python-reset-button {
-  background: #ffffff !important;
-  color: #111111 !important;
+  background-color: #ffffff;
+  color: var(--ink);
 
-  border: 2px solid #111111 !important;
-  border-radius: 0 !important;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--ink);
 
-  opacity: 1 !important;
+  opacity: 1;
   appearance: none;
   -webkit-appearance: none;
 }
 
-/* Darker eggshell only while hovering */
+.editor-actions button.primary-button:disabled,
+.editor-actions button.outline-button:disabled,
+#clean-run-sql-button:disabled,
+#run-sql-button:disabled,
+#run-python-button:disabled {
+  background-color: #ffffff;
+  color: #77736b;
+  opacity: 1;
+  transform: none;
+}
+
+.editor-actions button.primary-button:hover:not(:disabled),
+.editor-actions button.outline-button:hover:not(:disabled),
 #clean-run-sql-button:hover:not(:disabled),
 #run-sql-button:hover:not(:disabled),
 #run-python-button:hover:not(:disabled),
 #clean-reset-button:hover,
 #reset-button:hover,
 #python-reset-button:hover {
-  background: #ded9cf !important;
+  background-color: #ded9cf;
+  box-shadow: none;
+  transform: translate(6px, 6px);
 }
 
 
-/* Match final-answer inputs to the new button style */
+/* Final answer inputs */
 #clean-total-answer,
 #campaign-answer,
 #python-segment-answer {
-  height: 48px !important;
-  min-height: 48px !important;
+  height: 48px;
+  min-height: 48px;
   padding: 0 14px;
 
-  background-color: #ffffff !important;
-  color: #111111;
+  background: #ffffff;
+  color: var(--ink);
 
-  border: 2px solid #111111 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  box-shadow: none;
 
   box-sizing: border-box;
   font-family: inherit;
   font-size: 16px;
 }
 
-/* Keep the input and Submit button neatly aligned */
+#clean-total-answer::placeholder,
+#campaign-answer::placeholder,
+#python-segment-answer::placeholder {
+  color: #918d84;
+}
+
+#clean-total-answer:focus,
+#campaign-answer:focus,
+#python-segment-answer:focus {
+  background: #ffffff;
+  border-color: var(--ink);
+  outline: 2px solid #ded9cf;
+  outline-offset: 2px;
+}
+
 #clean-answer-form,
 #answer-form,
 #python-answer-form {
@@ -2454,6 +1810,543 @@ button.outline-button:disabled {
 #clean-answer-form .primary-button,
 #answer-form .primary-button,
 #python-answer-form .primary-button {
-  height: 48px !important;
-  min-height: 48px !important;
+  height: 48px;
+  min-height: 48px;
+}
+
+
+/* Tables and data panels */
+.table-tabs button {
+  background: #ffffff;
+}
+
+.table-tabs button.is-selected,
+.table-tabs button.is-active,
+.table-tabs button[aria-selected="true"],
+.table-tabs button:hover,
+.table-tabs button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.table-tabs button.is-selected,
+.table-tabs button.is-active,
+.table-tabs button[aria-selected="true"] {
+  font-weight: 600;
+}
+
+#clean-data-title,
+#data-title,
+#python-data-title {
+  display: none;
+}
+
+#view-cleaning .data-panel-header,
+#view-sql .data-panel-header,
+#view-python .data-panel-header {
+  min-height: 56px;
+  padding: 14px 18px;
+  align-items: center;
+}
+
+#view-cleaning .data-panel-header .eyebrow,
+#view-sql .data-panel-header .eyebrow,
+#view-python .data-panel-header .eyebrow {
+  margin: 0;
+}
+
+.table-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+
+  background: #ffffff;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.table-scroll th,
+.table-scroll td,
+.table-scroll td.number {
+  text-align: left;
+}
+
+
+/* Success states */
+.success-section {
+  border: 1px solid #d9e4dc;
+}
+
+.success-section .primary-button {
+  background: #ffffff;
+  color: var(--ink);
+
+  border-color: #9fb6a4;
+  box-shadow: 6px 6px 0 #9fb6a4;
+}
+
+.success-section .primary-button:hover,
+.success-section .primary-button:focus-visible {
+  background: #dfe9e2;
+  color: var(--ink);
+  border-color: #8ca392;
+  box-shadow: none;
+}
+
+
+/* Visualization page */
+#view-visualization h1 {
+  margin-bottom: 24px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--rule);
+}
+
+#view-visualization > p {
+  margin-bottom: 10px;
+}
+
+#view-visualization .visualization-steps {
+  margin-top: 10px;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.colab-action {
+  padding: 2px 5px;
+  background: #ebe7dc;
+  font-weight: 700;
+}
+
+
+/* Responsive refinements */
+@media (max-width: 780px) {
+  .challenge-view {
+    padding-top: 36px;
+  }
+
+  .challenge-view .objective h1 {
+    font-size: clamp(31px, 7.5vw, 42px);
+  }
+
+  .welcome-view.is-visible {
+    padding: 36px 22px 56px;
+  }
+
+  .welcome-title {
+    font-size: clamp(36px, 8vw, 48px);
+  }
+
+  .welcome-lower {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .welcome-instructions-column {
+    padding-right: 0;
+  }
+
+  .intro-note {
+    padding: 30px 0 0;
+    border-top: 1px solid var(--rule);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  #view-cleaning .cleaning-rule,
+  .challenge-task-rule {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  #view-cleaning .cleaning-callout,
+  #view-python .challenge-task-callout,
+  .sql-brief {
+    padding: 22px 24px;
+  }
+
+  .sql-formula {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+
+/* =================================
+   CONTEXTUAL BUTTON HOVER COLORS
+================================= */
+
+/* White buttons inside editors and data areas */
+.editor-actions button.primary-button,
+.editor-actions button.outline-button,
+#clean-run-sql-button,
+#run-sql-button,
+#run-python-button,
+#clean-reset-button,
+#reset-button,
+#python-reset-button {
+  background-color: #ffffff;
+}
+
+/* White becomes a slightly darker white */
+.editor-actions button.primary-button:hover:not(:disabled),
+.editor-actions button.outline-button:hover:not(:disabled),
+#clean-run-sql-button:hover:not(:disabled),
+#run-sql-button:hover:not(:disabled),
+#run-python-button:hover:not(:disabled),
+#clean-reset-button:hover,
+#reset-button:hover,
+#python-reset-button:hover {
+  background-color: #ecebea;
+}
+
+
+/* Unselected table-tab buttons */
+.table-tabs button:not(.is-selected):not(.is-active):not([aria-selected="true"]) {
+  background-color: #ffffff;
+  color: var(--ink);
+}
+
+/* White table tabs become a slightly darker white */
+.table-tabs button:not(.is-selected):not(.is-active):not([aria-selected="true"]):hover,
+.table-tabs button:not(.is-selected):not(.is-active):not([aria-selected="true"]):focus-visible {
+  background-color: #ecebea;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+
+/* Green confirmation-area button */
+.success-section .primary-button {
+  background-color: #dfe9e2;
+  color: var(--ink);
+
+  border-color: #9fb6a4;
+  box-shadow: 6px 6px 0 #9fb6a4;
+}
+
+/* Light green becomes darker green */
+.success-section .primary-button:hover,
+.success-section .primary-button:focus-visible {
+  background-color: #c8d8cc;
+  color: var(--ink);
+
+  border-color: #78917f;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+}
+
+/* Force confirmation buttons to use green hover states */
+.success-section button.primary-button {
+  background-color: #dfe9e2 !important;
+  border-color: #9fb6a4 !important;
+  box-shadow: 6px 6px 0 #9fb6a4 !important;
+}
+
+.success-section button.primary-button:hover:not(:disabled),
+.success-section button.primary-button:focus-visible:not(:disabled) {
+  background-color: #c2d4c7 !important;
+  border-color: #78917f !important;
+
+  box-shadow: none !important;
+  transform: translate(6px, 6px);
+}
+
+/* Each cleaning rule stays on one horizontal line */
+#view-cleaning .cleaning-rules {
+  display: block;
+  margin-top: 28px;
+}
+
+#view-cleaning .cleaning-rule {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: baseline;
+  gap: 6px;
+
+  width: 100%;
+  margin-top: 24px;
+  padding: 0px 0;
+
+  border: none;
+}
+
+/* Darker rule name */
+#view-cleaning .cleaning-rule-label {
+  flex: 0 0 auto;
+  padding: 5px 0;
+
+  color: var(--ink);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* Remove the dash and add a colon */
+#view-cleaning .cleaning-rule-label::before {
+  content: none;
+}
+
+#view-cleaning .cleaning-rule-label::after {
+  content: ":";
+}
+
+/* Lighter explanation */
+#view-cleaning .cleaning-rule > span:last-child {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* =================================
+   PYTHON INSTRUCTION BRIEF
+================================= */
+
+.python-brief {
+  margin-top: 32px;
+  padding: 26px 32px;
+
+  background: #ebe7dc;
+  border-left: 4px solid #111111;
+}
+
+.python-brief-label {
+  margin: 0 0 10px;
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.python-brief-text {
+  max-width: 920px;
+  margin: 0 0 12px;
+
+  line-height: 1.5;
+}
+
+/* Formula display */
+.python-equation {
+  margin: 24px 0 14px;
+  padding: 20px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--rule-dark);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(22px, 2.3vw, 30px);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.python-equation-expression {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 13px;
+}
+
+.python-equation-variable,
+.python-equation-expression i {
+  color: var(--ink);
+}
+
+.python-equation-operator {
+  color: var(--ink);
+  font-style: normal;
+}
+
+.python-equation sub {
+  position: relative;
+  bottom: -0.1em;
+
+  font-size: 0.55em;
+}
+
+/* Formula definitions */
+.python-equation-key {
+  margin: 0 0 24px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.python-equation-key span {
+  white-space: nowrap;
+}
+
+.python-verification-note {
+  margin-bottom: 18px;
+}
+
+.python-submit-note {
+  margin: 0;
+
+  color: var(--ink);
+}
+
+.python-submit-note strong {
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .python-brief {
+    padding: 22px 24px;
+  }
+
+  .python-equation {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    white-space: normal;
+  }
+
+  .python-equation-expression {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .python-equation-key {
+    display: grid;
+    gap: 5px;
+  }
+}
+
+.python-formula-line {
+  margin: 18px 0;
+
+  color: var(--muted);
+  font-size: inherit;
+  line-height: 1.5;
+}
+
+/* Hide the small green correct message, but keep red errors */
+.answer-section .feedback.success {
+  display: none !important;
+}
+
+/* Move all success-section Continue buttons to the right */
+.success-section .primary-button {
+  display: block;
+  margin: 20px 0 0 auto;
+}
+
+
+
+/* Header layout */
+.site-header {
+  position: relative;
+
+  display: flex !important;
+  grid-template-columns: none !important;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 50px;
+  padding: 0 32px;
+
+  /* Keep the line beneath the header */
+  border-bottom: 1px solid #d6d1c5;
+}
+
+/* Ball button on the left */
+.header-home-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+  padding: 0 28px;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.header-home-button img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+
+  animation: header-ball-spin 10s linear infinite;
+}
+
+/* Title stays in the exact center of the page */
+.header-center-title {
+ 
+
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+@keyframes header-ball-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Ball and title together on the left */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-title {
+  position: static;
+  transform: none;
+
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Hover effect for the Google Colab link only */
+.colab-button:hover,
+.colab-button:focus-visible {
+  background-color: #e3dfd5 !important;
+  box-shadow: none !important;
+  transform: translate(6px, 6px);
+}
+
+
+.header-home-button {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.header-home-button img {
+  pointer-events: none;
+}
+
+.header-home-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-home-logo img {
+  width: 25px;
+  height: 25px;
+  display: block;
+  animation: header-ball-spin 5s linear infinite;
 }
