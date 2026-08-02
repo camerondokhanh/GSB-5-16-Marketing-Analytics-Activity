@@ -1,10 +1,10 @@
 (() => {
   'use strict';
 
-  const app = window.NorthstarApp;
-  const engine = window.NorthstarSqlEngine;
-  const config = window.NORTHSTAR_CLEANING_CONFIG;
-  const data = window.NORTHSTAR_CLEANING_DATA;
+  const app = window.MarketingAnalyticsApp;
+  const engine = window.MarketingAnalyticsSqlEngine;
+  const config = window.MCCARTHYS_CLEANING_CONFIG;
+  const data = window.MCCARTHYS_CLEANING_DATA;
 
   if (!app || !engine || !config || !data) {
     console.error('Cleaning challenge dependencies did not load.');
@@ -169,6 +169,22 @@
     return Number(normalized);
   }
 
+  function formatCorrectTotal() {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2
+    }).format(config.correctTotal);
+  }
+
+  function syncCorrectAnswerCopy() {
+    const successHeading = $('#clean-success-section h2');
+    if (successHeading) {
+      successHeading.textContent = `Correct. The cleaned valid revenue is ${formatCorrectTotal()}.`;
+    }
+  }
+
   function hintForAttempt(attempt) {
     if (attempt === 1) return 'The export contains a duplicate transaction. Keep only one copy of each transaction ID.';
     if (attempt === 2) return 'Rows marked as test records should not count toward real revenue.';
@@ -180,7 +196,7 @@
     state.completed = true;
     saveState();
     app.unlock('sql');
-    window.NorthstarSqlChallenge?.syncUnlock?.();
+    window.MarketingAnalyticsSqlChallenge?.syncUnlock?.();
     $('#clean-success-section').hidden = false;
   }
 
@@ -192,7 +208,7 @@
     if (Number.isFinite(answer) && Math.abs(answer - config.correctTotal) < 0.01) {
       markComplete();
       feedback.className = 'feedback success is-visible';
-      feedback.innerHTML = '<strong>Correct.</strong> The cleaned valid revenue is $6,925.';
+      feedback.innerHTML = `<strong>Correct.</strong> The cleaned valid revenue is ${formatCorrectTotal()}.`;
       $('#clean-success-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
@@ -223,8 +239,8 @@
     app.lock('sql');
     app.lock('python');
     app.lock('visualization');
-    window.NorthstarSqlChallenge?.resetSilently?.();
-    window.NorthstarPythonChallenge?.resetSilently?.();
+    window.MarketingAnalyticsSqlChallenge?.resetSilently?.();
+    window.MarketingAnalyticsPythonChallenge?.resetSilently?.();
     app.clearWorkflow();
   }
 
@@ -259,6 +275,7 @@
 
   function init() {
     loadState();
+    syncCorrectAnswerCopy();
     $('#clean-sql-editor').value = state.sql;
     $('#clean-success-section').hidden = !state.completed;
     if (state.completed) app.unlock('sql');
@@ -266,7 +283,7 @@
     initializeDatabase();
   }
 
-  window.NorthstarCleaningChallenge = {
+  window.MarketingAnalyticsCleaningChallenge = {
     reset: resetChallenge
   };
 
