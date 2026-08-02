@@ -103,7 +103,7 @@
     return statements.length === 1 && /^(SELECT|WITH|PRAGMA|EXPLAIN)\b/i.test(statements[0]);
   }
 
-  window.NorthstarSqlEngine = {
+  window.MarketingAnalyticsSqlEngine = {
     load: loadSqlLibrary,
     renderTable,
     isReadOnlyQuery
